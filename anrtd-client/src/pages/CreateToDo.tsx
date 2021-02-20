@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { createToDo } from '../api/todos';
 import { appPaths } from '../AppRoutes';
 import { successToast } from '../toast';
-import CreateToDoForm from '../toDos/CreateToDoForm';
-import { CreateToDoFormValues } from '../toDos/CreateToDoForm/CreateToDoForm';
+import CreateToDoForm from '../toDos/CreateForm';
+import { CreateToDoFormValues } from '../toDos/CreateForm/CreateToDoForm';
 
 const CreateToDoPage: React.FC = () => {
     const history = useHistory();

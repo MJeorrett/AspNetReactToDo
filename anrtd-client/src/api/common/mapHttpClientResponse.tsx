@@ -5,9 +5,15 @@ export function mapHttpClientResponse<TResponse, TMapped>(
     mapper: (responseModel: TResponse) => TMapped): HttpClientResponse<TMapped> {
     if (response.isError) return response;
 
-    return {
-        ...response,
-        content: mapper(response.content)
+    try {
+        return {
+            ...response,
+            content: mapper(response.content)
+        }
+    }
+    catch (error) {
+        console.error('error parsing api response:', error);
+        throw error;
     }
 }
 
@@ -16,8 +22,14 @@ export function mapHttpClientListResponse<TResponse, TMapped>(
     mapper: (responseModel: TResponse) => TMapped): HttpClientResponse<TMapped[]> {
     if (response.isError) return response;
 
-    return {
-        ...response,
-        content: response.content.map(mapper),
+    try {
+        return {
+            ...response,
+            content: response.content.map(mapper),
+        }
+    }
+    catch (error) {
+        console.error('error parsing api response:', error);
+        throw error;
     }
 }

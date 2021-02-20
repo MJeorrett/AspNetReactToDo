@@ -1,11 +1,7 @@
+using Anrtd.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Anrtd.Api
 {
@@ -13,10 +9,26 @@ namespace Anrtd.Api
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            EnsureDbMigratedIfDevEnv(host);
+
+            host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static void EnsureDbMigratedIfDevEnv(IHost host)
+        {
+            var scope = host.Services.CreateScope();
+
+            var hostEnvironment = scope.ServiceProvider.GetRequiredService<IHostEnvironment>();
+
+            if (hostEnvironment.IsDevelopment())
+            {
+                DbInitialiser.EnsureDatabasesCreatedAndMigrated(scope.ServiceProvider);
+            }
+        }
+
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

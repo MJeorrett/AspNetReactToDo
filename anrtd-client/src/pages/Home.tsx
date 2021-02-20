@@ -17,8 +17,8 @@ const HomePage: React.FC<HomePageProps> = () => {
 
     return (
         <>
-            <h1>Welcome to Asp.Net React ToDo</h1>
-            <h3>The packages and project layouts that I like to use for this stack.</h3>
+            <h1>Welcome to Asp.Net React ToDos</h1>
+            <h3>The project layout, packages and boilerplate I like to use for Asp.Net Core + React + EF Core projects.</h3>
 
             <ApiResponseWrapper
                 isFetching={isFetching}

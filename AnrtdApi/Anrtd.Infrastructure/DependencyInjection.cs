@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StageRaceFantasy.Application.Common.Interfaces;
 
 namespace Anrtd.Infrastructure
 {
@@ -15,6 +16,9 @@ namespace Anrtd.Infrastructure
                 options.UseSqlServer(
                     configuration.GetConnectionString("SqlServer"),
                     builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
             return services;
         }

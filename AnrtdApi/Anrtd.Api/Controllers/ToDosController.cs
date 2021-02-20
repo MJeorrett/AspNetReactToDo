@@ -1,11 +1,9 @@
-﻿using Anrtd.Domain;
-using Anrtd.Infrastructure.Persistence;
+﻿using Anrtd.Application.ToDos.Commands;
+using Anrtd.Application.ToDos.Queries;
+using Anrtd.Domain;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Anrtd.Api.Controllers
@@ -14,28 +12,28 @@ namespace Anrtd.Api.Controllers
     [Route("api/todos")]
     public class ToDosController : ControllerBase
     {
-        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly IMediator _mediator;
 
-        public ToDosController(ApplicationDbContext dbContext)
+        public ToDosController(IMediator mediator)
         {
-            _applicationDbContext = dbContext;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDoEntity>>> GetAllToDos()
         {
-            var toDos = await _applicationDbContext.ToDos.ToListAsync();
+            var query = new GetAllToDosQuery();
+            var result = await _mediator.Send(query);
 
-            return Ok(toDos);
+            return Ok(result.Content);
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> CreateToDo([FromBody] ToDoEntity toDo)
+        public async Task<ActionResult<int>> CreateToDo([FromBody] CreateToDoCommand command)
         {
-            _applicationDbContext.ToDos.Add(toDo);
-            await _applicationDbContext.SaveChangesAsync();
+            var result = await _mediator.Send(command);
 
-            return StatusCode(201, toDo.Id);
+            return StatusCode(201, result.Content);
         }
     }
 }

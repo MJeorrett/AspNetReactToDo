@@ -33,6 +33,13 @@ namespace Anrtd.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Anrtd.Api", Version = "v1" });
             });
+
+            services.AddCors(options =>
+                options.AddDefaultPolicy(builder =>
+                    builder
+                        .WithOrigins("http://localhost:3010")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,9 +53,8 @@ namespace Anrtd.Api
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

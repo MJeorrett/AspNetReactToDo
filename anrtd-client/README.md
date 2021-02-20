@@ -8,4 +8,5 @@ It demonstrates the typical set up I use for react projects including:
 - Material UI.
 - Redux store built using @reduxjs/toolkit.
 - Forms using formik.
+- Routing using react-router.
 - Configuration.

@@ -11,6 +11,7 @@ const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
     name,
     fullWidth = true,
     disabled,
+    ...restOfProps
 }) => {
     const theme = useTheme();
     const { isSubmitting } = useFormikContext();
@@ -20,6 +21,7 @@ const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
 
     return (
         <TextField
+            {...restOfProps}
             {...fieldProps}
             helperText={helperText}
             error={isError}

@@ -10,7 +10,7 @@ export interface CreateToDoFormValues {
 const CreateToDoForm: React.FC<FormikProps<CreateToDoFormValues>> = () => {
     return (
         <Form>
-            <AppFormikTextField name="title" />
+            <AppFormikTextField name="title" label="Title" />
             <AppFormikSubmitButton variant="contained" color="primary" type="submit">Submit</AppFormikSubmitButton>
         </Form>
     );

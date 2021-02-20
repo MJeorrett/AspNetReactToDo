@@ -17,11 +17,13 @@ const entityAdapter = createEntityAdapter<ToDoSummary>({
 type SliceState = {
     entityState: EntityState<ToDoSummary>,
     isFetching: boolean,
+    isError: boolean,
 }
 
 const initialState: SliceState = {
     entityState: entityAdapter.getInitialState(),
     isFetching: false,
+    isError: false,
 }
 
 const slice = createSlice({
@@ -31,9 +33,11 @@ const slice = createSlice({
     extraReducers: builder => {
         builder.addCase(fetchAllAsyncThunk.pending, state => {
             state.isFetching = true;
+            state.isError = false;
         });
         builder.addCase(fetchAllAsyncThunk.rejected, (state, { payload }) => {
             state.isFetching = false;
+            state.isError = true;
         });
         builder.addCase(fetchAllAsyncThunk.fulfilled, (state, { payload }) => {
             state.isFetching = false;
@@ -67,6 +71,9 @@ function createSliceSelector<T>(selector: (state: SliceState) => T) {
 }
 
 export const selectors = {
-    selectIsFetching: createSliceSelector(state => state.isFetching),
-    selectAll: createSliceSelector(state => entitySelectors.selectAll(state.entityState)),
+    apiState: createSliceSelector(state => ({
+        isFetching: state.isFetching,
+        isError: state.isError,
+    })),
+    all: createSliceSelector(state => entitySelectors.selectAll(state.entityState)),
 }

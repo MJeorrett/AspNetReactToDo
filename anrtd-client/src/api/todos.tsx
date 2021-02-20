@@ -11,7 +11,7 @@ export const getAllToDos = async () => {
     return mapHttpClientListResponse(response, mapApiToDoSummary);
 }
 
-export const createCustomer = async (dto: ApiCreateToDoDto) => {
+export const createToDo = async (dto: ApiCreateToDoDto) => {
     const url = buildApiUrl('api/todos');
     const response = await httpClient.postRequest<number>(url, dto);
     

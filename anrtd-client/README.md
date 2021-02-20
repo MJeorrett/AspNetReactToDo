@@ -5,6 +5,7 @@ It demonstrates the typical set up I use for react projects including:
 - Api calls using axios.
 - Api error handling.
 - Anti-corruption layer between api and app models to allow the two to change independently.
-- Material UI
+- Material UI.
 - Redux store built using @reduxjs/toolkit.
-- Configuration
+- Forms using formik.
+- Configuration.

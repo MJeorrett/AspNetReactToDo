@@ -1,10 +1,14 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 
 export const useDispatchEffect = (actionCreator: () => void) => {
     const dispatch = useDispatch();
 
+    const dispatchAction = useCallback(() => dispatch(actionCreator()), [actionCreator]);
+
     useEffect(() => {
-        dispatch(actionCreator());
-    }, [dispatch, actionCreator]);
+        dispatchAction();
+    }, [dispatchAction]);
+
+    return dispatchAction;
 };

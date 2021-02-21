@@ -1,4 +1,4 @@
-﻿using Anrtd.Domain;
+﻿using Anrtd.Domain.Entities;
 using StageRaceFantasy.Application.Common.Interfaces;
 using StageRaceFantasy.Application.Common.Requests;
 using System.Threading;

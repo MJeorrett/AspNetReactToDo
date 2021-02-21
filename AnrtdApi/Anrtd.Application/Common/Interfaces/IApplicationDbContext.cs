@@ -1,4 +1,4 @@
-﻿using Anrtd.Domain;
+﻿using Anrtd.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;

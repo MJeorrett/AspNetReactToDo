@@ -1,6 +1,6 @@
 ﻿using Anrtd.Application.ToDos.Commands;
 using Anrtd.Application.ToDos.Queries;
-using Anrtd.Domain;
+using Anrtd.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

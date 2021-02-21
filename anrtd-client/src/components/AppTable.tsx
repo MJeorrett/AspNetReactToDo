@@ -60,6 +60,7 @@ const AppTable = <TRow,>({
                     page={pagination.pageNumber - 1}
                     SelectProps={{
                         inputProps: { 'aria-label': 'rows per page' },
+                        native: true,
                     }}
                     onChangePage={handleChangePageNumber}
                     onChangeRowsPerPage={handleChangePageSize}

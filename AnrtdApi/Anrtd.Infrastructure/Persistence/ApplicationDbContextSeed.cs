@@ -15,7 +15,7 @@ namespace Anrtd.Infrastructure.Persistence
             var logger = services.GetRequiredService<ILogger<ApplicationDbContextSeed>>();
             var dbContext = services.GetRequiredService<ApplicationDbContext>();
 
-            logger.LogInformation("Creating to do status entities id required.");
+            logger.LogInformation("Creating to do status entities if required.");
 
             var existingDbStatuses = await dbContext.ToDoStatuses.ToListAsync();
 

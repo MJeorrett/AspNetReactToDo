@@ -1,53 +1,40 @@
-﻿using Anrtd.Domain.Enums;
+﻿using Anrtd.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Anrtd.Infrastructure.Persistence
 {
     public class ApplicationDbContextSeed
     {
-        public static async Task SeedToDoStatuses(IServiceProvider services)
+        public static async Task SeedToDos(IServiceProvider services)
         {
             var logger = services.GetRequiredService<ILogger<ApplicationDbContextSeed>>();
             var dbContext = services.GetRequiredService<ApplicationDbContext>();
 
-            logger.LogInformation("Creating to do status entities if required.");
-
-            var existingDbStatuses = await dbContext.ToDoStatuses.ToListAsync();
-
-            var statusesInCode = Enum.GetValues<ToDoStatus>()
-                .Select(status => new ToDoStatusEntity()
-                {
-                    Id = status,
-                    Name = status.ToString(),
-                });
-
-            foreach (var statusInCode in statusesInCode)
+            if (await dbContext.ToDos.CountAsync() < 100)
             {
-                var existingDbStatus = existingDbStatuses.FirstOrDefault(s => s.Id == statusInCode.Id);
+                await DoSeedToDos(logger, dbContext);
+            }
+        }
 
-                if (existingDbStatus != null && statusInCode.Name != existingDbStatus.Name)
-                {
-                    throw new Exception("Missmatch between ToDo status in code and db:\n" +
-                        $"Id: {statusInCode.Id}\n" +
-                        $"Name in code: {statusInCode.Name}\n" +
-                        $"Name in db: {existingDbStatus.Name}");
-                }
+        private static async Task DoSeedToDos(ILogger<ApplicationDbContextSeed> logger, ApplicationDbContext dbContext)
+        {
+            logger.LogInformation("Seeding ToDos.");
 
-                if (existingDbStatus is null)
+            for (var i = 1; i <= 100; i++)
+            {
+                dbContext.ToDos.Add(new ToDoEntity()
                 {
-                    logger.LogInformation("Status found in code {StatusName} does not exist in db so creating it.", statusInCode.Name);
-                    dbContext.ToDoStatuses.Add(statusInCode);
-                }
+                    Title = $"Seed ToDo {i}",
+                });
             }
 
             await dbContext.SaveChangesAsync();
 
-            logger.LogInformation("Finished creating toDo status entities.");
+            logger.LogInformation("Finished seeding ToDos.");
         }
     }
 }

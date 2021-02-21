@@ -26,8 +26,8 @@ namespace Anrtd.Api
 
         private static async Task EnsureDbMigratedAndSeeded(IServiceProvider services)
         {
-            ApplicationDbInitialiser.EnsureDatabasesCreatedAndMigrated(services);
-            await ApplicationDbContextSeed.SeedToDoStatuses(services);
+            await ApplicationDbInitialiser.EnsureDatabasesCreatedAndMigrated(services);
+            await ApplicationDbContextSeed.SeedToDos(services);
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>

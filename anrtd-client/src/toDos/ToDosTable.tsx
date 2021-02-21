@@ -1,4 +1,4 @@
-import { TableCell, TableRow } from '@material-ui/core';
+import { TableCell, TableRow, Typography } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ApiResponseWrapper from '../components/ApiResponseWrapper';
@@ -25,16 +25,18 @@ const ToDosTable: React.FC<ToDosTableProps> = () => {
                 isFetching={isFetching}
                 isError={isError}
             >
-                <AppTable
-                    headers={['Id', 'Title']}
-                    entities={toDos}
-                    renderRow={toDo => (
-                        <TableRow key={toDo.id}>
-                            <TableCell>{toDo.id}</TableCell>
-                            <TableCell>{toDo.title}</TableCell>
-                        </TableRow>
-                    )}
-                />
+                {toDos.length === 0 ? <Typography>You don't have any ToDos yet.</Typography> :
+                    <AppTable
+                        headers={['Id', 'Title']}
+                        entities={toDos}
+                        renderRow={toDo => (
+                            <TableRow key={toDo.id}>
+                                <TableCell>{toDo.id}</TableCell>
+                                <TableCell>{toDo.title}</TableCell>
+                            </TableRow>
+                        )}
+                    />
+                }
             </ApiResponseWrapper>
         </>
     );

@@ -19,7 +19,6 @@ const ToDosTable: React.FC<ToDosTableProps> = () => {
     } = useSelector(selectors.toDos.apiState);
 
     const toDos = useSelector(selectors.toDos.all);
-    const isDeletingById = useSelector(selectors.toDos.isDeletingById);
     const pagination = useSelector(selectors.toDos.pagination);
 
     const makeHandleDelete = (toDoId: number) => () => dispatch(actions.toDos.delete(toDoId));
@@ -49,8 +48,6 @@ const ToDosTable: React.FC<ToDosTableProps> = () => {
                             <ToDosTableRow
                                 key={toDo.id}
                                 toDo={toDo}
-                                onDelete={makeHandleDelete(toDo.id)}
-                                isDeleting={isDeletingById[toDo.id]}
                             />
                         )}
                     />

@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSelector, createSlice, Dispatch, EntityState } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSelector, createSlice, Dispatch, EntityState, PayloadAction } from '@reduxjs/toolkit';
 import { deleteToDo, getPaginatedToDos } from '../api/todos';
 import { Pagination } from '../models/Pagination';
 import { ToDoSummary } from '../models/ToDo';
@@ -11,11 +11,6 @@ const fetchPaginatedAsyncThunk = createHttpClientThunk(
     getPaginatedToDos,
 );
 
-const deleteAsyncThunk = createHttpClientThunk(
-    `${sliceName}/delete`,
-    deleteToDo,
-)
-
 const entityAdapter = createEntityAdapter<ToDoSummary>({
     selectId: toDo => toDo.id,
 });
@@ -24,9 +19,6 @@ type SliceState = {
     entityState: EntityState<ToDoSummary>,
     pagination: Pagination,
     isFetching: boolean,
-    isDeletingById: {
-        [key: number]: boolean,
-    },
     isError: boolean,
 }
 
@@ -41,14 +33,17 @@ const initialState: SliceState = {
         totalPages: 1,
     },
     isFetching: false,
-    isDeletingById: {},
     isError: false,
 }
 
 const slice = createSlice({
     name: sliceName,
     initialState,
-    reducers: {},
+    reducers: {
+        removeToDo: (state, { payload }: PayloadAction<number>) => {
+            entityAdapter.removeOne(state.entityState, payload);
+        }
+    },
     extraReducers: builder => {
         builder.addCase(fetchPaginatedAsyncThunk.pending, state => {
             state.isFetching = true;
@@ -65,19 +60,6 @@ const slice = createSlice({
             state.pagination = {
                 ...payload,
             };
-        });
-        builder.addCase(deleteAsyncThunk.pending, (state, action) => {
-            const toDoId = action.meta.arg;
-            state.isDeletingById[toDoId] = true;
-        });
-        builder.addCase(deleteAsyncThunk.rejected, (state, action) => {
-            const toDoId = action.meta.arg;
-            state.isDeletingById[toDoId] = false;
-        });
-        builder.addCase(deleteAsyncThunk.fulfilled, (state, action) => {
-            const toDoId = action.meta.arg;
-            state.isDeletingById[toDoId] = false;
-            entityAdapter.removeOne(state.entityState, action.meta.arg)
         });
     },
 })
@@ -111,7 +93,7 @@ export const actions = {
         const state = selectSliceState(getState());
         doPaginatedFetch(dispatch, state);
     },
-    delete: (toDoId: number) => deleteAsyncThunk(toDoId),
+    delete: (toDoId: number) => slice.actions.removeToDo(toDoId),
     setPageNumber: (pageNumber: number) => (dispatch: (action: any) => void, getState: () => RootReducerState) => {
         const state = selectSliceState(getState());
         doPaginatedFetch(dispatch, state, pageNumber);        
@@ -135,6 +117,5 @@ export const selectors = {
         isError: state.isError,
     })),
     all: createSliceSelector(state => entitySelectors.selectAll(state.entityState)),
-    isDeletingById: createSliceSelector(state => state.isDeletingById),
     pagination: createSliceSelector(state => state.pagination),
 }

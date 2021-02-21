@@ -1,27 +1,40 @@
 import { TableCell, TableRow } from '@material-ui/core';
-import React from 'react';
+import DeleteIcon from '@material-ui/icons/Delete';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteToDo } from '../../api/todos';
 import { AppIconButton } from '../../components/AppIconButton';
 import { ToDoSummary } from '../../models/ToDo';
+import { actions } from '../../store';
 
 export interface ToDosTableRowProps {
     toDo: ToDoSummary,
-    onDelete: () => void,
-    isDeleting: boolean,
 }
 
 const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
     toDo,
-    onDelete,
-    isDeleting,
 }) => {
+    const dispatch = useDispatch();
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    const handleDelete = async () => {
+        setIsDeleting(true);
+        const response = await deleteToDo(toDo.id);
+        setIsDeleting(false);
+
+        if (response.isError) return;
+
+        dispatch(actions.toDos.delete(toDo.id));
+    }
+
     return (
         <TableRow key={toDo.id}>
             <TableCell>{toDo.id}</TableCell>
             <TableCell>{toDo.title}</TableCell>
             <TableCell>
                 <AppIconButton
-                    onClick={onDelete}
-                    iconName="delete"
+                    onClick={handleDelete}
+                    icon={<DeleteIcon />}
                     showSpinner={isDeleting}
                 />
             </TableCell>
@@ -29,4 +42,4 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
     );
 }
 
-export default ToDosTableRow;
+export default React.memo(ToDosTableRow, (prev, next) => prev.toDo.id === next.toDo.id);

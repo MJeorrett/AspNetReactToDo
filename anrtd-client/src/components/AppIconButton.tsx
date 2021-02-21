@@ -6,14 +6,7 @@ export type AppIconButtonIconNames = 'delete'|'edit';
 
 export interface AppButtonProps extends Omit<IconButtonProps, 'children'> {
     showSpinner?: boolean,
-    iconName: AppIconButtonIconNames,
-}
-
-const icons: {
-    [key in AppIconButtonIconNames]: JSX.Element
-} = {
-    'delete': <DeleteIcon />,
-    'edit': <EditIcon />,
+    icon: React.ReactNode,
 }
 
 const useStyles = makeStyles({
@@ -33,8 +26,8 @@ const useStyles = makeStyles({
 export const AppIconButton: React.FC<AppButtonProps> = ({
     disabled,
     showSpinner,
-    iconName,
     color = 'primary',
+    icon,
     ...restOfProps
 }) => {
     const classes = useStyles();
@@ -44,7 +37,7 @@ export const AppIconButton: React.FC<AppButtonProps> = ({
                 {...restOfProps}
                 disabled={disabled || showSpinner}
                 color={color}
-                children={icons[iconName]}
+                children={icon}
             />
             {showSpinner && (
                 <CircularProgress size={24} className={classes.progress} />

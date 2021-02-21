@@ -4,6 +4,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using StageRaceFantasy.Application.Common.Interfaces;
 using StageRaceFantasy.Application.Common.Requests;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,6 +30,7 @@ namespace Anrtd.Application.ToDos.Queries
         public override async Task<AppRequestResult<PaginatedList<ToDoSummaryDto>>> Handle(GetPaginatedToDosQuery request, CancellationToken cancellationToken)
         {
             var toDoSummaries = await _dbContext.ToDos
+                .OrderByDescending(toDo => toDo.Id)
                 .ProjectTo<ToDoSummaryDto>(_configurationProvider, cancellationToken)
                 .PaginatedListAsync(request.PageNumber, request.PageSize);
 

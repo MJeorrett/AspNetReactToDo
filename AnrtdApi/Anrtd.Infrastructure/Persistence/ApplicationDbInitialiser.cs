@@ -5,11 +5,11 @@ using System;
 
 namespace Anrtd.Infrastructure.Persistence
 {
-    public class DbInitialiser
+    public class ApplicationDbInitialiser
     {
         public static void EnsureDatabasesCreatedAndMigrated(IServiceProvider services)
         {
-            var logger = services.GetRequiredService<ILogger<DbInitialiser>>();
+            var logger = services.GetRequiredService<ILogger<ApplicationDbInitialiser>>();
             
             try
             {

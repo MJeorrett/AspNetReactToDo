@@ -2,30 +2,32 @@ using Anrtd.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading.Tasks;
 
 namespace Anrtd.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-
-            EnsureDbMigratedIfDevEnv(host);
-
-            host.Run();
-        }
-
-        private static void EnsureDbMigratedIfDevEnv(IHost host)
-        {
             var scope = host.Services.CreateScope();
 
             var hostEnvironment = scope.ServiceProvider.GetRequiredService<IHostEnvironment>();
 
             if (hostEnvironment.IsDevelopment())
             {
-                DbInitialiser.EnsureDatabasesCreatedAndMigrated(scope.ServiceProvider);
+                await EnsureDbMigratedAndSeeded(scope.ServiceProvider);
             }
+
+            await host.RunAsync();
+        }
+
+        private static async Task EnsureDbMigratedAndSeeded(IServiceProvider services)
+        {
+            ApplicationDbInitialiser.EnsureDatabasesCreatedAndMigrated(services);
+            await ApplicationDbContextSeed.SeedToDoStatuses(services);
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>

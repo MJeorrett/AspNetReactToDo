@@ -35,5 +35,16 @@ namespace Anrtd.Api.Controllers
 
             return StatusCode(201, result.Content);
         }
+
+        [HttpDelete("{toDoId}")]
+        public async Task<ActionResult> DeleteToDo(int toDoId)
+        {
+            var command = new SoftDeleteToDoCommand(toDoId);
+            var result = await _mediator.Send(command);
+
+            if (result.IsNotFound) return NotFound();
+
+            return Ok();
+        } 
     }
 }

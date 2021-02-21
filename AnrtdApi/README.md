@@ -6,3 +6,5 @@ It is heavily inspired by Jason Taylor's [Clean Architecture](https://github.com
 Most of the ideas are from Jason's project so I highly recommend viewing his videos to learn more about that.
 However I have introduced the following ideas:
 - Mapping enums in code to a db table - based on [this gist](https://gist.github.com/paolofulgoni/825bef5cd6cd92c4f9bbf33f603af4ff).
+- Response errors without throwing exceptions.
+- Soft deletion - DELETE method on endpoint rational is that soft delete is internal to api.

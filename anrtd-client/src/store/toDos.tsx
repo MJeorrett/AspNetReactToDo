@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSelector, createSlice, EntityState } from '@reduxjs/toolkit';
-import { getAllToDos } from '../api/todos';
+import { deleteToDo, getAllToDos } from '../api/todos';
 import { ToDoSummary } from '../models/ToDo';
 import { createHttpClientThunk } from './common/createHttpClientThunk';
 
@@ -10,6 +10,11 @@ const fetchAllAsyncThunk = createHttpClientThunk(
     getAllToDos,
 );
 
+const deleteAsyncThunk = createHttpClientThunk(
+    `${sliceName}/delete`,
+    deleteToDo,
+)
+
 const entityAdapter = createEntityAdapter<ToDoSummary>({
     selectId: toDo => toDo.id,
 });
@@ -17,12 +22,16 @@ const entityAdapter = createEntityAdapter<ToDoSummary>({
 type SliceState = {
     entityState: EntityState<ToDoSummary>,
     isFetching: boolean,
+    isDeletingById: {
+        [key: number]: boolean,
+    },
     isError: boolean,
 }
 
 const initialState: SliceState = {
     entityState: entityAdapter.getInitialState(),
     isFetching: false,
+    isDeletingById: {},
     isError: false,
 }
 
@@ -44,6 +53,19 @@ const slice = createSlice({
             entityAdapter.removeAll(state.entityState);
             entityAdapter.setAll(state.entityState, payload);
         });
+        builder.addCase(deleteAsyncThunk.pending, (state, action) => {
+            const toDoId = action.meta.arg;
+            state.isDeletingById[toDoId] = true;
+        });
+        builder.addCase(deleteAsyncThunk.rejected, (state, action) => {
+            const toDoId = action.meta.arg;
+            state.isDeletingById[toDoId] = false;
+        });
+        builder.addCase(deleteAsyncThunk.fulfilled, (state, action) => {
+            const toDoId = action.meta.arg;
+            state.isDeletingById[toDoId] = false;
+            entityAdapter.removeOne(state.entityState, action.meta.arg)
+        });
     },
 })
 
@@ -54,6 +76,7 @@ export const {
 
 export const actions = {
     fetchAll: fetchAllAsyncThunk,
+    delete: (toDoId: number) => deleteAsyncThunk(toDoId),
 }
 
 type RootReducerState = {
@@ -76,4 +99,5 @@ export const selectors = {
         isError: state.isError,
     })),
     all: createSliceSelector(state => entitySelectors.selectAll(state.entityState)),
+    isDeletingById: createSliceSelector(state => state.isDeletingById),
 }

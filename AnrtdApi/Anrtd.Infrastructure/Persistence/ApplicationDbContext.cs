@@ -1,5 +1,6 @@
 ﻿using Anrtd.Domain.Entities;
 using Anrtd.Domain.Enums;
+using Anrtd.Infrastructure.Persistence.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using StageRaceFantasy.Application.Common.Interfaces;
 
@@ -18,13 +19,7 @@ namespace Anrtd.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ToDoStatusEntity>()
-                .Property(status => status.Id)
-                .HasConversion<int>();
-
-            modelBuilder.Entity<ToDoEntity>()
-                .Property(toDo => toDo.Status)
-                .HasConversion<int>();
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ToDoEntityConfiguration).Assembly);
         }
     }
 }

@@ -19,3 +19,12 @@ export const createToDo = async (dto: ApiCreateToDoDto) => {
     
     return response;
 }
+
+export const deleteToDo = async (toDoId: number) => {
+    const url = buildApiUrl(`api/todos/${toDoId}`);
+    const response = await httpClient.deleteRequest(url);
+    
+    doErrorToastIfRequired(response);
+    
+    return response;
+}

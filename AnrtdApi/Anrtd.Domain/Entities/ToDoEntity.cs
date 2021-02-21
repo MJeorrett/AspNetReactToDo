@@ -15,5 +15,7 @@ namespace Anrtd.Domain.Entities
 
         [Required]
         public ToDoStatus Status { get; set; }
+
+        public bool IsSoftDeleted { get; set; }
     }
 }

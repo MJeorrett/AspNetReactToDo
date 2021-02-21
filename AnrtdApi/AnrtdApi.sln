@@ -5,16 +5,18 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anrtd.Api", "Anrtd.Api\Anrtd.Api.csproj", "{094D1164-C34D-4411-95AF-9B8F4A11846E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anrtd.Infrastructure", "Anrtd.Infrastructure\Anrtd.Infrastructure.csproj", "{C60D761F-6178-4C82-9666-791EEC5C4FD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anrtd.Infrastructure", "Anrtd.Infrastructure\Anrtd.Infrastructure.csproj", "{C60D761F-6178-4C82-9666-791EEC5C4FD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anrtd.Domain", "Anrtd.Domain\Anrtd.Domain.csproj", "{FF222ED9-DF11-4865-9DCA-6D41D17D2727}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anrtd.Domain", "Anrtd.Domain\Anrtd.Domain.csproj", "{FF222ED9-DF11-4865-9DCA-6D41D17D2727}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3AC61100-D9AA-489B-8BC3-C92A3A18272F}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anrtd.Application", "Anrtd.Application\Anrtd.Application.csproj", "{4BDEE1BC-EBCE-4F56-AB55-DE2D39AC9FDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anrtd.Application", "Anrtd.Application\Anrtd.Application.csproj", "{4BDEE1BC-EBCE-4F56-AB55-DE2D39AC9FDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anrtd.Application.UnitTests", "Anrtd.Application.UnitTests\Anrtd.Application.UnitTests.csproj", "{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{4BDEE1BC-EBCE-4F56-AB55-DE2D39AC9FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BDEE1BC-EBCE-4F56-AB55-DE2D39AC9FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BDEE1BC-EBCE-4F56-AB55-DE2D39AC9FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

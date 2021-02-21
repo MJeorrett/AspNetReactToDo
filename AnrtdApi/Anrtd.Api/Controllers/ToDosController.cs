@@ -25,6 +25,8 @@ namespace Anrtd.Api.Controllers
         {
             var result = await _mediator.Send(query);
 
+            if (result.IsBadRequest) return BadRequest(result.ValidationFailures);
+
             return Ok(result.Content);
         }
 
@@ -32,6 +34,8 @@ namespace Anrtd.Api.Controllers
         public async Task<ActionResult<int>> CreateToDo([FromBody] CreateToDoCommand command)
         {
             var result = await _mediator.Send(command);
+
+            if (result.IsBadRequest) return BadRequest(result.ValidationFailures);
 
             return StatusCode(201, result.Content);
         }

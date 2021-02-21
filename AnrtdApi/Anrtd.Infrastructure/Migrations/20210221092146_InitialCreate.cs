@@ -10,13 +10,13 @@ namespace Anrtd.Infrastructure.Migrations
                 name: "ToDo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ToDoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ToDo", x => x.Id);
+                    table.PrimaryKey("PK_ToDo", x => x.ToDoId);
                 });
         }
 

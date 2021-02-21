@@ -20,9 +20,9 @@ namespace Anrtd.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ToDoEntity>>> GetAllToDos()
+        public async Task<ActionResult<IEnumerable<ToDoEntity>>> GetPaginatedToDos(
+            [FromQuery] GetPaginatedToDosQuery query)
         {
-            var query = new GetAllToDosQuery();
             var result = await _mediator.Send(query);
 
             return Ok(result.Content);

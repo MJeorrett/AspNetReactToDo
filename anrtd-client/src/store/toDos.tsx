@@ -1,13 +1,14 @@
-import { createEntityAdapter, createSelector, createSlice, EntityState } from '@reduxjs/toolkit';
-import { deleteToDo, getAllToDos } from '../api/todos';
+import { createEntityAdapter, createSelector, createSlice, Dispatch, EntityState } from '@reduxjs/toolkit';
+import { deleteToDo, getPaginatedToDos } from '../api/todos';
+import { Pagination } from '../models/Pagination';
 import { ToDoSummary } from '../models/ToDo';
 import { createHttpClientThunk } from './common/createHttpClientThunk';
 
 const sliceName = 'toDos';
 
-const fetchAllAsyncThunk = createHttpClientThunk(
-    `${sliceName}/fetchAll`,
-    getAllToDos,
+const fetchPaginatedAsyncThunk = createHttpClientThunk(
+    `${sliceName}/fetchPaginated`,
+    getPaginatedToDos,
 );
 
 const deleteAsyncThunk = createHttpClientThunk(
@@ -21,6 +22,7 @@ const entityAdapter = createEntityAdapter<ToDoSummary>({
 
 type SliceState = {
     entityState: EntityState<ToDoSummary>,
+    pagination: Pagination,
     isFetching: boolean,
     isDeletingById: {
         [key: number]: boolean,
@@ -30,6 +32,14 @@ type SliceState = {
 
 const initialState: SliceState = {
     entityState: entityAdapter.getInitialState(),
+    pagination: {
+        pageNumber: 1,
+        pageSize: 10,
+        hasNextPage: false,
+        hasPreviousPage: false,
+        totalCount: 0,
+        totalPages: 1,
+    },
     isFetching: false,
     isDeletingById: {},
     isError: false,
@@ -40,18 +50,21 @@ const slice = createSlice({
     initialState,
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(fetchAllAsyncThunk.pending, state => {
+        builder.addCase(fetchPaginatedAsyncThunk.pending, state => {
             state.isFetching = true;
             state.isError = false;
         });
-        builder.addCase(fetchAllAsyncThunk.rejected, (state, { payload }) => {
+        builder.addCase(fetchPaginatedAsyncThunk.rejected, state => {
             state.isFetching = false;
             state.isError = true;
         });
-        builder.addCase(fetchAllAsyncThunk.fulfilled, (state, { payload }) => {
+        builder.addCase(fetchPaginatedAsyncThunk.fulfilled, (state, { payload }) => {
             state.isFetching = false;
             entityAdapter.removeAll(state.entityState);
-            entityAdapter.setAll(state.entityState, payload);
+            entityAdapter.setAll(state.entityState, payload.items);
+            state.pagination = {
+                ...payload,
+            };
         });
         builder.addCase(deleteAsyncThunk.pending, (state, action) => {
             const toDoId = action.meta.arg;
@@ -74,17 +87,40 @@ export const {
     reducer,
 } = slice
 
-export const actions = {
-    fetchAll: fetchAllAsyncThunk,
-    delete: (toDoId: number) => deleteAsyncThunk(toDoId),
-}
-
 type RootReducerState = {
     [sliceName]: SliceState,
 };
 
 const selectSliceState = (state: RootReducerState) => state[sliceName];
 const entitySelectors = entityAdapter.getSelectors();
+
+const doPaginatedFetch = (
+    dispatch: (action: any) => void,
+    state: SliceState,
+    pageNumber?: number,
+    pageSize?: number) => {
+
+    dispatch(fetchPaginatedAsyncThunk({
+        pageIndex: pageNumber || state.pagination.pageNumber,
+        pageSize: pageSize || state.pagination.pageSize,
+    }));
+}
+
+export const actions = {
+    fetchAll: () => (dispatch: (action: any) => void, getState: () => RootReducerState) => {
+        const state = selectSliceState(getState());
+        doPaginatedFetch(dispatch, state);
+    },
+    delete: (toDoId: number) => deleteAsyncThunk(toDoId),
+    setPageNumber: (pageNumber: number) => (dispatch: (action: any) => void, getState: () => RootReducerState) => {
+        const state = selectSliceState(getState());
+        doPaginatedFetch(dispatch, state, pageNumber);        
+    },
+    setPageSize: (pageSize: number) => (dispatch: (action: any) => void, getState: () => RootReducerState) => {
+        const state = selectSliceState(getState());
+        doPaginatedFetch(dispatch, state, undefined, pageSize);        
+    },
+}
 
 function createSliceSelector<T>(selector: (state: SliceState) => T) {
     return createSelector(
@@ -100,4 +136,5 @@ export const selectors = {
     })),
     all: createSliceSelector(state => entitySelectors.selectAll(state.entityState)),
     isDeletingById: createSliceSelector(state => state.isDeletingById),
+    pagination: createSliceSelector(state => state.pagination),
 }

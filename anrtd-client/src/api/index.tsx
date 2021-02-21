@@ -3,3 +3,7 @@ export type {
     HttpClientResponse,
     HttpClientSuccessResponse,
 } from './common/httpClient';
+
+export type {
+    ApiPagination,
+} from './common/ApiPaginatedResponse';

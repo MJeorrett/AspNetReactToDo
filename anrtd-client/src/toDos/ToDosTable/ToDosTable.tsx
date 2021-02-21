@@ -20,8 +20,17 @@ const ToDosTable: React.FC<ToDosTableProps> = () => {
 
     const toDos = useSelector(selectors.toDos.all);
     const isDeletingById = useSelector(selectors.toDos.isDeletingById);
+    const pagination = useSelector(selectors.toDos.pagination);
 
     const makeHandleDelete = (toDoId: number) => () => dispatch(actions.toDos.delete(toDoId));
+
+    const handleChangePageNumber = (pageNumber: number) => {
+        dispatch(actions.toDos.setPageNumber(pageNumber));
+    }
+
+    const handleChangePageSize = (pageSize: number) => {
+        dispatch(actions.toDos.setPageSize(pageSize));
+    }
 
     return (
         <>
@@ -33,6 +42,9 @@ const ToDosTable: React.FC<ToDosTableProps> = () => {
                     <AppTable
                         headers={['Id', 'Title', '']}
                         entities={toDos}
+                        pagination={pagination}
+                        onChangePageNumber={handleChangePageNumber}
+                        onChangePageSize={handleChangePageSize}
                         renderRow={toDo => (
                             <ToDosTableRow
                                 key={toDo.id}

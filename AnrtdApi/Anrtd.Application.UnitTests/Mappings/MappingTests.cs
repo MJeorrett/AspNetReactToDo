@@ -1,4 +1,5 @@
 ﻿using Anrtd.Application.Common.Mapping;
+using Anrtd.Application.ToDos.Commands;
 using Anrtd.Application.ToDos.Queries;
 using Anrtd.Domain.Entities;
 using AutoMapper;
@@ -31,6 +32,7 @@ namespace Anrtd.Application.UnitTests.Mappings
 
         [Test]
         [TestCase(typeof(ToDoEntity), typeof(ToDoSummaryDto))]
+        [TestCase(typeof(CreateToDoCommand), typeof(ToDoEntity))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = GetInstanceOf(source);

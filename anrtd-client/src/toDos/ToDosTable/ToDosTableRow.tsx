@@ -30,7 +30,7 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
     return (
         <TableRow key={toDo.id}>
             <TableCell>{toDo.id}</TableCell>
-            <TableCell>{toDo.title}</TableCell>
+            <TableCell style={{ width: '100%' }}>{toDo.title}</TableCell>
             <TableCell>
                 <AppIconButton
                     onClick={handleDelete}

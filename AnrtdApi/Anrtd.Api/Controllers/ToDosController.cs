@@ -1,5 +1,6 @@
 ﻿using Anrtd.Application.ToDos.Commands;
 using Anrtd.Application.ToDos.Commands.Create;
+using Anrtd.Application.ToDos.Queries.GetById;
 using Anrtd.Application.ToDos.Queries.GetPaginated;
 using Anrtd.Domain.Entities;
 using MediatR;
@@ -27,6 +28,17 @@ namespace Anrtd.Api.Controllers
             var result = await _mediator.Send(query);
 
             if (result.IsBadRequest) return BadRequest(result.ValidationFailures);
+
+            return Ok(result.Content);
+        }
+
+        [HttpGet("{toDoId}")]
+        public async Task<ActionResult<ToDoDetailsDto>> GetById(int toDoId)
+        {
+            var query = new GetToDoByIdQuery(toDoId);
+            var result = await _mediator.Send(query);
+
+            if (result.IsNotFound) return NotFound();
 
             return Ok(result.Content);
         }

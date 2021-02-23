@@ -32,6 +32,7 @@ namespace Anrtd.Application.UnitTests.Mappings
 
         [Test]
         [TestCase(typeof(ToDoEntity), typeof(ToDoSummaryDto))]
+        [TestCase(typeof(ToDoEntity), typeof(ToDoDetailsDto))]
         [TestCase(typeof(CreateToDoCommand), typeof(ToDoEntity))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {

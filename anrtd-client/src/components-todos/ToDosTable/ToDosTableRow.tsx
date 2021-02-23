@@ -1,8 +1,10 @@
 import { TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteToDo } from '../../api/todos';
+import { appPaths } from '../../AppRoutes';
 import { AppIconButton } from '../../components/AppIconButton';
 import { ToDoSummary } from '../../models/ToDo';
 import { actions } from '../../store';
@@ -29,6 +31,13 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
 
     return (
         <TableRow key={toDo.id}>
+            <TableCell>
+                <AppIconButton
+                    linkTo={appPaths.editToDo(toDo.id)}
+                    onClick={undefined}
+                    icon={<EditIcon />}
+                />
+            </TableCell>
             <TableCell>{toDo.id}</TableCell>
             <TableCell style={{ width: '100%' }}>{toDo.title}</TableCell>
             <TableCell>

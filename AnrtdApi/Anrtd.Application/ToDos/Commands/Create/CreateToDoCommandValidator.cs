@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Anrtd.Application.ToDos.Commands
+namespace Anrtd.Application.ToDos.Commands.Create
 {
     public class CreateToDoCommandValidator : AbstractValidator<CreateToDoCommand>
     {

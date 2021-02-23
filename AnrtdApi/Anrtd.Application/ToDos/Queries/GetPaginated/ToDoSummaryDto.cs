@@ -2,7 +2,7 @@
 using Anrtd.Domain.Entities;
 using Anrtd.Domain.Enums;
 
-namespace Anrtd.Application.ToDos.Queries
+namespace Anrtd.Application.ToDos.Queries.GetPaginated
 {
     public record ToDoSummaryDto() : IMapFrom<ToDoEntity>
     {

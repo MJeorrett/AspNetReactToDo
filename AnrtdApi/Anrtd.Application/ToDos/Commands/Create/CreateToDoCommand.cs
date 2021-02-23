@@ -6,7 +6,7 @@ using StageRaceFantasy.Application.Common.Requests;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Anrtd.Application.ToDos.Commands
+namespace Anrtd.Application.ToDos.Commands.Create
 {
     public record CreateToDoCommand : IAppRequest<int>, IMapTo<ToDoEntity>
     {

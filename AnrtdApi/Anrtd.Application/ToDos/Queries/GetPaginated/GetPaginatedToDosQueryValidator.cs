@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Anrtd.Application.ToDos.Queries
+namespace Anrtd.Application.ToDos.Queries.GetPaginated
 {
     public class GetPaginatedToDosQueryValidator : AbstractValidator<GetPaginatedToDosQuery>
     {

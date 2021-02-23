@@ -1,6 +1,6 @@
 ﻿using Anrtd.Application.Common.Mapping;
-using Anrtd.Application.ToDos.Commands;
-using Anrtd.Application.ToDos.Queries;
+using Anrtd.Application.ToDos.Commands.Create;
+using Anrtd.Application.ToDos.Queries.GetPaginated;
 using Anrtd.Domain.Entities;
 using AutoMapper;
 using NUnit.Framework;

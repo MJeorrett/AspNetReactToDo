@@ -1,8 +1,10 @@
 import { CircularProgress, IconButton, IconButtonProps, makeStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 export interface AppButtonProps extends Omit<IconButtonProps, 'children'> {
     showSpinner?: boolean,
     icon: React.ReactNode,
+    linkTo?: string,
 }
 
 const useStyles = makeStyles({
@@ -24,18 +26,27 @@ export const AppIconButton: React.FC<AppButtonProps> = ({
     showSpinner,
     color = 'primary',
     icon,
+    linkTo,
     ...restOfProps
 }) => {
     const classes = useStyles();
+
+    const iconButton = (
+        <IconButton
+            {...restOfProps}
+            disabled={disabled || showSpinner}
+            color={color}
+        >
+            {icon}
+        </IconButton>
+    );
+
     return (
         <span className={classes.root}>
-            <IconButton
-                {...restOfProps}
-                disabled={disabled || showSpinner}
-                color={color}
-            >
-                {icon}
-            </IconButton>
+            {linkTo ?
+                <Link to={linkTo}>{iconButton}</Link> :
+                iconButton
+            }
             {showSpinner && (
                 <CircularProgress size={24} className={classes.progress} />
             )}

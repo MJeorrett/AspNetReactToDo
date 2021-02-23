@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Anrtd.Application.ToDos.Queries
+namespace Anrtd.Application.ToDos.Queries.GetPaginated
 {
     public record GetPaginatedToDosQuery : IAppRequest<PaginatedList<ToDoSummaryDto>>
     {

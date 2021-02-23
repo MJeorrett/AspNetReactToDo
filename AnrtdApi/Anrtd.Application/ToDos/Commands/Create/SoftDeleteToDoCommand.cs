@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StageRaceFantasy.Application.Common.Interfaces;
 using StageRaceFantasy.Application.Common.Requests;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Anrtd.Application.ToDos.Commands
+namespace Anrtd.Application.ToDos.Commands.Create
 {
     public record SoftDeleteToDoCommand(int ToDoId) : IAppRequest
     {

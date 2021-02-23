@@ -1,10 +1,10 @@
 import { Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+
 import { createToDo } from '../api/todos';
 import { appPaths } from '../AppRoutes';
+import CreateToDoForm, { CreateToDoFormValues } from '../components-todos/CreateForm';
 import { successToast } from '../toast';
-import CreateToDoForm from '../toDos/CreateForm';
-import { CreateToDoFormValues } from '../toDos/CreateForm/CreateToDoForm';
 
 const CreateToDoPage: React.FC = () => {
     const history = useHistory();

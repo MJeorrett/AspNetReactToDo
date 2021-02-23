@@ -41,8 +41,8 @@ const AppTable = <TRow,>({
                 <Table>
                     <TableHead>
                         <TableRow>
-                            {headers.map(header => (
-                                <TableCell key={header}>{header}</TableCell>
+                            {headers.map((header, index) => (
+                                <TableCell key={index}>{header}</TableCell>
                             ))}
                         </TableRow>
                     </TableHead>

@@ -10,3 +10,8 @@ It demonstrates the typical set up I use for react projects including:
 - Forms using formik.
 - Routing using react-router.
 - Configuration.
+- Component layout:
+  - hooks
+  - state
+  - handlers
+  - render

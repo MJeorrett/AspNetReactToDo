@@ -14,6 +14,7 @@ const AppPageHeading: React.SFC<AppPageHeadingProps> = ({
             component="h1"
             color="primary"
             gutterBottom
+            align="center"
         >
             {children}
         </Typography>

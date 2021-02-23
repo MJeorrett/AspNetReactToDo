@@ -1,8 +1,8 @@
-import { mapApiToDoSummary } from '../modelMappings/ToDo';
+import { mapApiToDoDetails, mapApiToDoSummary } from '../modelMappings/ToDo';
 import { ToDoSummary } from '../models/ToDo';
-import { ApiPaginatedResponse, ApiPaginationQueryParams, buildApiUrl, doErrorToastIfRequired, httpClient, mapHttpClientPaginatedResponse } from './common';
+import { ApiPaginatedResponse, ApiPaginationQueryParams, buildApiUrl, doErrorToastIfRequired, httpClient, mapHttpClientPaginatedResponse, mapHttpClientResponse } from './common';
 import { HttpClientResponse } from './common/httpClient';
-import { ApiCreateToDoDto, ApiToDoSummary } from './models';
+import { ApiCreateToDoDto, ApiToDoDetails, ApiToDoSummary } from './models';
 
 export const getPaginatedToDos = async ({ pageIndex: pageNumber, pageSize }: ApiPaginationQueryParams): Promise<HttpClientResponse<ApiPaginatedResponse<ToDoSummary>>> => {
     const url = buildApiUrl(`api/todos?pageNumber=${pageNumber}&pageSize=${pageSize}`);
@@ -11,6 +11,15 @@ export const getPaginatedToDos = async ({ pageIndex: pageNumber, pageSize }: Api
     doErrorToastIfRequired(response);
     
     return mapHttpClientPaginatedResponse(response, mapApiToDoSummary);
+};
+
+export const getToDoById = async (toDoId: number): Promise<HttpClientResponse<ApiToDoDetails>> => {
+    const url = buildApiUrl(`api/todos/${toDoId}`);
+    const response = await httpClient.getRequest<ApiToDoDetails>(url);
+
+    doErrorToastIfRequired(response);
+
+    return mapHttpClientResponse(response, mapApiToDoDetails);
 };
 
 export const createToDo = async (dto: ApiCreateToDoDto): Promise<HttpClientResponse<number>> => {

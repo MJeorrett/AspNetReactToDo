@@ -30,7 +30,7 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
     };
 
     return (
-        <TableRow key={toDo.id}>
+        <TableRow>
             <TableCell>
                 <AppIconButton
                     linkTo={appPaths.editToDo(toDo.id)}

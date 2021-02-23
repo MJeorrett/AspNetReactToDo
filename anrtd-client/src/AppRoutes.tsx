@@ -22,9 +22,9 @@ const AppRoutes: React.FC = () => {
     );
 };
 
-export const useToDoId = (): string => {
+export const useToDoId = (): number => {
     const { toDoId } = useParams<{ toDoId: string}>();
-    return toDoId;
+    return parseInt(toDoId);
 };
  
 export default AppRoutes;

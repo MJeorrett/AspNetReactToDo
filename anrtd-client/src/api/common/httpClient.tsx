@@ -18,6 +18,7 @@ function isAxiosError(error: unknown): error is AxiosError {
     return (error as AxiosError).isAxiosError !== undefined;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError<T>(url: string, error: any): HttpClientResponse<T> {
     if (isAxiosError(error)) {
         if (error.response) {

@@ -7,6 +7,6 @@ const HomePage: React.FC = () => {
             <Typography align="center" gutterBottom>An example project using the layout, packages and boilerplate I like to use for Asp.Net Core + React + EF Core projects.</Typography>
         </>
     );
-}
+};
 
 export default HomePage;

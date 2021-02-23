@@ -10,7 +10,7 @@ export function mapHttpClientResponse<TResponse, TMapped>(
         return {
             ...response,
             content: mapper(response.content)
-        }
+        };
     }
     catch (error) {
         console.error('error parsing api response:', error);
@@ -27,7 +27,7 @@ export function mapHttpClientListResponse<TResponse, TMapped>(
         return {
             ...response,
             content: response.content.map(mapper),
-        }
+        };
     }
     catch (error) {
         console.error('error parsing api response:', error);
@@ -47,7 +47,7 @@ export function mapHttpClientPaginatedResponse<TResponse, TMapped>(
                 ...response.content,
                 items: response.content.items.map(mapper),
             },
-        }
+        };
     }
     catch (error) {
         console.error('error parsing api response:', error);

@@ -14,7 +14,7 @@ export interface HttpClientFailureResponse {
 
 export type HttpClientResponse<T> = HttpClientSuccessResponse<T> | HttpClientFailureResponse;
 
-function isAxiosError(error: any): error is AxiosError {
+function isAxiosError(error: unknown): error is AxiosError {
     return (error as AxiosError).isAxiosError !== undefined;
 }
 
@@ -28,7 +28,7 @@ function handleError<T>(url: string, error: any): HttpClientResponse<T> {
                 isError: true,
                 statusCode: error.response.status,
                 message,
-            }
+            };
         } else if (error.request) {
             const message = `Request to ${url} failed, no response received.`;
             console.error(message);
@@ -36,7 +36,7 @@ function handleError<T>(url: string, error: any): HttpClientResponse<T> {
             return {
                 isError: true,
                 message,
-            }
+            };
         } else {
             const message = `Request failed with unknown error: ${error.message}`;
             console.error(message);
@@ -54,9 +54,9 @@ function handleError<T>(url: string, error: any): HttpClientResponse<T> {
 const buildDefaultHeaders = () => {
     // placeholder this is where we would add e.g. auth token.
     const headers = {
-        
+
     };
-    
+
     return headers;
 };
 
@@ -68,79 +68,79 @@ export async function getRequest<TResponse>(url: string, allowedNon200Statuses: 
                 validateStatus: status => (status >= 200 && status <= 299) || allowedNon200Statuses.includes(status),
             });
 
-            const responseData = response.data as TResponse;
+        const responseData = response.data as TResponse;
 
-            return {
-                isError: false,
-                statusCode: response.status,
-                content: responseData,
-            }
+        return {
+            isError: false,
+            statusCode: response.status,
+            content: responseData,
+        };
     }
     catch (error) {
         return handleError<TResponse>(url, error);
     }
 }
 
-export async function postRequest<TResponse>(url: string, payload?: any): Promise<HttpClientResponse<TResponse>> {
+export async function postRequest<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
     try {
-        
+
         const response = await Axios.post(url, payload,
             {
                 headers: buildDefaultHeaders(),
                 validateStatus: status => status >= 200 && status <= 299,
             });
 
-            const responseData = response.data as TResponse;
+        const responseData = response.data as TResponse;
 
-            return {
-                isError: false,
-                statusCode: response.status,
-                content: responseData,
-            }
+        return {
+            isError: false,
+            statusCode: response.status,
+            content: responseData,
+        };
     }
     catch (error) {
         return handleError<TResponse>(url, error);
     }
 }
 
-export async function putRequest<TResponse>(url: string, payload?: any): Promise<HttpClientResponse<TResponse>> {
+export async function putRequest<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
     try {
-        
+
         const response = await Axios.put(url, payload,
             {
                 headers: buildDefaultHeaders(),
                 validateStatus: status => status >= 200 && status <= 299,
             });
 
-            const responseData = response.data as TResponse;
+        const responseData = response.data as TResponse;
 
-            return {
-                isError: false,
-                statusCode: response.status,
-                content: responseData,
-            }
+        return {
+            isError: false,
+            statusCode: response.status,
+            content: responseData,
+        };
     }
     catch (error) {
         return handleError<TResponse>(url, error);
     }
 }
 
-export async function patchRequest<TResponse>(url: string, payload?: any): Promise<HttpClientResponse<TResponse>> {
+export async function patchRequest<TResponse>(url: string, payload?: unknown): Promise<HttpClientResponse<TResponse>> {
     try {
-        
+
         const response = await Axios.patch(url, payload,
             {
                 headers: buildDefaultHeaders(),
                 validateStatus: status => status >= 200 && status <= 299,
             });
 
-            const responseData = response.data as TResponse;
+        const responseData = response.data as TResponse;
 
-            return {
-                isError: false,
-                statusCode: response.status,
-                content: responseData,
-            }
+        return {
+            isError: false,
+            statusCode: response.status,
+            content: responseData,
+        };
     }
     catch (error) {
         return handleError<TResponse>(url, error);
@@ -149,20 +149,20 @@ export async function patchRequest<TResponse>(url: string, payload?: any): Promi
 
 export async function deleteRequest<TResponse>(url: string): Promise<HttpClientResponse<TResponse>> {
     try {
-        
+
         const response = await Axios.delete(url,
             {
                 headers: buildDefaultHeaders(),
                 validateStatus: status => status >= 200 && status <= 299,
             });
 
-            const responseData = response.data as TResponse;
+        const responseData = response.data as TResponse;
 
-            return {
-                isError: false,
-                statusCode: response.status,
-                content: responseData,
-            }
+        return {
+            isError: false,
+            statusCode: response.status,
+            content: responseData,
+        };
     }
     catch (error) {
         return handleError<TResponse>(url, error);

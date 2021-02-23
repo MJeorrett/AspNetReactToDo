@@ -1,3 +1,3 @@
 import config from '../../config';
 
-export const buildApiUrl = (path: string) => `${config.apiBaseUrl}/${path}`;
+export const buildApiUrl = (path: string): string => `${config.apiBaseUrl}/${path}`;

@@ -20,21 +20,21 @@ const AppTable = <TRow,>({
     pageSizeOptions = [10, 25, 100],
     onChangePageNumber,
     onChangePageSize,
-}: AppTableProps<TRow>) => {
+}: AppTableProps<TRow>): JSX.Element => {
     if (pagination) {
         if (!onChangePageNumber || !onChangePageSize) {
             console.warn('AppTable: For pagination to work you must provide page number and size change handlers.');
         }
     }
 
-    const handleChangePageNumber = (_: any, pageNumber: number) => {
+    const handleChangePageNumber = (_: unknown, pageNumber: number) => {
         onChangePageNumber && onChangePageNumber(pageNumber + 1);
-    }
+    };
 
     const handleChangePageSize = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        var pageSize = parseInt(event.target.value);
+        const pageSize = parseInt(event.target.value);
         onChangePageSize && onChangePageSize(pageSize);
-    }
+    };
     return (
         <>
             <TableContainer>
@@ -68,6 +68,6 @@ const AppTable = <TRow,>({
             )}
         </>
     );
-}
+};
 
 export default AppTable;

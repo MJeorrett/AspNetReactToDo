@@ -13,12 +13,12 @@ const CreateToDoPage: React.FC = () => {
         const response = await createToDo(toDo);
 
         if (!response.isError) {
-            successToast("ToDo created.");
+            successToast('ToDo created.');
             history.push(appPaths.toDos);
         }
 
         return response;
-    }
+    };
 
     return (
         <>
@@ -29,6 +29,6 @@ const CreateToDoPage: React.FC = () => {
             />
         </>
     );
-}
+};
 
 export default CreateToDoPage;

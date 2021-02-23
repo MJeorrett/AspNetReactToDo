@@ -13,7 +13,7 @@ const ApiResponseWrapper: React.FC<ApiErrorLoaderWrapperProps> = ({
     children,
 }) => {
     if (isFetching) {
-        return <AppLoader />
+        return <AppLoader />;
     }
 
     if (isError) {
@@ -29,6 +29,6 @@ const ApiResponseWrapper: React.FC<ApiErrorLoaderWrapperProps> = ({
             {children}
         </>
     );
-}
+};
 
 export default ApiResponseWrapper;

@@ -38,4 +38,4 @@ export const AppButton: React.FC<AppButtonProps> = ({
             )}
         </span>
     );
-}
+};

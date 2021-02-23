@@ -25,7 +25,7 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
         if (response.isError) return;
 
         dispatch(actions.toDos.delete(toDo.id));
-    }
+    };
 
     return (
         <TableRow key={toDo.id}>
@@ -40,6 +40,6 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
             </TableCell>
         </TableRow>
     );
-}
+};
 
 export default React.memo(ToDosTableRow, (prev, next) => prev.toDo.id === next.toDo.id);

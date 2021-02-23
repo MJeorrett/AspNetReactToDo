@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
-export const useDispatchEffect = (actionCreator: () => void) => {
+export const useDispatchEffect = (actionCreator: () => void): () => void => {
     const dispatch = useDispatch();
 
     const dispatchAction = useCallback(() => dispatch(actionCreator()), [actionCreator]);

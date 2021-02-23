@@ -14,7 +14,7 @@ export const actions = {
 
 export const selectors = {
     [toDosSlice.name]: toDosSlice.selectors,
-}
+};
 
 export default store;
 export * from './utils/useDispatchEffect';

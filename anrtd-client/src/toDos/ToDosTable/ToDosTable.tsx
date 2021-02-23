@@ -5,11 +5,7 @@ import AppTable from '../../components/AppTable';
 import { actions, selectors, useDispatchEffect } from '../../store';
 import ToDosTableRow from './ToDosTableRow';
 
-export interface ToDosTableProps {
-
-}
-
-const ToDosTable: React.FC<ToDosTableProps> = () => {
+const ToDosTable: React.FC = () => {
     useDispatchEffect(actions.toDos.fetchAll);
     const dispatch = useDispatch();
 
@@ -21,15 +17,13 @@ const ToDosTable: React.FC<ToDosTableProps> = () => {
     const toDos = useSelector(selectors.toDos.all);
     const pagination = useSelector(selectors.toDos.pagination);
 
-    const makeHandleDelete = (toDoId: number) => () => dispatch(actions.toDos.delete(toDoId));
-
     const handleChangePageNumber = (pageNumber: number) => {
         dispatch(actions.toDos.setPageNumber(pageNumber));
-    }
+    };
 
     const handleChangePageSize = (pageSize: number) => {
         dispatch(actions.toDos.setPageSize(pageSize));
-    }
+    };
 
     return (
         <>
@@ -37,7 +31,7 @@ const ToDosTable: React.FC<ToDosTableProps> = () => {
                 isFetching={isFetching}
                 isError={isError}
             >
-                {toDos.length === 0 ? <Typography>You don't have any ToDos yet.</Typography> :
+                {toDos.length === 0 ? <Typography>You don&lsquo;t have any ToDos yet.</Typography> :
                     <AppTable
                         headers={['Id', 'Title', '']}
                         entities={toDos}
@@ -55,6 +49,6 @@ const ToDosTable: React.FC<ToDosTableProps> = () => {
             </ApiResponseWrapper>
         </>
     );
-}
+};
 
 export default ToDosTable;

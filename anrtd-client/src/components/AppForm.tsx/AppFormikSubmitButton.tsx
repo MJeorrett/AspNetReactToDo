@@ -2,7 +2,7 @@ import { FormikProps, useFormikContext } from 'formik';
 import { AppButton, AppButtonProps } from '../AppButton';
 
 export interface AppFormikSubmitButtonProps extends AppButtonProps {
-    formikProps?: FormikProps<any>
+    formikProps?: FormikProps<unknown>
 }
  
 const AppFormikSubmitButton: React.FC<AppFormikSubmitButtonProps> = ({
@@ -22,6 +22,6 @@ const AppFormikSubmitButton: React.FC<AppFormikSubmitButtonProps> = ({
             disabled={disabled || isSubmitting}
         />
     );
-}
+};
  
 export default AppFormikSubmitButton;

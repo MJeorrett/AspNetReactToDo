@@ -4,13 +4,13 @@ import { HttpClientResponse } from '../../api';
 import CreateToDoForm, { CreateToDoFormValues } from './CreateToDoForm';
 
 export interface CreateToDoFormContainerProps {
-    onSubmit: (toDo: CreateToDoFormValues) => Promise<HttpClientResponse<any>>,
+    onSubmit: (toDo: CreateToDoFormValues) => Promise<HttpClientResponse<unknown>>,
     formikRef?: Ref<FormikProps<CreateToDoFormValues>>,
 }
 
 const initialValues: CreateToDoFormValues = {
     title: '',
-}
+};
  
 const CreateToDoFormContainer: React.FC<CreateToDoFormContainerProps> = ({
     onSubmit,
@@ -27,6 +27,6 @@ const CreateToDoFormContainer: React.FC<CreateToDoFormContainerProps> = ({
             )}
         </Formik>
     );
-}
+};
  
 export default CreateToDoFormContainer;

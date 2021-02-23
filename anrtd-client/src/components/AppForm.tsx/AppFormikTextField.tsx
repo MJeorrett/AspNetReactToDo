@@ -1,5 +1,5 @@
 import { TextField, TextFieldProps, useTheme } from '@material-ui/core';
-import { useField, useFormik, useFormikContext } from 'formik';
+import { useField, useFormikContext } from 'formik';
 
 type InternallySetTextFieldProps = Omit<TextFieldProps, 'helperText'|'error'|'name'>
 
@@ -32,6 +32,6 @@ const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
             }}
         />
     );
-}
+};
  
 export default AppFormikTextField;

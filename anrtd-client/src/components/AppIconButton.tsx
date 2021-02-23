@@ -1,8 +1,4 @@
 import { CircularProgress, IconButton, IconButtonProps, makeStyles } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-
-export type AppIconButtonIconNames = 'delete'|'edit';
 
 export interface AppButtonProps extends Omit<IconButtonProps, 'children'> {
     showSpinner?: boolean,
@@ -37,11 +33,12 @@ export const AppIconButton: React.FC<AppButtonProps> = ({
                 {...restOfProps}
                 disabled={disabled || showSpinner}
                 color={color}
-                children={icon}
-            />
+            >
+                {icon}
+            </IconButton>
             {showSpinner && (
                 <CircularProgress size={24} className={classes.progress} />
             )}
         </span>
     );
-}
+};

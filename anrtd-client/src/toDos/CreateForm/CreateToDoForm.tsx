@@ -1,4 +1,3 @@
-import { Button } from '@material-ui/core';
 import { Form, FormikProps } from 'formik';
 import AppFormikSubmitButton from '../../components/AppForm.tsx/AppFormikSubmitButton';
 import AppFormikTextField from '../../components/AppForm.tsx/AppFormikTextField';
@@ -14,6 +13,6 @@ const CreateToDoForm: React.FC<FormikProps<CreateToDoFormValues>> = () => {
             <AppFormikSubmitButton variant="contained" color="primary" type="submit">Submit</AppFormikSubmitButton>
         </Form>
     );
-}
+};
  
 export default CreateToDoForm;

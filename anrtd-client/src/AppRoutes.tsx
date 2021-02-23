@@ -17,6 +17,6 @@ const AppRoutes: React.FC = () => {
             <Route path={appPaths.home}><HomePage /></Route>
         </Switch>
     );
-}
+};
  
 export default AppRoutes;

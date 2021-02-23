@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core';
-import ToDosTable from '../toDos/ToDosTable';
+import ToDosTable from '../components-todos/ToDosTable';
 
 const ToDosPage: React.FC = () => {
     return (

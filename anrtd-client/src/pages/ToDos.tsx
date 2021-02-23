@@ -1,10 +1,10 @@
-import { Typography } from '@material-ui/core';
 import ToDosTable from '../components-todos/ToDosTable';
+import AppPageHeading from '../components/AppPageHeading';
 
 const ToDosPage: React.FC = () => {
     return (
         <>
-            <Typography variant="h3" component="h1" gutterBottom>ToDos</Typography>
+            <AppPageHeading>ToDos</AppPageHeading>
             <ToDosTable />
         </>
     );

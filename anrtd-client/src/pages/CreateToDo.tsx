@@ -1,9 +1,9 @@
-import { Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 import { createToDo } from '../api/todos';
 import { appPaths } from '../AppRoutes';
 import CreateToDoForm, { CreateToDoFormValues } from '../components-todos/CreateForm';
+import AppPageHeading from '../components/AppPageHeading';
 import { successToast } from '../toast';
 
 const CreateToDoPage: React.FC = () => {
@@ -22,7 +22,7 @@ const CreateToDoPage: React.FC = () => {
 
     return (
         <>
-            <Typography variant="h3" component="h1" gutterBottom>Create ToDo</Typography>
+            <AppPageHeading>Create ToDo</AppPageHeading>
 
             <CreateToDoForm
                 onSubmit={handleSubmit}

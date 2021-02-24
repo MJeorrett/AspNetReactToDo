@@ -54,14 +54,9 @@ namespace Anrtd.Api.Controllers
             return StatusCode(201, result.Content);
         }
 
-        [HttpPut("{toDoId}")]
-        public async Task<ActionResult<int>> UpdateToDo(int toDoId, [FromBody] UpdateToDoCommand command)
+        [HttpPut]
+        public async Task<ActionResult<int>> UpdateToDo([FromBody] UpdateToDoCommand command)
         {
-            if (toDoId != command.Id) return BadRequest(new
-            {
-                message = "Id in url and body must match.",
-            });
-
             var result = await _mediator.Send(command);
 
             if (result.IsBadRequest) return BadRequest(result.ValidationFailures);

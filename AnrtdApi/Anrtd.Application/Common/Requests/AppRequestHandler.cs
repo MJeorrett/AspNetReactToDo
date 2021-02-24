@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace StageRaceFantasy.Application.Common.Requests
+namespace Anrtd.Application.Common.Requests
 {
     public abstract class AppRequestHandler<TRequest, TResponse> : IRequestHandler<TRequest, AppRequestResult<TResponse>>
         where TRequest : IRequest<AppRequestResult<TResponse>>

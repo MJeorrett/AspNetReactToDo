@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace StageRaceFantasy.Application.Common.Requests
+namespace Anrtd.Application.Common.Requests
 {
     public interface IAppRequest<T> : IRequest<AppRequestResult<T>>, IValidatedAppRequest
     {

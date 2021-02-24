@@ -1,8 +1,8 @@
-﻿using Anrtd.Infrastructure.Persistence;
+﻿using Anrtd.Application.Common.Interfaces;
+using Anrtd.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StageRaceFantasy.Application.Common.Interfaces;
 
 namespace Anrtd.Infrastructure
 {

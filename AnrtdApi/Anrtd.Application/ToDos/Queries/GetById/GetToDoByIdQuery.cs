@@ -1,8 +1,8 @@
-﻿using Anrtd.Application.ToDos.Queries.GetPaginated;
+﻿using Anrtd.Application.Common.Interfaces;
+using Anrtd.Application.Common.Requests;
+using Anrtd.Application.ToDos.Queries.GetPaginated;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using StageRaceFantasy.Application.Common.Interfaces;
-using StageRaceFantasy.Application.Common.Requests;
 using System.Threading;
 using System.Threading.Tasks;
 

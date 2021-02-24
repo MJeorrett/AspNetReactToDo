@@ -1,8 +1,8 @@
-﻿using Anrtd.Domain.Entities;
+﻿using Anrtd.Application.Common.Interfaces;
+using Anrtd.Domain.Entities;
 using Anrtd.Domain.Enums;
 using Anrtd.Infrastructure.Persistence.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
-using StageRaceFantasy.Application.Common.Interfaces;
 
 namespace Anrtd.Infrastructure.Persistence
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StageRaceFantasy.Application.Common.Requests
+namespace Anrtd.Application.Common.Requests
 {
     public record AppRequestResult<T>
     {

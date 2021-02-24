@@ -1,8 +1,8 @@
-﻿using Anrtd.Application.Common.Mapping;
+﻿using Anrtd.Application.Common.Interfaces;
+using Anrtd.Application.Common.Mapping;
+using Anrtd.Application.Common.Requests;
 using Anrtd.Domain.Entities;
 using AutoMapper;
-using StageRaceFantasy.Application.Common.Interfaces;
-using StageRaceFantasy.Application.Common.Requests;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace StageRaceFantasy.Application.Common.Interfaces
+namespace Anrtd.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {

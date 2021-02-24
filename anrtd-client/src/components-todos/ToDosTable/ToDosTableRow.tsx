@@ -31,6 +31,8 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
 
     return (
         <TableRow>
+            <TableCell>{toDo.id}</TableCell>
+            <TableCell style={{ width: '100%' }}>{toDo.title}</TableCell>
             <TableCell>
                 <AppIconButton
                     linkTo={appPaths.editToDo(toDo.id)}
@@ -38,8 +40,6 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
                     icon={<EditIcon />}
                 />
             </TableCell>
-            <TableCell>{toDo.id}</TableCell>
-            <TableCell style={{ width: '100%' }}>{toDo.title}</TableCell>
             <TableCell>
                 <AppIconButton
                     onClick={handleDelete}

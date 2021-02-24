@@ -1,5 +1,6 @@
 ﻿using Anrtd.Application.ToDos.Commands;
 using Anrtd.Application.ToDos.Commands.Create;
+using Anrtd.Application.ToDos.Commands.Edit;
 using Anrtd.Application.ToDos.Queries.GetById;
 using Anrtd.Application.ToDos.Queries.GetPaginated;
 using Anrtd.Domain.Entities;
@@ -51,6 +52,22 @@ namespace Anrtd.Api.Controllers
             if (result.IsBadRequest) return BadRequest(result.ValidationFailures);
 
             return StatusCode(201, result.Content);
+        }
+
+        [HttpPut("{toDoId}")]
+        public async Task<ActionResult<int>> UpdateToDo(int toDoId, [FromBody] UpdateToDoCommand command)
+        {
+            if (toDoId != command.Id) return BadRequest(new
+            {
+                message = "Id in url and body must match.",
+            });
+
+            var result = await _mediator.Send(command);
+
+            if (result.IsBadRequest) return BadRequest(result.ValidationFailures);
+            if (result.IsNotFound) return NotFound();
+
+            return Ok();
         }
 
         [HttpDelete("{toDoId}")]

@@ -1,6 +1,7 @@
 import { Ref } from 'react';
 import { Formik, FormikProps } from 'formik';
 import ToDoForm, { ToDoFormValues } from './ToDoForm';
+import { ToDoStatus } from '../../config/ToDoStatus';
 
 export interface ToDoFormContainerProps {
     onSubmit: (toDo: ToDoFormValues) => Promise<unknown>,
@@ -10,6 +11,7 @@ export interface ToDoFormContainerProps {
 
 const defaultInitialValues: ToDoFormValues = {
     title: '',
+    status: ToDoStatus.New,
 };
  
 const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({

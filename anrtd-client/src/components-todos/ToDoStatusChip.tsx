@@ -1,5 +1,5 @@
 import { Chip } from '@material-ui/core';
-import { ToDoStatus, toDoStatusColors } from '../config/ToDoStatus';
+import { ToDoStatus, useToDoStatusColors } from '../config/ToDoStatus';
 
 export interface ToDoStatusChipProps {
     status: ToDoStatus,
@@ -8,6 +8,8 @@ export interface ToDoStatusChipProps {
 const ToDoStatusChip: React.FC<ToDoStatusChipProps> = ({
     status,
 }) => {
+    const toDoStatusColors = useToDoStatusColors();
+    
     return (
         <Chip
             label={ToDoStatus[status]}
@@ -15,6 +17,7 @@ const ToDoStatusChip: React.FC<ToDoStatusChipProps> = ({
             style={{
                 borderColor: toDoStatusColors[status],
                 color: toDoStatusColors[status],
+                width: '85px',
             }}
         />
     );

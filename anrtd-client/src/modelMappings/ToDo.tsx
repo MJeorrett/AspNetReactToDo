@@ -1,10 +1,10 @@
-import { ApiToDoDetails, ApiToDoSummary } from '../api/models';
-import { ToDoDetails, ToDoSummary } from '../models/ToDo';
+import { ApiToDo } from '../api/models';
+import { ToDo } from '../models/ToDo';
 
-export const mapApiToDoSummary = (apiToDo: ApiToDoSummary): ToDoSummary => ({
+export const mapApiToDoSummary = (apiToDo: ApiToDo): ToDo => ({
     ...apiToDo,
 });
 
-export const mapApiToDoDetails = (apiToDo: ApiToDoDetails): ToDoDetails => ({
+export const mapApiToDoDetails = (apiToDo: ApiToDo): ToDo => ({
     ...apiToDo,
 });

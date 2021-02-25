@@ -1,12 +1,14 @@
 import { useCallback } from 'react';
-import { getToDoById } from '../api/todos';
+import { useHistory } from 'react-router-dom';
+import { getToDoById, updateToDo } from '../api/todos';
 import { useHttpRequest } from '../api/utils/useHttpRequest';
-import { useToDoId } from '../AppRoutes';
-import ToDoForm from '../components-todos/Form';
+import { appPaths, useToDoId } from '../AppRoutes';
+import ToDoForm, { ToDoFormValues } from '../components-todos/Form';
 import ApiResponseWrapper from '../components/ApiResponseWrapper';
 import AppPageHeading from '../components/AppPageHeading';
 
 const EditToDoPage: React.FC = () => {
+    const history = useHistory();
     const toDoId = useToDoId();
     const fetchToDo = useCallback(() => getToDoById(toDoId), [toDoId]);
     const {
@@ -14,6 +16,17 @@ const EditToDoPage: React.FC = () => {
         isError,
         result: toDo,
     } = useHttpRequest(fetchToDo);
+
+    const handleUpdateToDo = async (values: ToDoFormValues) => {
+        const response = await updateToDo({
+            id: toDoId,
+            ...values
+        });
+
+        if (!response.isError) {
+            history.push(appPaths.toDos);
+        }
+    };
 
     return (
         <>
@@ -23,7 +36,7 @@ const EditToDoPage: React.FC = () => {
                 isError={isError}
             >
                 <ToDoForm
-                    onSubmit={async values => console.log(values)}
+                    onSubmit={handleUpdateToDo}
                     initialValues={toDo}
                 />
             </ApiResponseWrapper>

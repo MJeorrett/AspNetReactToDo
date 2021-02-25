@@ -33,7 +33,7 @@ const ToDosTable: React.FC = () => {
             >
                 {toDos.length === 0 ? <Typography>You don&lsquo;t have any ToDos yet.</Typography> :
                     <AppTable
-                        headers={['ID', 'Title', 'Status', '', '']}
+                        headers={['ID', 'Title', '', '', '']}
                         entities={toDos}
                         pagination={pagination}
                         onChangePageNumber={handleChangePageNumber}

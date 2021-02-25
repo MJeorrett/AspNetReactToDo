@@ -1,9 +1,4 @@
-export interface ToDoSummary {
-    id: number,
-    title: string,
-}
-
-export interface ToDoDetails {
+export interface ToDo {
     id: number,
     title: string,
 }

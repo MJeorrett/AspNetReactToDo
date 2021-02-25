@@ -1,9 +1,4 @@
-export interface ApiToDoSummary {
-    id: number,
-    title: string,
-}
-
-export interface ApiToDoDetails {
+export interface ApiToDo {
     id: number,
     title: string,
 }

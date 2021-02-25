@@ -1,21 +1,21 @@
 import { mapApiToDoDetails, mapApiToDoSummary } from '../modelMappings/ToDo';
-import { ToDoSummary } from '../models/ToDo';
+import { ToDo } from '../models/ToDo';
 import { ApiPaginatedResponse, ApiPaginationQueryParams, buildApiUrl, doErrorToastIfRequired, httpClient, mapHttpClientPaginatedResponse, mapHttpClientResponse } from './common';
 import { HttpClientResponse } from './common/httpClient';
-import { ApiCreateToDoDto, ApiToDoDetails, ApiToDoSummary } from './models';
+import { ApiCreateToDoDto, ApiToDo } from './models';
 
-export const getPaginatedToDos = async ({ pageIndex: pageNumber, pageSize }: ApiPaginationQueryParams): Promise<HttpClientResponse<ApiPaginatedResponse<ToDoSummary>>> => {
+export const getPaginatedToDos = async ({ pageIndex: pageNumber, pageSize }: ApiPaginationQueryParams): Promise<HttpClientResponse<ApiPaginatedResponse<ToDo>>> => {
     const url = buildApiUrl(`api/todos?pageNumber=${pageNumber}&pageSize=${pageSize}`);
-    const response = await httpClient.getRequest<ApiPaginatedResponse<ApiToDoSummary>>(url);
+    const response = await httpClient.getRequest<ApiPaginatedResponse<ApiToDo>>(url);
 
     doErrorToastIfRequired(response);
     
     return mapHttpClientPaginatedResponse(response, mapApiToDoSummary);
 };
 
-export const getToDoById = async (toDoId: number): Promise<HttpClientResponse<ApiToDoDetails>> => {
+export const getToDoById = async (toDoId: number): Promise<HttpClientResponse<ApiToDo>> => {
     const url = buildApiUrl(`api/todos/${toDoId}`);
-    const response = await httpClient.getRequest<ApiToDoDetails>(url);
+    const response = await httpClient.getRequest<ApiToDo>(url);
 
     doErrorToastIfRequired(response);
 
@@ -23,6 +23,15 @@ export const getToDoById = async (toDoId: number): Promise<HttpClientResponse<Ap
 };
 
 export const createToDo = async (dto: ApiCreateToDoDto): Promise<HttpClientResponse<number>> => {
+    const url = buildApiUrl('api/todos');
+    const response = await httpClient.postRequest<number>(url, dto);
+    
+    doErrorToastIfRequired(response);
+    
+    return response;
+};
+
+export const updateToDo = async (dto: ApiToDo): Promise<HttpClientResponse<number>> => {
     const url = buildApiUrl('api/todos');
     const response = await httpClient.postRequest<number>(url, dto);
     

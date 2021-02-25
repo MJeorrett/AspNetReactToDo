@@ -14,7 +14,7 @@ namespace Anrtd.Infrastructure.Persistence
             var logger = services.GetRequiredService<ILogger<ApplicationDbContextSeed>>();
             var dbContext = services.GetRequiredService<ApplicationDbContext>();
 
-            if (await dbContext.ToDos.CountAsync() < 100)
+            if (await dbContext.ToDos.CountAsync() < 10)
             {
                 await DoSeedToDos(logger, dbContext);
             }
@@ -24,7 +24,7 @@ namespace Anrtd.Infrastructure.Persistence
         {
             logger.LogInformation("Seeding ToDos.");
 
-            for (var i = 1; i <= 100; i++)
+            for (var i = 1; i <= 10; i++)
             {
                 dbContext.ToDos.Add(new ToDoEntity()
                 {

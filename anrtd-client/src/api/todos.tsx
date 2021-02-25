@@ -33,7 +33,7 @@ export const createToDo = async (dto: ApiCreateToDoDto): Promise<HttpClientRespo
 
 export const updateToDo = async (dto: ApiToDo): Promise<HttpClientResponse<number>> => {
     const url = buildApiUrl('api/todos');
-    const response = await httpClient.postRequest<number>(url, dto);
+    const response = await httpClient.putRequest<number>(url, dto);
     
     doErrorToastIfRequired(response);
     

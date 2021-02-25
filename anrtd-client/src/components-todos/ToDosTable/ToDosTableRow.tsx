@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { deleteToDo } from '../../api/todos';
 import { appPaths } from '../../AppRoutes';
 import { AppIconButton } from '../../components/AppIconButton';
+import { ToDoStatus } from '../../config/ToDoStatus';
 import { ToDo } from '../../models/ToDo';
 import { actions } from '../../store';
 
@@ -33,6 +34,7 @@ const ToDosTableRow: React.FC<ToDosTableRowProps> = ({
         <TableRow>
             <TableCell>{toDo.id}</TableCell>
             <TableCell style={{ width: '100%' }}>{toDo.title}</TableCell>
+            <TableCell>{ToDoStatus[toDo.status]}</TableCell>
             <TableCell>
                 <AppIconButton
                     linkTo={appPaths.editToDo(toDo.id)}

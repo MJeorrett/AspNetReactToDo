@@ -1,5 +1,6 @@
 ﻿using Anrtd.Application.Common.Interfaces;
 using Anrtd.Infrastructure.Persistence;
+using Anrtd.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,8 @@ namespace Anrtd.Infrastructure
 
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
+            services.AddTransient<IDateTime, DateTimeService>();
 
             return services;
         }

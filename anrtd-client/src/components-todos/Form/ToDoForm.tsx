@@ -1,10 +1,11 @@
 import { Form, FormikProps } from 'formik';
-import AppFormikSelect, { mapEnumToAppSelectOptions } from '../../components/AppForm/AppFormikSelect';
+import AppFormikSelect from '../../components/AppForm/AppFormikSelect';
 import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButton';
 import AppFormikTextField from '../../components/AppForm/AppFormikTextField';
 import { ToDoStatus } from '../../config/ToDoStatus';
+import { mapEnumToAppSelectOptions } from '../../enumUtils';
 
-export interface ToDoFormValues {
+export type ToDoFormValues = {
     title: string,
     status: ToDoStatus,
 }

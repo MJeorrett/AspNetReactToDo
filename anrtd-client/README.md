@@ -8,6 +8,6 @@ It demonstrates the typical set up I use for react projects including:
 - Anti-corruption layer between api and app models to allow the two to change independently.
 - Material UI.
 - Redux store built using @reduxjs/toolkit.
-- Forms using formik.
+- Forms using formik including validation.
 - Routing using react-router.
 - Configuration.

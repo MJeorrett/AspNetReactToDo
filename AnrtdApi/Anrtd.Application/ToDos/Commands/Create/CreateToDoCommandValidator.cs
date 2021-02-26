@@ -6,8 +6,7 @@ namespace Anrtd.Application.ToDos.Commands.Create
     {
         public CreateToDoCommandValidator()
         {
-            RuleFor(x => x.Title)
-                .NotEmpty();
+            RuleFor(x => x.Title).ToDoTitleRules();
         }
     }
 }

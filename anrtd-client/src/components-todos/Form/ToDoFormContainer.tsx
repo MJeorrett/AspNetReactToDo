@@ -10,13 +10,14 @@ export interface ToDoFormContainerProps {
     onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
     formikRef?: Ref<FormikProps<ToDoFormValues>>,
     initialValues?: ToDoFormValues,
-    hideReadonlyFields?: boolean,
+    createMode?: boolean,
     autoFocus?: boolean,
 }
 
 const defaultInitialValues: ToDoFormValues = {
     title: '',
     status: ToDoStatus.New,
+    dueDate: null,
 };
 
 const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
@@ -24,13 +25,14 @@ const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
     status: Yup.number()
         .oneOf(getNumericEnumValues(ToDoStatus))
         .required(),
+    dueDate: Yup.date().typeError('Must be a valid date.').nullable().default(null),
 });
- 
+
 const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
     onSubmit,
     formikRef,
     initialValues,
-    hideReadonlyFields,
+    createMode,
     autoFocus,
 }) => {
     return (
@@ -43,12 +45,12 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
             {formikProps => (
                 <ToDoForm
                     {...formikProps}
-                    hideReadonlyFields={!!hideReadonlyFields}
+                    createMode={!!createMode}
                     autoFocus={!!autoFocus}
                 />
             )}
         </Formik>
     );
 };
- 
+
 export default ToDoFormContainer;

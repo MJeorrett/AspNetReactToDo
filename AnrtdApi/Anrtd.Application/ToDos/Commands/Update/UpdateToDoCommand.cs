@@ -5,6 +5,7 @@ using Anrtd.Domain.Entities;
 using Anrtd.Domain.Enums;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace Anrtd.Application.ToDos.Commands.Edit
         public int Id { get; init; }
         public string Title { get; init; }
         public ToDoStatus Status { get; init; }
+        public DateTime? DueDate { get; set; }
 
         public void Mapping(Profile profile)
         {

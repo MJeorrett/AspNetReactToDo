@@ -1,8 +1,8 @@
 import { useTheme } from '@material-ui/core';
 import { KeyboardDatePicker, KeyboardDatePickerProps } from '@material-ui/pickers';
 import { ParsableDate } from '@material-ui/pickers/constants/prop-types';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import { useField, useFormikContext } from 'formik';
-import AppFormikTextField from './AppFormikTextField';
 import { FormikInputPropsKeys } from './common';
 
 
@@ -29,16 +29,27 @@ const AppFormikDatePicker: React.FC<AppFormikDatePickerProps> = ({
 }) => {
     const theme = useTheme();
     const { isSubmitting } = useFormikContext();
-    const [fieldProps, fieldMeta] = useField<ParsableDate>(name);
+    const [fieldProps, fieldMeta, { setValue }] = useField<ParsableDate>(name);
     const isError = fieldMeta.touched && !!fieldMeta.error;
     const helperText = fieldMeta.touched ? fieldMeta.error : undefined;
+
+    const format = readonly ?
+        !fieldProps.value ? '-' : 'do MMMM yyyy hh:mmaaa' :
+        'dd/MM/yyyy';
+
+    const handleChange = (date: MaterialUiPickersDate) => {
+        console.log(date);
+        setValue(date);
+    };
 
     return (
         <KeyboardDatePicker
             {...restOfProps}
             {...fieldProps}
-            value={readonly && !fieldProps.value ? new Date() : fieldProps.value}
-            format={fieldProps.value ? 'do MMMM yyyy hh:mmaaa' : '-'}
+            onChange={handleChange}
+            value={(readonly && !fieldProps.value) ? new Date() : (fieldProps.value || null)}
+            format={format}
+            placeholder="dd/mm/yyyy"
             helperText={helperText}
             error={isError}
             disabled={readonly || isSubmitting || disabled}

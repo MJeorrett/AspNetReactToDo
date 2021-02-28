@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSelector, createSlice, EntityState, PayloadAction } from '@reduxjs/toolkit';
 import { getPaginatedToDos } from '../api/todos';
 import { Pagination } from '../models/Pagination';
-import { ToDo } from '../models/ToDo';
+import { ToDoSummary } from '../models/ToDo';
 import { createHttpClientThunk } from './common/createHttpClientThunk';
 
 const sliceName = 'toDos';
@@ -11,12 +11,12 @@ const fetchPaginatedAsyncThunk = createHttpClientThunk(
     getPaginatedToDos,
 );
 
-const entityAdapter = createEntityAdapter<ToDo>({
+const entityAdapter = createEntityAdapter<ToDoSummary>({
     selectId: toDo => toDo.id,
 });
 
 type SliceState = {
-    entityState: EntityState<ToDo>,
+    entityState: EntityState<ToDoSummary>,
     pagination: Pagination,
     isFetching: boolean,
     isError: boolean,

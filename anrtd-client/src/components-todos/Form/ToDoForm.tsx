@@ -25,6 +25,8 @@ const ToDoForm: React.FC<OtherProps & FormikProps<ToDoFormValues>> = () => {
                 options={toDoStatusOptions}
             />
             <AppFormikTextField name="created" label="Created Date" readonly />
+            <AppFormikTextField name="lastModified" label="Last Modified Date" readonly />
+
             <AppFormikSubmitButton variant="contained" color="primary" type="submit">Submit</AppFormikSubmitButton>
         </Form>
     );

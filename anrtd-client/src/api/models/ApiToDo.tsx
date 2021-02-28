@@ -8,6 +8,7 @@ export interface ApiToDo {
 
 export interface ApiToDoDetails extends ApiToDo {
     created: string,
+    lastModified?: string,
 }
 
 export interface ApiCreateToDoDto {

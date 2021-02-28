@@ -25,6 +25,7 @@ const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
         <TextField
             {...restOfProps}
             {...fieldProps}
+            value={readonly ? (fieldProps.value || '-') : fieldProps.value}
             helperText={helperText}
             error={isError}
             disabled={readonly || isSubmitting || disabled}

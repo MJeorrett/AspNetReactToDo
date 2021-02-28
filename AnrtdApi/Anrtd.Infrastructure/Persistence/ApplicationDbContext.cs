@@ -35,11 +35,11 @@ namespace Anrtd.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.Created = _dateTime.Now;
+                        entry.Entity.CreatedDate = _dateTime.Now;
                         break;
 
                     case EntityState.Modified:
-                        entry.Entity.LastModified = _dateTime.Now;
+                        entry.Entity.LastModifiedDate = _dateTime.Now;
                         break;
                 }
             }

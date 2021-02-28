@@ -12,7 +12,7 @@ const CreateToDoPage: React.FC = () => {
         const response = await createToDo(toDo);
 
         if (!response.isError) {
-            history.push(appPaths.toDos);
+            history.push(appPaths.editToDo(response.content));
         }
 
         return response;
@@ -24,6 +24,8 @@ const CreateToDoPage: React.FC = () => {
 
             <ToDoForm
                 onSubmit={handleSubmit}
+                hideReadonlyFields
+                autoFocus
             />
         </>
     );

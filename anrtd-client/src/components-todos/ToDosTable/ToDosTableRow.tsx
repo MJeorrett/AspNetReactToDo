@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { deleteToDo } from '../../api/todos';
 import { appPaths } from '../../AppRoutes';
 import { AppIconButton } from '../../components/AppIconButton';
-import { ToDoStatus } from '../../config/ToDoStatus';
 import { ToDo } from '../../models/ToDo';
 import { actions } from '../../store';
 import ToDoStatusChip from '../ToDoStatusChip';

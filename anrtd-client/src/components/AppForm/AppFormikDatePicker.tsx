@@ -1,9 +1,13 @@
-import { TextField, TextFieldProps, useTheme } from '@material-ui/core';
+import { useTheme } from '@material-ui/core';
+import { KeyboardDatePicker, KeyboardDatePickerProps } from '@material-ui/pickers';
+import { ParsableDate } from '@material-ui/pickers/constants/prop-types';
 import { useField, useFormikContext } from 'formik';
+import AppFormikTextField from './AppFormikTextField';
 import { FormikInputPropsKeys } from './common';
 
-export interface AppFormikTextFieldProps extends
-    Omit<TextFieldProps,
+
+export interface AppFormikDatePickerProps extends
+    Omit<KeyboardDatePickerProps,
     FormikInputPropsKeys |
     'helperText' |
     'error' |
@@ -15,29 +19,30 @@ export interface AppFormikTextFieldProps extends
     readonly?: boolean,
 }
 
-const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
+const AppFormikDatePicker: React.FC<AppFormikDatePickerProps> = ({
     name,
     fullWidth = true,
     disabled,
     readonly,
+    keyboardIcon,
     ...restOfProps
 }) => {
     const theme = useTheme();
     const { isSubmitting } = useFormikContext();
-    const [fieldProps, fieldMeta] = useField(name);
+    const [fieldProps, fieldMeta] = useField<ParsableDate>(name);
     const isError = fieldMeta.touched && !!fieldMeta.error;
     const helperText = fieldMeta.touched ? fieldMeta.error : undefined;
 
     return (
-        <TextField
+        <KeyboardDatePicker
             {...restOfProps}
             {...fieldProps}
-            value={readonly ? (fieldProps.value || '-') : fieldProps.value}
+            value={readonly && !fieldProps.value ? new Date() : fieldProps.value}
+            format={fieldProps.value ? 'do MMMM yyyy hh:mmaaa' : '-'}
             helperText={helperText}
             error={isError}
             disabled={readonly || isSubmitting || disabled}
             fullWidth={fullWidth}
-            variant="standard"
             InputLabelProps={{
                 style: {
                     color: readonly ? theme.palette.text.secondary : undefined,
@@ -52,8 +57,9 @@ const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
             style={{
                 marginBottom: theme.spacing(2),
             }}
+            keyboardIcon={keyboardIcon ? keyboardIcon : readonly ? false : undefined}
         />
     );
 };
 
-export default AppFormikTextField;
+export default AppFormikDatePicker;

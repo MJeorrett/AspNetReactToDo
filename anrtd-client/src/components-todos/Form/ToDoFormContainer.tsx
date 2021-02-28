@@ -10,7 +10,8 @@ export interface ToDoFormContainerProps {
     onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
     formikRef?: Ref<FormikProps<ToDoFormValues>>,
     initialValues?: ToDoFormValues,
-    readonly?: boolean,
+    hideReadonlyFields?: boolean,
+    autoFocus?: boolean,
 }
 
 const defaultInitialValues: ToDoFormValues = {
@@ -29,7 +30,8 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
     onSubmit,
     formikRef,
     initialValues,
-    readonly,
+    hideReadonlyFields,
+    autoFocus,
 }) => {
     return (
         <Formik
@@ -39,7 +41,11 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
             onSubmit={onSubmit || (() => undefined)}
         >
             {formikProps => (
-                <ToDoForm {...formikProps} />
+                <ToDoForm
+                    {...formikProps}
+                    hideReadonlyFields={!!hideReadonlyFields}
+                    autoFocus={!!autoFocus}
+                />
             )}
         </Formik>
     );

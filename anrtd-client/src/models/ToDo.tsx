@@ -5,3 +5,7 @@ export interface ToDo {
     title: string,
     status: ToDoStatus,
 }
+
+export interface ToDoDetails extends ToDo {
+    created: Date,
+}

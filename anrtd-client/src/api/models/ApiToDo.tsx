@@ -6,6 +6,10 @@ export interface ApiToDo {
     status: ToDoStatus,
 }
 
+export interface ApiToDoDetails extends ApiToDo {
+    created: string,
+}
+
 export interface ApiCreateToDoDto {
     title: string,
 }

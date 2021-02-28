@@ -5,12 +5,14 @@ type InternallySetTextFieldProps = Omit<TextFieldProps, 'helperText'|'error'|'na
 
 export interface AppFormikTextFieldProps extends InternallySetTextFieldProps {
     name: string,
+    readonly?: boolean,
 }
 
 const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
     name,
     fullWidth = true,
     disabled,
+    readonly,
     ...restOfProps
 }) => {
     const theme = useTheme();
@@ -25,8 +27,20 @@ const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
             {...fieldProps}
             helperText={helperText}
             error={isError}
-            disabled={isSubmitting || disabled}
+            disabled={readonly || isSubmitting || disabled}
             fullWidth={fullWidth}
+            variant="standard"
+            InputLabelProps={{
+                style: {
+                    color: readonly ? theme.palette.text.secondary : undefined,
+                },
+            }}
+            InputProps={{
+                disableUnderline: readonly || undefined,
+                style: {
+                    color: readonly ? 'currentColor' :   undefined,
+                }
+            }}
             style={{
                 marginBottom: theme.spacing(2),
             }}

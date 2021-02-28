@@ -1,10 +1,11 @@
-import { ApiToDo } from '../api/models';
-import { ToDo } from '../models/ToDo';
+import { ApiToDo, ApiToDoDetails } from '../api/models';
+import { ToDo, ToDoDetails } from '../models/ToDo';
 
-export const mapApiToDoSummary = (apiToDo: ApiToDo): ToDo => ({
+export const mapApiToDo = (apiToDo: ApiToDo): ToDo => ({
     ...apiToDo,
 });
 
-export const mapApiToDoDetails = (apiToDo: ApiToDo): ToDo => ({
+export const mapApiToDoDetails = (apiToDo: ApiToDoDetails): ToDoDetails => ({
     ...apiToDo,
+    created: new Date(apiToDo.created),
 });

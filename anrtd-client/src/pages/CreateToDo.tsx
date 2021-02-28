@@ -24,7 +24,7 @@ const CreateToDoPage: React.FC = () => {
 
             <ToDoForm
                 onSubmit={handleSubmit}
-                hideReadonlyFields
+                createMode
                 autoFocus
             />
         </>

@@ -9,28 +9,30 @@ import { mapEnumToAppSelectOptions } from '../../enumUtils';
 export type ToDoFormValues = {
     title: string,
     status: ToDoStatus,
+    dueDate: Date | null,
 }
 
 export type ToDoFormOtherProps = {
-    hideReadonlyFields: boolean,
+    createMode: boolean,
     autoFocus: boolean,
 }
 
 const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
-    hideReadonlyFields,
+    createMode,
     autoFocus,
 }) => {
     const toDoStatusOptions = mapEnumToAppSelectOptions(ToDoStatus);
     return (
         <Form>
             <AppFormikTextField name="title" label="Title" autoFocus={autoFocus} />
-            <AppFormikSelect
-                name="status"
-                label="Status"
-                options={toDoStatusOptions}
-            />
-            {!hideReadonlyFields && (
+            {!createMode && (
                 <>
+                    <AppFormikSelect
+                        name="status"
+                        label="Status"
+                        options={toDoStatusOptions}
+                    />
+                    <AppFormikDatePicker name="dueDate" label="Due Date" />
                     <AppFormikDatePicker name="createdDate" label="Created Date" readonly />
                     <AppFormikDatePicker name="lastModifiedDate" label="Last Modified Date" readonly />
                 </>

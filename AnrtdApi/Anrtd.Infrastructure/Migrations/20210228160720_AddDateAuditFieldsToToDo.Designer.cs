@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Anrtd.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210226221433_AddToDoAuditFields")]
-    partial class AddToDoAuditFields
+    [Migration("20210228160720_AddDateAuditFieldsToToDo")]
+    partial class AddDateAuditFieldsToToDo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,13 +29,13 @@ namespace Anrtd.Infrastructure.Migrations
                         .HasColumnName("ToDoId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsSoftDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModified")
+                    b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")

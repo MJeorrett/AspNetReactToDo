@@ -8,6 +8,6 @@ export const mapApiToDo = (apiToDo: ApiToDo): ToDo => ({
 
 export const mapApiToDoDetails = (apiToDo: ApiToDoDetails): ToDoDetails => ({
     ...apiToDo,
-    created: parseApiDate(apiToDo.created),
-    lastModified: parseNullableApiDate(apiToDo.lastModified),
+    createdDate: parseApiDate(apiToDo.createdDate),
+    lastModifiedDate: parseNullableApiDate(apiToDo.lastModifiedDate),
 });

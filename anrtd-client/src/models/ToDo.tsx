@@ -7,6 +7,6 @@ export interface ToDo {
 }
 
 export interface ToDoDetails extends ToDo {
-    created: Date,
-    lastModified?: Date,
+    createdDate: Date,
+    lastModifiedDate?: Date,
 }

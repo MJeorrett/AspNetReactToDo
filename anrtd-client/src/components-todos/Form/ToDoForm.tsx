@@ -31,8 +31,8 @@ const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
             />
             {!hideReadonlyFields && (
                 <>
-                    <AppFormikDatePicker name="created" label="Created Date" readonly />
-                    <AppFormikDatePicker name="lastModified" label="Last Modified Date" readonly />
+                    <AppFormikDatePicker name="createdDate" label="Created Date" readonly />
+                    <AppFormikDatePicker name="lastModifiedDate" label="Last Modified Date" readonly />
                 </>
             )}
 

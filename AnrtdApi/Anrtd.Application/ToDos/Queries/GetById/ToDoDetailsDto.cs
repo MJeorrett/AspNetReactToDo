@@ -10,7 +10,7 @@ namespace Anrtd.Application.ToDos.Queries.GetPaginated
         public int Id { get; init; }
         public string Title { get; init; }
         public ToDoStatus Status { get; init; }
-        public DateTime Created { get; init; }
-        public DateTime? LastModified { get; set; }
+        public DateTime CreatedDate { get; init; }
+        public DateTime? LastModifiedDate { get; set; }
     }
 }

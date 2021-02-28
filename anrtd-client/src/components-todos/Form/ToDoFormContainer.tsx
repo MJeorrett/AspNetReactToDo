@@ -7,9 +7,10 @@ import { ToDoStatus } from '../../config/ToDoStatus';
 import { getNumericEnumValues } from '../../enumUtils';
 
 export interface ToDoFormContainerProps {
-    onSubmit: (toDo: ToDoFormValues) => Promise<unknown>,
+    onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
     formikRef?: Ref<FormikProps<ToDoFormValues>>,
     initialValues?: ToDoFormValues,
+    readonly?: boolean,
 }
 
 const defaultInitialValues: ToDoFormValues = {
@@ -28,13 +29,14 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
     onSubmit,
     formikRef,
     initialValues,
+    readonly,
 }) => {
     return (
         <Formik
             innerRef={formikRef}
             initialValues={initialValues || defaultInitialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}
+            onSubmit={onSubmit || (() => undefined)}
         >
             {formikProps => (
                 <ToDoForm {...formikProps} />

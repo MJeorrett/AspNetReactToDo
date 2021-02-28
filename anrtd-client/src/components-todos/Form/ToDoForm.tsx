@@ -9,8 +9,12 @@ export type ToDoFormValues = {
     title: string,
     status: ToDoStatus,
 }
- 
-const ToDoForm: React.FC<FormikProps<ToDoFormValues>> = () => {
+
+type OtherProps = {
+
+}
+
+const ToDoForm: React.FC<OtherProps & FormikProps<ToDoFormValues>> = () => {
     const toDoStatusOptions = mapEnumToAppSelectOptions(ToDoStatus);
     return (
         <Form>
@@ -20,9 +24,10 @@ const ToDoForm: React.FC<FormikProps<ToDoFormValues>> = () => {
                 label="Status"
                 options={toDoStatusOptions}
             />
+            <AppFormikTextField name="created" label="Created Date" readonly />
             <AppFormikSubmitButton variant="contained" color="primary" type="submit">Submit</AppFormikSubmitButton>
         </Form>
     );
 };
- 
+
 export default ToDoForm;

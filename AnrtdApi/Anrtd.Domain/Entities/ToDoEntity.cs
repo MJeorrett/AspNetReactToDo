@@ -1,5 +1,6 @@
 ﻿using Anrtd.Domain.Common;
 using Anrtd.Domain.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,8 @@ namespace Anrtd.Domain.Entities
 
         [Required]
         public ToDoStatus Status { get; set; }
+
+        public DateTime? DueDate { get; set; }
 
         public bool IsSoftDeleted { get; set; }
     }

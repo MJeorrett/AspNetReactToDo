@@ -6,12 +6,12 @@ import { useDispatch } from 'react-redux';
 import { deleteToDo } from '../../api/todos';
 import { appPaths } from '../../AppRoutes';
 import { AppIconButton } from '../../components/AppIconButton';
-import { ToDo } from '../../models/ToDo';
+import { ToDoSummary } from '../../models/ToDo';
 import { actions } from '../../store';
 import ToDoStatusChip from '../ToDoStatusChip';
 
 export interface ToDosTableRowProps {
-    toDo: ToDo,
+    toDo: ToDoSummary,
 }
 
 const ToDosTableRow: React.FC<ToDosTableRowProps> = ({

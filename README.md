@@ -11,3 +11,6 @@ You need to run both projects separately:
 - Client in the client directory run
   - `npm i`
   - `npm start`
+
+## Design Principles
+- Require minimal information for create operations e.g. only mandatory fields.

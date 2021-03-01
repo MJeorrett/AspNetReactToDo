@@ -8,6 +8,7 @@ namespace Anrtd.Application.ToDos.Commands.Update
         public UpdateToDoCommandValidator()
         {
             RuleFor(x => x.Title).ToDoTitleRules();
+            RuleFor(x => x.Status).ToDoStatusRules();
         }
     }
 }

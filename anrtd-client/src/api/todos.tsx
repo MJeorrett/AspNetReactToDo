@@ -1,11 +1,23 @@
+import { ToDoStatus } from '../config/ToDoStatus';
 import { mapApiToDo, mapApiToDoDetails } from '../modelMappings/ToDo';
 import { ToDoSummary, ToDoDetails } from '../models/ToDo';
 import { ApiPaginatedResponse, ApiPaginationQueryParams, buildApiUrl, doErrorToastIfRequired, httpClient, mapHttpClientPaginatedResponse, mapHttpClientResponse } from './common';
 import { HttpClientResponse } from './common/httpClient';
 import { ApiCreateToDoDto, ApiToDoSummary, ApiToDoDetails } from './models';
 
-export const getPaginatedToDos = async ({ pageIndex: pageNumber, pageSize }: ApiPaginationQueryParams): Promise<HttpClientResponse<ApiPaginatedResponse<ToDoSummary>>> => {
-    const url = buildApiUrl(`api/todos?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+export interface ApiGetPaginatedToDosQueryParams extends ApiPaginationQueryParams {
+    toDoStatuses: ToDoStatus[],
+}
+
+export const getPaginatedToDos = async ({ pageIndex: pageNumber, pageSize, toDoStatuses }: ApiGetPaginatedToDosQueryParams): Promise<HttpClientResponse<ApiPaginatedResponse<ToDoSummary>>> => {
+    const queryParameters = [
+        `pageNumber=${pageNumber}`,
+        `pageSize=${pageSize}`,
+    ];
+
+    if (toDoStatuses.length > 0) queryParameters.push(`statusIds=${toDoStatuses.join(',')}`); 
+
+    const url = buildApiUrl(`api/todos?${queryParameters.join('&')}`);
     const response = await httpClient.getRequest<ApiPaginatedResponse<ApiToDoSummary>>(url);
 
     doErrorToastIfRequired(response);

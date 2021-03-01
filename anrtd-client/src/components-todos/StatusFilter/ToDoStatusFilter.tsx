@@ -44,7 +44,7 @@ const ToDoStatusFilter: React.FC<ToDoStatusFilterProps> = ({
                 aria-haspopup="true"
                 onClick={handleButtonClick}
             >
-                Filter Status
+                Filter Status {selectedStatuses.length }/{options.length}
             </AppButton>
             <Menu
                 anchorEl={anchorEl}

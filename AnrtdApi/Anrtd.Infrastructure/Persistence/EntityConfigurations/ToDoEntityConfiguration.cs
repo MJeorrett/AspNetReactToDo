@@ -11,6 +11,10 @@ namespace Anrtd.Infrastructure.Persistence.EntityConfigurations
             builder.Property(toDo => toDo.Status)
                 .HasConversion<int>();
 
+            builder.HasOne(toDo => toDo.StatusEntity)
+                .WithMany(status => status.ToDos)
+                .HasForeignKey(toDo => toDo.Status);
+
             builder.HasQueryFilter(toDo => !toDo.IsSoftDeleted);
         }
     }

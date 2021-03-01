@@ -16,5 +16,12 @@ namespace Anrtd.Domain.Enums
         [Column("ToDoStatusId")]
         public ToDoStatus Id { get; set; }
         public string Name { get; set; }
+
+        public List<ToDoEntity> ToDos { get; set; }
+
+        public ToDoStatusEntity()
+        {
+            ToDos = new List<ToDoEntity>();
+        }
     }
 }

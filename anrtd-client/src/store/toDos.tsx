@@ -1,5 +1,6 @@
 import { createEntityAdapter, createSelector, createSlice, EntityState, PayloadAction } from '@reduxjs/toolkit';
 import { getPaginatedToDos } from '../api/todos';
+import { ToDoStatus } from '../config/ToDoStatus';
 import { Pagination } from '../models/Pagination';
 import { ToDoSummary } from '../models/ToDo';
 import { createHttpClientThunk } from './common/createHttpClientThunk';
@@ -18,6 +19,7 @@ const entityAdapter = createEntityAdapter<ToDoSummary>({
 type SliceState = {
     entityState: EntityState<ToDoSummary>,
     pagination: Pagination,
+    selectedStatuses: ToDoStatus[], 
     isFetching: boolean,
     isError: boolean,
 }
@@ -32,6 +34,7 @@ const initialState: SliceState = {
         totalCount: 0,
         totalPages: 1,
     },
+    selectedStatuses: [],
     isFetching: false,
     isError: false,
 };
@@ -42,7 +45,12 @@ const slice = createSlice({
     reducers: {
         removeToDo: (state, { payload }: PayloadAction<number>) => {
             entityAdapter.removeOne(state.entityState, payload);
-        }
+        },
+        toggleSelectedStatus: (state, { payload }: PayloadAction<ToDoStatus>) => {
+            state.selectedStatuses.includes(payload) ?
+                state.selectedStatuses = state.selectedStatuses.filter(status => status !== payload) :
+                state.selectedStatuses.push(payload);
+        },
     },
     extraReducers: builder => {
         builder.addCase(fetchPaginatedAsyncThunk.pending, state => {
@@ -83,6 +91,7 @@ const doPaginatedFetch = (
     pageSize?: number) => {
 
     dispatch(fetchPaginatedAsyncThunk({
+        toDoStatuses: state.selectedStatuses,
         pageIndex: pageNumber || state.pagination.pageNumber,
         pageSize: pageSize || state.pagination.pageSize,
     }));
@@ -102,6 +111,11 @@ export const actions = {
         const state = selectSliceState(getState());
         doPaginatedFetch(dispatch, state, undefined, pageSize);        
     },
+    toggleSelectedStatus: (status: ToDoStatus) =>  (dispatch: (action: unknown) => void, getState: () => RootReducerState): void => {
+        dispatch(slice.actions.toggleSelectedStatus(status));
+        const state = selectSliceState(getState());
+        doPaginatedFetch(dispatch, state);
+    }
 };
 
 const createSliceSelector = <T, >(selector: (state: SliceState) => T) => {
@@ -118,4 +132,5 @@ export const selectors = {
     })),
     all: createSliceSelector(state => entitySelectors.selectAll(state.entityState)),
     pagination: createSliceSelector(state => state.pagination),
+    selectedStatuses: createSliceSelector(state => state.selectedStatuses),
 };

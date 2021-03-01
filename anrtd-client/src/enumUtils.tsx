@@ -1,8 +1,3 @@
-export type AppSelectOption = {
-    value: number,
-    label: string,
-}
-
 type EnumType = { [s: number]: string };
 
 export const getNumericEnumValues = (enumerable: EnumType): number[] => {
@@ -14,7 +9,12 @@ export const getNumericEnumValues = (enumerable: EnumType): number[] => {
     return keys;
 };
 
-export const mapEnumToAppSelectOptions = (enumerable: EnumType): AppSelectOption[] => {
+export interface Option {
+    value: number,
+    label: string,
+}
+
+export const mapEnumToOptions = (enumerable: EnumType): Option[] => {
     return getNumericEnumValues(enumerable)
         .map(value => ({
             value,

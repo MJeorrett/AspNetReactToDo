@@ -4,7 +4,7 @@ import AppFormikSelect from '../../components/AppForm/AppFormikSelect';
 import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButton';
 import AppFormikTextField from '../../components/AppForm/AppFormikTextField';
 import { ToDoStatus } from '../../config/ToDoStatus';
-import { mapEnumToAppSelectOptions } from '../../enumUtils';
+import { mapEnumToOptions } from '../../enumUtils';
 
 export type ToDoFormValues = {
     title: string,
@@ -21,7 +21,7 @@ const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
     createMode,
     autoFocus,
 }) => {
-    const toDoStatusOptions = mapEnumToAppSelectOptions(ToDoStatus);
+    const toDoStatusOptions = mapEnumToOptions(ToDoStatus);
     return (
         <Form>
             <AppFormikTextField name="title" label="Title" autoFocus={autoFocus} />

@@ -10,3 +10,4 @@ However I have introduced the following ideas:
 - Soft deletion - DELETE method on endpoint rational is that soft delete is internal to api.
 - Sharing validation rules between models.
 - TODO: Validating enum values using Fluent Validation - inspiration taken from here https://benfoster.io/blog/binding-validating-enums-aspnet-core/
+- Predicate builder pattern - taken from this article http://www.albahari.com/nutshell/predicatebuilder.aspx

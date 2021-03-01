@@ -3,6 +3,7 @@ import CheckMarkIcon from '@material-ui/icons/Check';
 import React, { useState } from 'react';
 import { AppButton } from '../../components/AppButton';
 import { ToDoStatus } from '../../config/ToDoStatus';
+import ToDoStatusChip from '../ToDoStatusChip';
 
 export interface ToDoStatusFilterOption {
     value: number,
@@ -53,12 +54,10 @@ const ToDoStatusFilter: React.FC<ToDoStatusFilterProps> = ({
             >
                 {options.map(option => (
                     <MenuItem key={option.value}>
-                        <ListItemText onClick={() => handleStatusClick(option.value)}>{option.label}</ListItemText>
-                        {selectedStatuses.includes(option.value) && (
-                            <ListItemIcon style={{ minWidth: 'auto', marginLeft: theme.spacing(1) }} >
-                                <CheckMarkIcon color="primary" />
-                            </ListItemIcon>
-                        )}
+                        <ToDoStatusChip status={option.value}
+                            onClick={() => handleStatusClick(option.value)}
+                            variant={selectedStatuses.includes(option.value) ? 'filled' : 'outlined'}
+                        />
                     </MenuItem>
                 ))}
             </Menu>

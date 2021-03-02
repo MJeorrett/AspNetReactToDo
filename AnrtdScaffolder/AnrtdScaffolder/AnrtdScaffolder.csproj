@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AnrtdApi\Anrtd.Application\Anrtd.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="XXENTITY_NAMEXXs\Commands\Create\CreateXXENTITY_NAMEXXCommand.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Commands\Create\CreateXXENTITY_NAMEXXCommandValidator.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Commands\SoftDelete\SoftDeleteXXENTITY_NAMEXXCommand.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Commands\Update\UpdateXXENTITY_NAMEXXCommand.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Commands\Update\UpdateXXENTITY_NAMEXXCommandValidator.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Queries\GetById\GetXXENTITY_NAMEXXByIdQuery.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Queries\GetById\XXENTITY_NAMEXXDetailsDto.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Queries\GetPaginated\GetPaginatedXXENTITY_NAMEXXsQuery.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Queries\GetPaginated\GetPaginatedXXENTITY_NAMEXXsQueryValidator.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="XXENTITY_NAMEXXs\Queries\GetPaginated\XXENTITY_NAMEXXSummaryDto.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+</Project>

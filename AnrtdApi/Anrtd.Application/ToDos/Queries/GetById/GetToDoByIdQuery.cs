@@ -1,6 +1,5 @@
 ﻿using Anrtd.Application.Common.Interfaces;
 using Anrtd.Application.Common.Requests;
-using Anrtd.Application.ToDos.Queries.GetPaginated;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;

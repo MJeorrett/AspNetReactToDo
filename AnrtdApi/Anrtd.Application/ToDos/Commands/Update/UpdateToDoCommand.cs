@@ -9,7 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Anrtd.Application.ToDos.Commands.Edit
+namespace Anrtd.Application.ToDos.Commands.Update
 {
     public record UpdateToDoCommand : IAppRequest, IMapTo<ToDoEntity>
     {

@@ -1,5 +1,4 @@
-﻿using Anrtd.Application.ToDos.Commands.Edit;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Anrtd.Application.ToDos.Commands.Update
 {

@@ -1,6 +1,6 @@
 ﻿using Anrtd.Application.ToDos.Commands;
 using Anrtd.Application.ToDos.Commands.Create;
-using Anrtd.Application.ToDos.Commands.Edit;
+using Anrtd.Application.ToDos.Commands.Update;
 using Anrtd.Application.ToDos.Queries.GetById;
 using Anrtd.Application.ToDos.Queries.GetPaginated;
 using Anrtd.Domain.Entities;

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Anrtd.Application.ToDos.Commands.Create
+namespace Anrtd.Application.ToDos.Commands.SoftDelete
 {
     public record SoftDeleteToDoCommand(int ToDoId) : IAppRequest
     {

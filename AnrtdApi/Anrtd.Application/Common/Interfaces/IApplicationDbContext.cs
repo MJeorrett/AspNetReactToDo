@@ -8,6 +8,7 @@ namespace Anrtd.Application.Common.Interfaces
     public interface IApplicationDbContext
     {
         DbSet<ToDoEntity> ToDos { get; set; }
+        DbSet<ToDoListEntity> ToDoLists { get; set; }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

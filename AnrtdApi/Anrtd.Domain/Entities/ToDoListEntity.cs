@@ -1,30 +1,30 @@
 ﻿using Anrtd.Domain.Common;
 using Anrtd.Domain.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Anrtd.Domain.Entities
 {
-    [Table("ToDo")]
-    public class ToDoEntity : AuditableEntity
+    [Table("ToDoList")]
+    public class ToDoListEntity : AuditableEntity
     {
-        [Column("ToDoId")]
+        [Column("ToDoListId")]
         public int Id { get; set; }
         
         [Required]
         public string Title { get; set; }
 
-        [Required]
-        public ToDoStatus Status { get; set; }
+        public string Description { get; set; }
 
-        public ToDoStatusEntity StatusEntity { get; set; }
-
-        public DateTime? DueDate { get; set; }
-
-        public int ToDoListId { get; set; }
-        public ToDoListEntity ToDoList { get; set; }
+        public List<ToDoEntity> ToDos { get; set; }
 
         public bool IsSoftDeleted { get; set; }
+
+        public ToDoListEntity()
+        {
+            ToDos = new List<ToDoEntity>();
+        }
     }
 }

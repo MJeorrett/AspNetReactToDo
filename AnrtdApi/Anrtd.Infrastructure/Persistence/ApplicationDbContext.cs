@@ -13,6 +13,7 @@ namespace Anrtd.Infrastructure.Persistence
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public DbSet<ToDoEntity> ToDos { get; set; }
+        public DbSet<ToDoListEntity> ToDoLists { get; set; }
         public DbSet<ToDoStatusEntity> ToDoStatuses { get; set; }
 
         private readonly IDateTime _dateTime;

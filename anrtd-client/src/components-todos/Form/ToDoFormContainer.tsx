@@ -1,4 +1,4 @@
-import React, { Ref, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
@@ -8,7 +8,6 @@ import { getNumericEnumValues } from '../../enumUtils';
 
 export interface ToDoFormContainerProps {
     onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
-    formikRef?: Ref<FormikProps<ToDoFormValues>>,
     initialValues?: ToDoFormValues,
     createMode?: boolean,
     autoFocus?: boolean,
@@ -31,7 +30,6 @@ const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
 
 const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
     onSubmit,
-    formikRef,
     initialValues,
     createMode,
     autoFocus,
@@ -46,7 +44,6 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
 
     return (
         <Formik
-            innerRef={formikRef}
             initialValues={initialValues || defaultInitialValues}
             validationSchema={validationSchema}
             validateOnBlur={submissionAttempted}

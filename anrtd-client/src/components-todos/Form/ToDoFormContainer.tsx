@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import React, { Ref, useState } from 'react';
 import { Form, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
@@ -37,12 +37,20 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
     autoFocus,
     children,
 }) => {
+    const [submissionAttempted, setSubmissionAttempted] = useState(false);
+
+    const handleSubmit = (values: ToDoFormValues) => {
+        setSubmissionAttempted(true);
+        onSubmit && onSubmit(values);
+    };
+
     return (
         <Formik
             innerRef={formikRef}
             initialValues={initialValues || defaultInitialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit || (() => undefined)}
+            validateOnBlur={submissionAttempted}
+            onSubmit={handleSubmit}
         >
             {formikProps => (
                 <Form>

@@ -1,8 +1,6 @@
 import { FormikProps } from 'formik';
-import { AppButtons } from '../../components/AppButton';
 import AppFormikDatePicker from '../../components/AppForm/AppFormikDatePicker';
 import AppFormikSelect from '../../components/AppForm/AppFormikSelect';
-import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButton';
 import AppFormikTextField from '../../components/AppForm/AppFormikTextField';
 import { ToDoStatus } from '../../config/ToDoStatus';
 import { mapEnumToOptions } from '../../enumUtils';
@@ -16,13 +14,11 @@ export type ToDoFormValues = {
 export type ToDoFormOtherProps = {
     createMode?: boolean,
     autoFocus?: boolean,
-    showSubmit?: boolean,
 }
 
 const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
     createMode,
     autoFocus,
-    showSubmit,
 }) => {
     const toDoStatusOptions = mapEnumToOptions(ToDoStatus);
     return (
@@ -39,12 +35,6 @@ const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
                     <AppFormikDatePicker name="createdDate" label="Created Date" readonly />
                     <AppFormikDatePicker name="lastModifiedDate" label="Last Modified Date" readonly />
                 </>
-            )}
-
-            {showSubmit && (
-                <AppButtons>
-                    <AppFormikSubmitButton variant="contained" color="primary" type="submit">Submit</AppFormikSubmitButton>
-                </AppButtons>
             )}
         </>
     );

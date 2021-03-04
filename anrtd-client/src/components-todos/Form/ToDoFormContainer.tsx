@@ -12,7 +12,6 @@ export interface ToDoFormContainerProps {
     initialValues?: ToDoFormValues,
     createMode?: boolean,
     autoFocus?: boolean,
-    showSubmit?: boolean,
     children?: (formikProps: FormikProps<ToDoFormValues>) => React.ReactNode,
 }
 
@@ -36,7 +35,6 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
     initialValues,
     createMode,
     autoFocus,
-    showSubmit = true,
     children,
 }) => {
     return (
@@ -54,7 +52,6 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
                             {...formikProps}
                             createMode={!!createMode}
                             autoFocus={!!autoFocus}
-                            showSubmit={showSubmit}
                         />
                     }
                 </Form>

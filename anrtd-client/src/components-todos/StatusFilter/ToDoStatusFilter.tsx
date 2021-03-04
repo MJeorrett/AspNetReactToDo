@@ -1,7 +1,6 @@
-import { ListItemIcon, ListItemText, Menu, MenuItem, useTheme } from '@material-ui/core';
-import CheckMarkIcon from '@material-ui/icons/Check';
+import { Menu, MenuItem } from '@material-ui/core';
 import React, { useState } from 'react';
-import { AppButton } from '../../components/AppButton';
+import AppButton from '../../components/AppButton';
 import { ToDoStatus } from '../../config/ToDoStatus';
 import ToDoStatusChip from '../ToDoStatusChip';
 
@@ -22,7 +21,6 @@ const ToDoStatusFilter: React.FC<ToDoStatusFilterProps> = ({
     onStatusClick,
 }) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const theme = useTheme();
 
     const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);

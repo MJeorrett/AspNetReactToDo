@@ -1,5 +1,5 @@
 import { FormikProps, useFormikContext } from 'formik';
-import { AppButton, AppButtonProps } from '../AppButton';
+import AppButton, { AppButtonProps } from '../AppButton';
 
 export interface AppFormikSubmitButtonProps extends AppButtonProps {
     formikProps?: FormikProps<unknown>

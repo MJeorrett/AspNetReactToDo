@@ -18,13 +18,14 @@ const useStyles = makeStyles({
     }
 });
 
-export const AppButton: React.FC<AppButtonProps> = ({
+const AppButton: React.FC<AppButtonProps> = ({
     disabled,
     showSpinner,
     variant = 'contained',
     ...restOfProps
 }) => {
     const classes = useStyles();
+
     return (
         <span className={classes.root}>
             <Button
@@ -39,3 +40,5 @@ export const AppButton: React.FC<AppButtonProps> = ({
         </span>
     );
 };
+
+export default AppButton;

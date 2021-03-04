@@ -1,8 +1,11 @@
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { createToDo } from '../api/todos';
 import { appPaths } from '../AppRoutes';
-import ToDoForm, { ToDoFormValues } from '../components-todos/Form';
+import ToDoForm, { ToDoFormComponent, ToDoFormValues } from '../components-todos/Form';
+import AppButton, { AppButtons } from '../components/AppButton';
+import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';
 import AppPageHeading from '../components/AppPageHeading';
 
 const CreateToDoPage: React.FC = () => {
@@ -24,9 +27,21 @@ const CreateToDoPage: React.FC = () => {
 
             <ToDoForm
                 onSubmit={handleSubmit}
-                createMode
-                autoFocus
-            />
+            >
+                {formikProps => (
+                    <>
+                        <ToDoFormComponent
+                            {...formikProps}
+                            createMode
+                            autoFocus
+                        />
+                        <AppButtons>
+                            <AppButton linkPath={appPaths.toDos}>Cancel</AppButton>
+                            <AppFormikSubmitButton>Save</AppFormikSubmitButton>
+                        </AppButtons>
+                    </>
+                )}
+            </ToDoForm>
         </>
     );
 };

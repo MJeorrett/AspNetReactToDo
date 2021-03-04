@@ -10,7 +10,6 @@ import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';
 import AppButton, { AppButtons } from '../components/AppButton';
 
 const EditToDoPage: React.FC = () => {
-    const history = useHistory();
     const toDoId = useToDoId();
     const fetchToDo = useCallback(() => getToDoById(toDoId), [toDoId]);
     const {

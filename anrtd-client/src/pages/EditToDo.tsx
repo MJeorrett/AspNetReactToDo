@@ -48,7 +48,7 @@ const EditToDoPage: React.FC = () => {
                                 {...formikProps}
                             />
                             <AppButtons>
-                                <AppButton onClick={() => history.push(appPaths.toDos)}>Back</AppButton>
+                                <AppButton linkPath={appPaths.toDos}>Back</AppButton>
                                 <AppFormikSubmitButton>Save</AppFormikSubmitButton>
                             </AppButtons>
                         </>

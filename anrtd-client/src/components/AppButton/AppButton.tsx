@@ -1,7 +1,9 @@
 import { Button, ButtonProps, CircularProgress, makeStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 export interface AppButtonProps extends ButtonProps {
     showSpinner?: boolean,
+    linkPath?: string,
 }
 
 const useStyles = makeStyles({
@@ -22,6 +24,7 @@ const AppButton: React.FC<AppButtonProps> = ({
     disabled,
     showSpinner,
     variant = 'contained',
+    linkPath,
     ...restOfProps
 }) => {
     const classes = useStyles();
@@ -29,7 +32,9 @@ const AppButton: React.FC<AppButtonProps> = ({
     return (
         <span className={classes.root}>
             <Button
-                {...restOfProps}
+                {...restOfProps as never}
+                component={linkPath ? Link : undefined}
+                to={linkPath}
                 disabled={disabled || showSpinner}
                 color="primary"
                 variant={variant}

@@ -1,5 +1,5 @@
-import { Ref } from 'react';
-import { Formik, FormikProps } from 'formik';
+import React, { Ref } from 'react';
+import { Form, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import ToDoForm, { ToDoFormValues } from './ToDoForm';
@@ -13,6 +13,7 @@ export interface ToDoFormContainerProps {
     createMode?: boolean,
     autoFocus?: boolean,
     showSubmit?: boolean,
+    children?: (formikProps: FormikProps<ToDoFormValues>) => React.ReactNode,
 }
 
 const defaultInitialValues: ToDoFormValues = {
@@ -36,6 +37,7 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
     createMode,
     autoFocus,
     showSubmit = true,
+    children,
 }) => {
     return (
         <Formik
@@ -45,12 +47,17 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
             onSubmit={onSubmit || (() => undefined)}
         >
             {formikProps => (
-                <ToDoForm
-                    {...formikProps}
-                    createMode={!!createMode}
-                    autoFocus={!!autoFocus}
-                    showSubmit={showSubmit}
-                />
+                <Form>
+                    {children ?
+                        children(formikProps) :
+                        <ToDoForm
+                            {...formikProps}
+                            createMode={!!createMode}
+                            autoFocus={!!autoFocus}
+                            showSubmit={showSubmit}
+                        />
+                    }
+                </Form>
             )}
         </Formik>
     );

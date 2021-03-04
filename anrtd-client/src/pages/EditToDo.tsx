@@ -1,11 +1,13 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getToDoById, updateToDo } from '../api/todos';
 import { useHttpRequest } from '../api';
 import { appPaths, useToDoId } from '../AppRoutes';
-import ToDoForm, { ToDoFormValues } from '../components-todos/Form';
+import ToDoForm, { ToDoFormComponent, ToDoFormValues } from '../components-todos/Form';
 import ApiResponseWrapper from '../components/ApiResponseWrapper';
 import AppPageHeading from '../components/AppPageHeading';
+import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';
+import AppButton, { AppButtons } from '../components/AppButton';
 
 const EditToDoPage: React.FC = () => {
     const history = useHistory();
@@ -15,6 +17,7 @@ const EditToDoPage: React.FC = () => {
         isLoading,
         isError,
         result: toDo,
+        forceRefresh: reloadToDo,
     } = useHttpRequest(fetchToDo);
 
     const handleUpdateToDo = async (values: ToDoFormValues) => {
@@ -24,7 +27,7 @@ const EditToDoPage: React.FC = () => {
         });
 
         if (!response.isError) {
-            history.push(appPaths.toDos);
+            reloadToDo();
         }
     };
 
@@ -38,7 +41,19 @@ const EditToDoPage: React.FC = () => {
                 <ToDoForm
                     onSubmit={handleUpdateToDo}
                     initialValues={toDo}
-                />
+                >
+                    {formikProps => (
+                        <>
+                            <ToDoFormComponent
+                                {...formikProps}
+                            />
+                            <AppButtons>
+                                <AppButton onClick={() => history.push(appPaths.toDos)}>Back</AppButton>
+                                <AppFormikSubmitButton>Save</AppFormikSubmitButton>
+                            </AppButtons>
+                        </>
+                    )}
+                </ToDoForm>
             </ApiResponseWrapper>
         </>
     );

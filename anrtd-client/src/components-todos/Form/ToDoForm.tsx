@@ -1,4 +1,4 @@
-import { Form, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import { AppButtons } from '../../components/AppButton';
 import AppFormikDatePicker from '../../components/AppForm/AppFormikDatePicker';
 import AppFormikSelect from '../../components/AppForm/AppFormikSelect';
@@ -14,8 +14,8 @@ export type ToDoFormValues = {
 }
 
 export type ToDoFormOtherProps = {
-    createMode: boolean,
-    autoFocus: boolean,
+    createMode?: boolean,
+    autoFocus?: boolean,
     showSubmit?: boolean,
 }
 
@@ -26,7 +26,7 @@ const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
 }) => {
     const toDoStatusOptions = mapEnumToOptions(ToDoStatus);
     return (
-        <Form>
+        <>
             <AppFormikTextField name="title" label="Title" autoFocus={autoFocus} />
             {!createMode && (
                 <>
@@ -46,7 +46,7 @@ const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
                     <AppFormikSubmitButton variant="contained" color="primary" type="submit">Submit</AppFormikSubmitButton>
                 </AppButtons>
             )}
-        </Form>
+        </>
     );
 };
 

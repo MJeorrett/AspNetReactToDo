@@ -18,6 +18,7 @@ const AppFormikSubmitButton: React.FC<AppFormikSubmitButtonProps> = ({
     return (
         <AppButton
             {...restOfProps}
+            type="submit"
             showSpinner={showSpinner || isSubmitting}
             disabled={disabled || isSubmitting}
         />

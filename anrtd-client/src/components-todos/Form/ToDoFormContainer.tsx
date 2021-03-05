@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import ToDoForm, { ToDoFormValues } from './ToDoForm';
 import { ToDoStatus } from '../../config/ToDoStatus';
 import { getNumericEnumValues } from '../../enumUtils';
+import { TShirtSize } from '../../config/TShirtSize';
 
 export interface ToDoFormContainerProps {
     onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
@@ -25,6 +26,8 @@ const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
     status: Yup.number()
         .oneOf(getNumericEnumValues(ToDoStatus))
         .required(),
+    tShirtSize: Yup.number()
+        .oneOf(getNumericEnumValues(TShirtSize)),
     dueDate: Yup.date().typeError('Must be a valid date.').nullable().default(null),
 });
 

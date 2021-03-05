@@ -7,6 +7,7 @@ import ApiResponseWrapper from '../components/ApiResponseWrapper';
 import AppPageHeading from '../components/AppPageHeading';
 import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';
 import AppButton, { AppButtons } from '../components/AppButton';
+import TShirtIcon from '../components/TShirtIcon';
 
 const EditToDoPage: React.FC = () => {
     const toDoId = useToDoId();
@@ -31,7 +32,6 @@ const EditToDoPage: React.FC = () => {
 
     return (
         <>
-            <AppPageHeading>Edit ToDo #{toDoId}</AppPageHeading>
             <ApiResponseWrapper
                 isFetching={isLoading}
                 isError={isError}
@@ -42,6 +42,12 @@ const EditToDoPage: React.FC = () => {
                 >
                     {formikProps => (
                         <>
+                            <AppPageHeading>
+                                Edit ToDo #{toDoId}
+                                {(formikProps.values.tShirtSize || formikProps.values.tShirtSize === 0) && (
+                                    <TShirtIcon size={formikProps.values.tShirtSize} />
+                                )}
+                            </AppPageHeading>
                             <ToDoFormComponent
                                 {...formikProps}
                             />

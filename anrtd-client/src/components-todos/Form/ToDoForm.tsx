@@ -1,4 +1,5 @@
 import { FormikProps } from 'formik';
+
 import AppFormikDatePicker from '../../components/AppForm/AppFormikDatePicker';
 import AppFormikSelect from '../../components/AppForm/AppFormikSelect';
 import AppFormikTextField from '../../components/AppForm/AppFormikTextField';
@@ -9,6 +10,7 @@ import { mapEnumToOptions } from '../../enumUtils';
 export type ToDoFormValues = {
     title: string,
     status: ToDoStatus,
+    tShirtSize?: TShirtSize,
     dueDate: Date | null,
 }
 

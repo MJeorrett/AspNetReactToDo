@@ -1,4 +1,5 @@
 import { ToDoStatus } from '../../config/ToDoStatus';
+import { TShirtSize } from '../../config/TShirtSize';
 
 export interface ApiToDoSummary {
     id: number,
@@ -8,6 +9,7 @@ export interface ApiToDoSummary {
 
 export interface ApiUpdateToDoDto extends ApiToDoSummary {
     dueDate: string | null,
+    tShirtSize?: TShirtSize,
 }
 
 export interface ApiToDoDetails extends ApiUpdateToDoDto {

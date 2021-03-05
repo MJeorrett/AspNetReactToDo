@@ -4,7 +4,6 @@ using Anrtd.Domain.Entities;
 using Anrtd.Domain.Enums;
 using Anrtd.Infrastructure.Persistence.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,6 +13,7 @@ namespace Anrtd.Infrastructure.Persistence
     {
         public DbSet<ToDoEntity> ToDos { get; set; }
         public DbSet<ToDoStatusEntity> ToDoStatuses { get; set; }
+        public DbSet<TShirtSizeEntity> TShirtSizes { get; set; }
 
         private readonly IDateTime _dateTime;
 

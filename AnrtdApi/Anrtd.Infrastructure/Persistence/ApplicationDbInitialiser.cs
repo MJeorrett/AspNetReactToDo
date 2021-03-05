@@ -1,4 +1,5 @@
-﻿using Anrtd.Domain.Enums;
+﻿using Anrtd.Domain.Common;
+using Anrtd.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -22,7 +23,13 @@ namespace Anrtd.Infrastructure.Persistence
 
                 dbContext.Database.Migrate();
 
-                await SeedToDoStatuses(dbContext, logger);
+                logger.LogInformation("Creating ToDoStatus enum entities if required.");
+                await SeedToDoStatuses<ToDoStatusEntity, ToDoStatus>(dbContext, logger);
+                logger.LogInformation("Finished creating ToDoStatus enum entities.");
+
+                logger.LogInformation("Creating TShirtSize enum entities if required.");
+                await SeedToDoStatuses<TShirtSizeEntity, TShirtSize>(dbContext, logger);
+                logger.LogInformation("Finished creating TShirtSize enum entities.");
 
                 logger.LogInformation("Schema database migration done.");
             }
@@ -33,41 +40,39 @@ namespace Anrtd.Infrastructure.Persistence
 
         }
 
-        private static async Task SeedToDoStatuses(ApplicationDbContext dbContext, ILogger logger)
+        private static async Task SeedToDoStatuses<TEnumEntity, TEnum>(ApplicationDbContext dbContext, ILogger logger)
+            where TEnumEntity : class, IEnumEntity<TEnum>, new()
+            where TEnum : struct, Enum
         {
-            logger.LogInformation("Creating to do status entities if required.");
+            var existingDbEtities = await dbContext.Set<TEnumEntity>().ToListAsync();
 
-            var existingDbStatuses = await dbContext.ToDoStatuses.ToListAsync();
-
-            var statusesInCode = Enum.GetValues<ToDoStatus>()
-                .Select(status => new ToDoStatusEntity()
+            var enumEntitiesInCode = Enum.GetValues<TEnum>()
+                .Select(enumValue => new TEnumEntity()
                 {
-                    Id = status,
-                    Name = status.ToString(),
+                    Id = enumValue,
+                    Name = enumValue.ToString(),
                 });
 
-            foreach (var statusInCode in statusesInCode)
+            foreach (var enumEntity in enumEntitiesInCode)
             {
-                var existingDbStatus = existingDbStatuses.FirstOrDefault(s => s.Id == statusInCode.Id);
+                var existingDbEntity = existingDbEtities.FirstOrDefault(s => s.Id.Equals(enumEntity.Id));
 
-                if (existingDbStatus != null && statusInCode.Name != existingDbStatus.Name)
+                if (existingDbEntity != null && enumEntity.Name != existingDbEntity.Name)
                 {
-                    throw new Exception("Missmatch between ToDo status in code and db:\n" +
-                        $"Id: {statusInCode.Id}\n" +
-                        $"Name in code: {statusInCode.Name}\n" +
-                        $"Name in db: {existingDbStatus.Name}");
+                    throw new Exception("Missmatch between enum in code and db:\n" +
+                        $"Id: {enumEntity.Id}\n" +
+                        $"Name in code: {enumEntity.Name}\n" +
+                        $"Name in db: {existingDbEntity.Name}");
                 }
 
-                if (existingDbStatus is null)
+                if (existingDbEntity is null)
                 {
-                    logger.LogInformation("Status found in code {StatusName} does not exist in db so creating it.", statusInCode.Name);
-                    dbContext.ToDoStatuses.Add(statusInCode);
+                    logger.LogInformation("Enum found in code {EnumName} does not exist in db so creating it.", enumEntity.Name);
+                    dbContext.Add(enumEntity);
                 }
             }
 
             await dbContext.SaveChangesAsync();
-
-            logger.LogInformation("Finished creating toDo status entities.");
         }
     }
 }

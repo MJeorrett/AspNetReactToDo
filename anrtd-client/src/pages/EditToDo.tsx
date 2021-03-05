@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
 import { getToDoById, updateToDo } from '../api/todos';
 import { useHttpRequest } from '../api';
 import { appPaths, useToDoId } from '../AppRoutes';

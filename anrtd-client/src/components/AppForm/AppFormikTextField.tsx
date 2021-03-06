@@ -19,7 +19,6 @@ const AppFormikTextField: React.FC<AppFormikTextFieldProps> = ({
     readonly,
     ...restOfProps
 }) => {
-    const theme = useTheme();
     const { isSubmitting } = useFormikContext();
     const [fieldProps, fieldMeta] = useField(name);
     const isError = fieldMeta.touched && !!fieldMeta.error;

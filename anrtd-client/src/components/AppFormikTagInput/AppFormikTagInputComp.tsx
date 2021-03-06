@@ -7,6 +7,7 @@ import useStyles from './AppFormikTagInputStyles';
 
 export interface AppFormikTagInputCompProps {
     inputValue: string,
+    inputValidationMessage?: string,
     tags: string[],
     onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>,
     onKeyDown: KeyboardEventHandler<HTMLDivElement>,
@@ -16,6 +17,7 @@ export interface AppFormikTagInputCompProps {
 
 const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
     inputValue,
+    inputValidationMessage,
     tags,
     onChange,
     onKeyDown,
@@ -37,6 +39,8 @@ const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
                     onKeyDown={onKeyDown}
                     onKeyUp={onKeyUp}
                     autoFocus
+                    helperText={inputValidationMessage}
+                    error={!!inputValidationMessage}
                 /> :
                 <AppButton
                     size="small"

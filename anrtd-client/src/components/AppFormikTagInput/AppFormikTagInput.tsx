@@ -1,5 +1,6 @@
 import { FieldArray, FieldArrayRenderProps, useField } from 'formik';
-import { KeyboardEventHandler, useState } from 'react';
+import * as Yup from 'yup';
+import { ChangeEventHandler, KeyboardEventHandler, useState } from 'react';
 import { warningToast } from '../../toast';
 import AppFormikTagInputComp from './AppFormikTagInputComp';
 
@@ -12,6 +13,19 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
 }) => {
     const [{ value: tags }] = useField<string[]>(name);
     const [inputValue, setInputValue] = useState('');
+    const [inputValidationMessage, setInputValidationMessage] = useState<string | undefined>(undefined);
+
+    const tagInputValidation = Yup.string()
+        .matches(/^[a-z0-9-_]*$/, 'Tags can only contain letters, numbers, dashes and underscores.')
+        .notOneOf(tags, 'Tag already added.');
+
+    const handleInputChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = event => {
+        setInputValue(event.target.value);
+        setInputValidationMessage('');
+        tagInputValidation.validate(event.target.value).catch(error => {
+            setInputValidationMessage(error.errors[0]);
+        });
+    };
 
     const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = event => {
         if (event.key === 'Enter') {
@@ -20,12 +34,9 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
     };
 
     const handleAddTag = (newTag: string, arrayHelpers: FieldArrayRenderProps) => {
-        if (!tags.includes(newTag)) {
-            arrayHelpers.unshift(newTag);
-            setInputValue('');
-        } else {
-            warningToast(`Tag '${newTag}' already exists.`);
-        }
+        if (!newTag || inputValidationMessage) return;
+        arrayHelpers.unshift(newTag);
+        setInputValue('');
     };
 
     const createHandleKeyUp = (arrayHelpers: FieldArrayRenderProps): KeyboardEventHandler<HTMLDivElement> =>
@@ -48,10 +59,11 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
                     <AppFormikTagInputComp
                         inputValue={inputValue}
                         tags={tags}
-                        onChange={event => setInputValue(event.target.value)}
+                        onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
                         onKeyUp={createHandleKeyUp(arrayHelpers)}
                         onRemoveTag={createHandleRemoveTag(arrayHelpers)}
+                        inputValidationMessage={inputValidationMessage}
                     />
                 );
             }}

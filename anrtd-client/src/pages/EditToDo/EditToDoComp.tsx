@@ -28,7 +28,7 @@ const EditToDoPageComp: React.FC<EditToDoPageCompProps> = ({
                 {formikProps => (
                     <>
                         <div className={classes.heading}>
-                            {(formikProps.values.tShirtSize || formikProps.values.tShirtSize === 0) && (
+                            {(formikProps.values.tShirtSize > -1) && (
                                 <TShirtIcon size={formikProps.values.tShirtSize} />
                             )}
                             <AppPageHeading gutterBottom={false}>Edit ToDo #{toDo.id}</AppPageHeading>

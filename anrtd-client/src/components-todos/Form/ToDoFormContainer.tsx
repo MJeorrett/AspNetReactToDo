@@ -19,6 +19,7 @@ const defaultInitialValues: ToDoFormValues = {
     title: '',
     status: ToDoStatus.New,
     dueDate: null,
+    tShirtSize: -1,
 };
 
 const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
@@ -27,7 +28,8 @@ const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
         .oneOf(getNumericEnumValues(ToDoStatus))
         .required(),
     tShirtSize: Yup.number()
-        .oneOf(getNumericEnumValues(TShirtSize)),
+        .oneOf([...getNumericEnumValues(TShirtSize), -1])
+        .required(),
     dueDate: Yup.date().typeError('Must be a valid date.').nullable().default(null),
 });
 

@@ -2,7 +2,7 @@ import { SvgIcon } from '@material-ui/core';
 import { TShirtSize } from '../config/TShirtSize';
 
 export interface TShirtIconProps {
-    size?: TShirtSize,
+    size: TShirtSize,
 }
 
 const fontSize: { [key in TShirtSize]: number } = {

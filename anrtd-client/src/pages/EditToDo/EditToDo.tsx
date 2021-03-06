@@ -3,6 +3,7 @@ import * as api from '../../api';
 import { appPaths, useToDoId } from '../../AppRoutes';
 import { ToDoFormValues } from '../../components-todos/Form';
 import ApiResponseWrapper from '../../components/ApiResponseWrapper';
+import { mapToApiUpdateToDo } from '../../modelMappings/ToDo';
 import EditToDoPageComp from './EditToDoComp';
 
 const EditToDoPage: React.FC = () => {
@@ -16,10 +17,7 @@ const EditToDoPage: React.FC = () => {
     } = api.useHttpRequest(fetchToDo);
 
     const handleUpdateToDo = async (values: ToDoFormValues) => {
-        const response = await api.updateToDo({
-            id: toDoId,
-            ...values
-        });
+        const response = await api.updateToDo(mapToApiUpdateToDo(toDoId, values));
 
         if (!response.isError) {
             reloadToDo();

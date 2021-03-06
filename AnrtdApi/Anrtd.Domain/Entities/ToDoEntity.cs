@@ -20,6 +20,10 @@ namespace Anrtd.Domain.Entities
 
         public ToDoStatusEntity StatusEntity { get; set; }
 
+        public TShirtSize? TShirtSize { get; set; }
+
+        public TShirtSizeEntity TShirtSizeEntity { get; set; }
+
         public DateTime? DueDate { get; set; }
 
         public bool IsSoftDeleted { get; set; }

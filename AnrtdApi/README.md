@@ -11,3 +11,5 @@ However I have introduced the following ideas:
 - Sharing validation rules between models.
 - TODO: Validating enum values using Fluent Validation - inspiration taken from here https://benfoster.io/blog/binding-validating-enums-aspnet-core/
 - Predicate builder pattern - taken from this article http://www.albahari.com/nutshell/predicatebuilder.aspx
+- Pagination
+  - Note that page number is 1-indexed as this is preferred by client so makes everything easier.

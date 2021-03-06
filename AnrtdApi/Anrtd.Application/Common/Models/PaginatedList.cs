@@ -21,8 +21,10 @@ namespace Anrtd.Application.Common.Models
         {
             var totalCount = await source.CountAsync();
             var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
-            var flooredPageNumber = Math.Min(pageNumber, totalPages);
-            var items = await source.Skip((flooredPageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+            var flooredPageNumber = Math.Min(pageNumber, totalPages == 0 ? 1 : totalPages);
+            var items = totalCount == 0 ?
+                new List<T>() :
+                await source.Skip((flooredPageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return new PaginatedList<T>(items, totalCount, totalPages, flooredPageNumber, pageSize);
         }

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import ToDoForm, { ToDoFormValues } from './ToDoForm';
 import { ToDoStatus } from '../../config/ToDoStatus';
 import { getNumericEnumValues } from '../../enumUtils';
+import { TShirtSize } from '../../config/TShirtSize';
 
 export interface ToDoFormContainerProps {
     onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
@@ -18,12 +19,16 @@ const defaultInitialValues: ToDoFormValues = {
     title: '',
     status: ToDoStatus.New,
     dueDate: null,
+    tShirtSize: -1,
 };
 
 const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
     title: Yup.string().required('Please provide a title.'),
     status: Yup.number()
         .oneOf(getNumericEnumValues(ToDoStatus))
+        .required(),
+    tShirtSize: Yup.number()
+        .oneOf([...getNumericEnumValues(TShirtSize), -1])
         .required(),
     dueDate: Yup.date().typeError('Must be a valid date.').nullable().default(null),
 });

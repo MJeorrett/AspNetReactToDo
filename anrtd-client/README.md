@@ -11,6 +11,8 @@ It demonstrates the typical set up I use for react projects including:
 - Forms using formik including validation.
 - Routing using react-router.
 - Configuration.
+- Pagination
+  - Note that page number is 1-indexed (instead of 0) as this is default for MUI Table Pagination.
 
 ### Component layers
 The components in the app, i.e. the files containing code that actually renders something, are divided into three layers:

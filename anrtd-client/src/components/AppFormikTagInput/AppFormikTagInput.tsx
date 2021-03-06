@@ -39,6 +39,8 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
             }
         };
 
+    const createHandleRemoveTag = (arrayHelpers: FieldArrayRenderProps) => arrayHelpers.remove;
+
     return (
         <FieldArray name={name}>
             {arrayHelpers => {
@@ -49,6 +51,7 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
                         onChange={event => setInputValue(event.target.value)}
                         onKeyDown={handleKeyDown}
                         onKeyUp={createHandleKeyUp(arrayHelpers)}
+                        onRemoveTag={createHandleRemoveTag(arrayHelpers)}
                     />
                 );
             }}

@@ -10,6 +10,7 @@ export interface AppFormikTagInputCompProps {
     onChange: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>,
     onKeyDown: KeyboardEventHandler<HTMLDivElement>,
     onKeyUp: KeyboardEventHandler<HTMLDivElement>,
+    onRemoveTag: (tagIndex: number) => void,
 }
 
 const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
@@ -18,6 +19,7 @@ const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
     onChange,
     onKeyDown,
     onKeyUp,
+    onRemoveTag,
 }) => {
     const classes = useStyles();
 
@@ -32,13 +34,14 @@ const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
                 onKeyDown={onKeyDown}
                 onKeyUp={onKeyUp}
             />
-            {tags.sort((a, b) => a.localeCompare(b)).map(tag => (
+            {tags.sort((a, b) => a.localeCompare(b)).map((tag, index) => (
                 <Chip
                     key={tag}
                     size="small"
                     label={tag}
                     color="primary"
                     variant="outlined"
+                    onDelete={() => onRemoveTag(index)}
                 />
             ))}
         </div>

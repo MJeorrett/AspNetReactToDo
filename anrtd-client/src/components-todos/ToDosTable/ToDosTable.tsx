@@ -16,6 +16,7 @@ const ToDosTable: React.FC = () => {
 
     const toDos = useSelector(selectors.toDos.all);
     const pagination = useSelector(selectors.toDos.pagination);
+    const selectedStatuses = useSelector(selectors.toDos.selectedStatuses);
 
     const handleChangePageNumber = (pageNumber: number) => {
         dispatch(actions.toDos.setPageNumber(pageNumber));
@@ -25,13 +26,17 @@ const ToDosTable: React.FC = () => {
         dispatch(actions.toDos.setPageSize(pageSize));
     };
 
+    const noToDosMessage = selectedStatuses.length > 0 ?
+        'There are no toDos matching your selected filters.' :
+        'You do not have any toDos yet.';
+
     return (
         <>
             <ApiResponseWrapper
                 isFetching={isFetching}
                 isError={isError}
             >
-                {toDos.length === 0 ? <Typography>You don&lsquo;t have any ToDos yet.</Typography> :
+                {toDos.length === 0 ? <Typography>{noToDosMessage}</Typography> :
                     <AppTable
                         headers={['ID', 'Title', '', '', '']}
                         entities={toDos}

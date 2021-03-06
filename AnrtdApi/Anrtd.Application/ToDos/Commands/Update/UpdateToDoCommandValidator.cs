@@ -9,6 +9,7 @@ namespace Anrtd.Application.ToDos.Commands.Update
         {
             RuleFor(x => x.Title).ToDoTitleRules();
             RuleFor(x => x.Status).ToDoStatusRules();
+            RuleForEach(x => x.Tags).ToDoTagRules();
         }
     }
 }

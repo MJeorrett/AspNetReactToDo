@@ -16,7 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anrtd.Application", "Anrtd.Application\Anrtd.Application.csproj", "{4BDEE1BC-EBCE-4F56-AB55-DE2D39AC9FDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anrtd.Application.UnitTests", "Anrtd.Application.UnitTests\Anrtd.Application.UnitTests.csproj", "{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anrtd.Application.UnitTests", "Anrtd.Application.UnitTests\Anrtd.Application.UnitTests.csproj", "{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anrtd.Domain.UnitTests", "Anrtd.Domain.UnitTests\Anrtd.Domain.UnitTests.csproj", "{3A1A79BD-AB70-4E68-93BC-EF7AB36A2F54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A3FFBED-D814-46CC-9C6E-2AF54E7A62BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A1A79BD-AB70-4E68-93BC-EF7AB36A2F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A1A79BD-AB70-4E68-93BC-EF7AB36A2F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A1A79BD-AB70-4E68-93BC-EF7AB36A2F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A1A79BD-AB70-4E68-93BC-EF7AB36A2F54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

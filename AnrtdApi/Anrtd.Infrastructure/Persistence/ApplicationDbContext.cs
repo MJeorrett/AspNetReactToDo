@@ -14,6 +14,7 @@ namespace Anrtd.Infrastructure.Persistence
         public DbSet<ToDoEntity> ToDos { get; set; }
         public DbSet<ToDoStatusEntity> ToDoStatuses { get; set; }
         public DbSet<TShirtSizeEntity> TShirtSizes { get; set; }
+        public DbSet<ToDoTagEntity> ToDoTags { get; set; }
 
         private readonly IDateTime _dateTime;
 

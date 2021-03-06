@@ -24,7 +24,9 @@ namespace Anrtd.Application.ToDos.Queries.GetById
 
         public override async Task<AppRequestResult<ToDoDetailsDto>> Handle(GetToDoByIdQuery request, CancellationToken cancellationToken)
         {
-            var toDoEntity = await _dbContext.ToDos.SingleOrDefaultAsync(toDo => toDo.Id == request.ToDoId, cancellationToken);
+            var toDoEntity = await _dbContext.ToDos
+                .Include(toDo => toDo.Tags)
+                .SingleOrDefaultAsync(toDo => toDo.Id == request.ToDoId, cancellationToken);
 
             if (toDoEntity == default) return NotFound();
 

@@ -4,7 +4,6 @@ export default makeStyles(theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
-        marginBottom: theme.spacing(2),
         '& > *': {
             margin: `${theme.spacing(1)}px ${theme.spacing(0.5)}px`,
         },

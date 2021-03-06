@@ -5,6 +5,7 @@ import AppButton, { AppButtons } from '../../components/AppButton';
 import TShirtIcon from '../../components/TShirtIcon';
 import { ToDoDetails } from '../../models/ToDo';
 import useStyles from './EditToDoStyles';
+import AppForm from '../../components/AppForm/AppForm';
 
 export interface EditToDoPageCompProps {
     toDo: ToDoDetails,
@@ -33,13 +34,15 @@ const EditToDoPageComp: React.FC<EditToDoPageCompProps> = ({
                             )}
                             <AppPageHeading gutterBottom={false}>Edit ToDo #{toDo.id}</AppPageHeading>
                         </div>
-                        <ToDoFormComponent
-                            {...formikProps}
-                        />
-                        <AppButtons>
-                            <AppButton linkPath={backLinkPath}>Back</AppButton>
-                            <AppFormikSubmitButton>Save</AppFormikSubmitButton>
-                        </AppButtons>
+                        <AppForm>
+                            <ToDoFormComponent
+                                {...formikProps}
+                            />
+                            <AppButtons>
+                                <AppButton linkPath={backLinkPath}>Back</AppButton>
+                                <AppFormikSubmitButton>Save</AppFormikSubmitButton>
+                            </AppButtons>
+                        </AppForm>
                     </>
                 )}
             </ToDoForm>

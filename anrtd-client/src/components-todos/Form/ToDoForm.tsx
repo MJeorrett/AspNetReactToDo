@@ -33,8 +33,8 @@ const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
 
     return (
         <>
-            <AppFormikTagInput name="tags" />
             <AppFormikTextField name="title" label="Title" autoFocus={autoFocus} />
+            <AppFormikTagInput name="tags" />
             {!createMode && (
                 <>
                     <AppFormikSelect

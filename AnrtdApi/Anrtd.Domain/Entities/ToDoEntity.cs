@@ -12,6 +12,8 @@ namespace Anrtd.Domain.Entities
     [Table("ToDo")]
     public class ToDoEntity : AuditableEntity
     {
+        public delegate Task<List<ToDoTagEntity>> GetTagEntities(List<string> toDoIds);
+
         [Column("ToDoId")]
         public int Id { get; set; }
         
@@ -33,13 +35,13 @@ namespace Anrtd.Domain.Entities
 
         public bool IsSoftDeleted { get; set; }
 
-        public async Task UpdateTags(List<string> newTagList, Func<List<string>, Task<List<ToDoTagEntity>>> getTagEntities)
+        public async Task UpdateTags(List<string> newTagList, GetTagEntities getTagEntities)
         {
             await AddTagsNotInList(newTagList, getTagEntities);
             RemoveTagsNotInList(newTagList);
         }
 
-        private async Task AddTagsNotInList(List<string> tags, Func<List<string>, Task<List<ToDoTagEntity>>> getTagEntities)
+        private async Task AddTagsNotInList(List<string> tags, GetTagEntities getTagEntities)
         {
             var tagsToAdd = new List<string>();
 
@@ -50,6 +52,8 @@ namespace Anrtd.Domain.Entities
                     tagsToAdd.Add(newTag);
                 }
             }
+
+            if (!tagsToAdd.Any()) return;
 
             Tags.AddRange(await getTagEntities(tagsToAdd));
         }

@@ -44,9 +44,9 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
 }) => {
     const [submissionAttempted, setSubmissionAttempted] = useState(false);
 
-    const handleSubmit = (values: ToDoFormValues) => {
+    const handleSubmit = async (values: ToDoFormValues) => {
         setSubmissionAttempted(true);
-        onSubmit && onSubmit(values);
+        onSubmit && await onSubmit(values);
     };
 
     return (

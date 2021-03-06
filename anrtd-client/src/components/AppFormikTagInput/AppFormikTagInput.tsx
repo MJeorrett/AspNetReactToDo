@@ -1,10 +1,7 @@
-import { Chip } from '@material-ui/core';
 import { FieldArray, FieldArrayRenderProps, useField } from 'formik';
 import { KeyboardEventHandler, useState } from 'react';
 import { warningToast } from '../../toast';
-import AppTextField from '../AppForm/AppTextField';
-
-import useStyles from './AppFormikTagInputStyles';
+import AppFormikTagInputComp from './AppFormikTagInputComp';
 
 export interface AppFormikTagInputProps {
     name: string,
@@ -13,7 +10,6 @@ export interface AppFormikTagInputProps {
 const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
     name,
 }) => {
-    const classes = useStyles();
     const [{ value: tags }] = useField<string[]>(name);
     const [inputValue, setInputValue] = useState('');
 
@@ -44,32 +40,19 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
         };
 
     return (
-        <div className={classes.root}>
-            <FieldArray name={name}>
-                {arrayHelpers => (
-                    <>
-                        <AppTextField
-                            value={inputValue}
-                            size="small"
-                            fullWidth={false}
-                            className={classes.input}
-                            onChange={event => setInputValue(event.target.value)}
-                            onKeyDown={handleKeyDown}
-                            onKeyUp={createHandleKeyUp(arrayHelpers)}
-                        />
-                        {tags.map(tag => (
-                            <Chip
-                                key={tag}
-                                size="small"
-                                label={tag}
-                                color="primary"
-                                variant="outlined"
-                            />
-                        ))}
-                    </>
-                )}
-            </FieldArray>
-        </div>
+        <FieldArray name={name}>
+            {arrayHelpers => {
+                return (
+                    <AppFormikTagInputComp
+                        inputValue={inputValue}
+                        tags={tags}
+                        onChange={event => setInputValue(event.target.value)}
+                        onKeyDown={handleKeyDown}
+                        onKeyUp={createHandleKeyUp(arrayHelpers)}
+                    />
+                );
+            }}
+        </FieldArray>
     );
 };
 

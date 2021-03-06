@@ -31,6 +31,7 @@ namespace Anrtd.Application.ToDos.Queries.GetById
             if (toDoEntity == default) return NotFound();
 
             var toDoDto = _mapper.Map<ToDoDetailsDto>(toDoEntity);
+
             return Success(toDoDto);
         }
     }

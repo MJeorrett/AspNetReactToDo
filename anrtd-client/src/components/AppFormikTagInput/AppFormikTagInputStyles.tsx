@@ -5,8 +5,8 @@ export default makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         marginBottom: theme.spacing(2),
-        '& > *:not(:last-child)': {
-            marginRight: theme.spacing(1),
+        '& > *': {
+            margin: `${theme.spacing(1)}px ${theme.spacing(0.5)}px`,
         },
     },
     input: {

@@ -1,26 +1,27 @@
 import React, { useCallback } from 'react';
-import { getToDoById, updateToDo } from '../api/todos';
-import { useHttpRequest } from '../api';
-import { appPaths, useToDoId } from '../AppRoutes';
-import ToDoForm, { ToDoFormComponent, ToDoFormValues } from '../components-todos/Form';
-import ApiResponseWrapper from '../components/ApiResponseWrapper';
-import AppPageHeading from '../components/AppPageHeading';
-import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';
-import AppButton, { AppButtons } from '../components/AppButton';
-import TShirtIcon from '../components/TShirtIcon';
+import * as api from '../../api';
+import { appPaths, useToDoId } from '../../AppRoutes';
+import ToDoForm, { ToDoFormComponent, ToDoFormValues } from '../../components-todos/Form';
+import ApiResponseWrapper from '../../components/ApiResponseWrapper';
+import AppPageHeading from '../../components/AppPageHeading';
+import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButton';
+import AppButton, { AppButtons } from '../../components/AppButton';
+import TShirtIcon from '../../components/TShirtIcon';
+import useStyles from './EditToDoStyles';
 
 const EditToDoPage: React.FC = () => {
     const toDoId = useToDoId();
-    const fetchToDo = useCallback(() => getToDoById(toDoId), [toDoId]);
+    const classes = useStyles();
+    const fetchToDo = useCallback(() => api.getToDoById(toDoId), [toDoId]);
     const {
         isLoading,
         isError,
         result: toDo,
         forceRefresh: reloadToDo,
-    } = useHttpRequest(fetchToDo);
+    } = api.useHttpRequest(fetchToDo);
 
     const handleUpdateToDo = async (values: ToDoFormValues) => {
-        const response = await updateToDo({
+        const response = await api.updateToDo({
             id: toDoId,
             ...values
         });
@@ -42,12 +43,12 @@ const EditToDoPage: React.FC = () => {
                 >
                     {formikProps => (
                         <>
-                            <AppPageHeading>
-                                Edit ToDo #{toDoId}
+                            <div className={classes.heading}>
                                 {(formikProps.values.tShirtSize || formikProps.values.tShirtSize === 0) && (
                                     <TShirtIcon size={formikProps.values.tShirtSize} />
                                 )}
-                            </AppPageHeading>
+                                <AppPageHeading gutterBottom={false}>Edit ToDo #{toDoId}</AppPageHeading>
+                            </div>
                             <ToDoFormComponent
                                 {...formikProps}
                             />

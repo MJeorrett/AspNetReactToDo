@@ -1,5 +1,6 @@
+import { ChangeEventHandler, KeyboardEventHandler, useState } from 'react';
 import { Chip } from '@material-ui/core';
-import { ChangeEventHandler, KeyboardEventHandler } from 'react';
+import AppButton from '../AppButton';
 import AppTextField from '../AppForm/AppTextField';
 
 import useStyles from './AppFormikTagInputStyles';
@@ -22,18 +23,29 @@ const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
     onRemoveTag,
 }) => {
     const classes = useStyles();
+    const [isClicked, setIsClicked] = useState(false);
 
     return (
         <div className={classes.root}>
-            <AppTextField
-                value={inputValue}
-                size="small"
-                fullWidth={false}
-                className={classes.input}
-                onChange={onChange}
-                onKeyDown={onKeyDown}
-                onKeyUp={onKeyUp}
-            />
+            {isClicked ?
+                <AppTextField
+                    value={inputValue}
+                    size="small"
+                    fullWidth={false}
+                    className={classes.input}
+                    onChange={onChange}
+                    onKeyDown={onKeyDown}
+                    onKeyUp={onKeyUp}
+                    autoFocus
+                /> :
+                <AppButton
+                    size="small"
+                    variant="outlined"
+                    onClick={() => setIsClicked(true)}
+                >
+                    Add Tag
+                </AppButton>
+            }
             {tags.sort((a, b) => a.localeCompare(b)).map((tag, index) => (
                 <Chip
                     key={tag}

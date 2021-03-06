@@ -20,6 +20,7 @@ const defaultInitialValues: ToDoFormValues = {
     status: ToDoStatus.New,
     dueDate: null,
     tShirtSize: -1,
+    tags: [],
 };
 
 const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
@@ -31,6 +32,7 @@ const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
         .oneOf([...getNumericEnumValues(TShirtSize), -1])
         .required(),
     dueDate: Yup.date().typeError('Must be a valid date.').nullable().default(null),
+    tags: Yup.array().of(Yup.string().required()).required(),
 });
 
 const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({

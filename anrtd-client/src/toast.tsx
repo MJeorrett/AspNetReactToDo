@@ -17,6 +17,13 @@ export const errorToast = (message: React.ReactNode): void => {
     );
 };
 
+export const warningToast = (message: React.ReactNode): void => {
+    toast(
+        message,
+        { type: 'warning', position: 'bottom-center' }
+    );
+};
+
 export const successToast = (message: React.ReactNode): void => {
     toast(
         message,

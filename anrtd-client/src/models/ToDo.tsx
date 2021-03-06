@@ -10,6 +10,7 @@ export interface ToDoSummary {
 export interface ToDoDetails extends ToDoSummary {
     tShirtSize: TShirtSize,
     dueDate: Date | null,
+    tags: string[],
     createdDate: Date,
     lastModifiedDate: Date | null,
 }

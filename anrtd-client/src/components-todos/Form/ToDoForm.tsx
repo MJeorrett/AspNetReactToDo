@@ -3,6 +3,7 @@ import { FormikProps } from 'formik';
 import AppFormikDatePicker from '../../components/AppForm/AppFormikDatePicker';
 import AppFormikSelect from '../../components/AppForm/AppFormikSelect';
 import AppFormikTextField from '../../components/AppForm/AppFormikTextField';
+import AppFormikTagInput from '../../components/AppFormikTagInput';
 import { ToDoStatus } from '../../config/ToDoStatus';
 import { TShirtSize } from '../../config/TShirtSize';
 import { mapEnumToOptions } from '../../enumUtils';
@@ -12,6 +13,7 @@ export type ToDoFormValues = {
     status: ToDoStatus,
     tShirtSize: TShirtSize | -1,
     dueDate: Date | null,
+    tags: string[],
 }
 
 export type ToDoFormOtherProps = {
@@ -31,6 +33,7 @@ const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
 
     return (
         <>
+            <AppFormikTagInput name="tags" />
             <AppFormikTextField name="title" label="Title" autoFocus={autoFocus} />
             {!createMode && (
                 <>

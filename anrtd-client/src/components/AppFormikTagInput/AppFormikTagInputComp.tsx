@@ -1,5 +1,5 @@
 import { ChangeEventHandler, KeyboardEventHandler, useState } from 'react';
-import { Chip } from '@material-ui/core';
+import { Chip, FormHelperText } from '@material-ui/core';
 import AppButton from '../AppButton';
 import AppTextField from '../AppForm/AppTextField';
 
@@ -28,38 +28,43 @@ const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
     const [isClicked, setIsClicked] = useState(false);
 
     return (
-        <div className={classes.root}>
-            {isClicked ?
-                <AppTextField
-                    value={inputValue}
-                    size="small"
-                    fullWidth={false}
-                    className={classes.input}
-                    onChange={onChange}
-                    onKeyDown={onKeyDown}
-                    onKeyUp={onKeyUp}
-                    autoFocus
-                    helperText={inputValidationMessage}
-                    error={!!inputValidationMessage}
-                /> :
-                <AppButton
-                    size="small"
-                    variant="outlined"
-                    onClick={() => setIsClicked(true)}
-                >
-                    Add Tag
-                </AppButton>
-            }
-            {tags.sort((a, b) => a.localeCompare(b)).map((tag, index) => (
-                <Chip
-                    key={tag}
-                    size="small"
-                    label={tag}
-                    color="primary"
-                    variant="outlined"
-                    onDelete={() => onRemoveTag(index)}
-                />
-            ))}
+        <div>
+            <div className={classes.root}>
+                {isClicked ?
+                    <AppTextField
+                        value={inputValue}
+                        size="small"
+                        fullWidth={false}
+                        className={classes.input}
+                        onChange={onChange}
+                        onKeyDown={onKeyDown}
+                        onKeyUp={onKeyUp}
+                        autoFocus
+                    /> :
+                    <AppButton
+                        size="small"
+                        variant="outlined"
+                        onClick={() => setIsClicked(true)}
+                    >
+                        Add Tag
+                    </AppButton>
+                }
+                {tags.sort((a, b) => a.localeCompare(b)).map((tag, index) => (
+                    <Chip
+                        key={tag}
+                        size="small"
+                        label={tag}
+                        color="primary"
+                        variant="outlined"
+                        onDelete={() => onRemoveTag(index)}
+                    />
+                ))}
+            </div>
+            <FormHelperText
+                error={!!inputValidationMessage}
+            >
+                {inputValidationMessage}
+            </FormHelperText>
         </div>
     );
 };

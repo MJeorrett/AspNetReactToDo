@@ -21,9 +21,9 @@ namespace Anrtd.Application.ToDos.Commands.SoftDelete
 
         public override async Task<AppRequestResult> Handle(SoftDeleteToDoCommand request, CancellationToken cancellationToken)
         {
-            var toDo = await _dbContext.ToDos.SingleAsync(td => td.Id == request.ToDoId, cancellationToken);
+            var toDo = await _dbContext.ToDos.SingleOrDefaultAsync(td => td.Id == request.ToDoId, cancellationToken);
 
-            if (toDo is null)
+            if (toDo == default)
             {
                 return NotFound();
             }

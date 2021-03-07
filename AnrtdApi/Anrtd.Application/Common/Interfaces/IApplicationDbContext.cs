@@ -7,6 +7,7 @@ namespace Anrtd.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
+        DbSet<ToDoListEntity> ToDoLists { get; set; }
         DbSet<ToDoEntity> ToDos { get; set; }
         DbSet<ToDoTagEntity> ToDoTags { get; set; }
 

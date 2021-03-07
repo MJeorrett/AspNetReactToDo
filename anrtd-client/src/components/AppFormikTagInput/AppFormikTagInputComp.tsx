@@ -13,6 +13,8 @@ export interface AppFormikTagInputCompProps {
     onKeyDown: KeyboardEventHandler<HTMLDivElement>,
     onKeyUp: KeyboardEventHandler<HTMLDivElement>,
     onRemoveTag: (tagIndex: number) => void,
+    isInputClicked: boolean,
+    onInputClick: () => void,
 }
 
 const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
@@ -23,14 +25,15 @@ const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
     onKeyDown,
     onKeyUp,
     onRemoveTag,
+    onInputClick,
+    isInputClicked,
 }) => {
     const classes = useStyles();
-    const [isClicked, setIsClicked] = useState(false);
 
     return (
         <div>
             <div className={classes.root}>
-                {isClicked ?
+                {isInputClicked ?
                     <AppTextField
                         value={inputValue}
                         size="small"
@@ -44,7 +47,7 @@ const AppFormikTagInputComp: React.FC<AppFormikTagInputCompProps> = ({
                     <AppButton
                         size="small"
                         variant="outlined"
-                        onClick={() => setIsClicked(true)}
+                        onClick={onInputClick}
                     >
                         Add Tag
                     </AppButton>

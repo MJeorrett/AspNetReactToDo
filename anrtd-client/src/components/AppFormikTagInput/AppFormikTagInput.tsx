@@ -1,7 +1,6 @@
 import { FieldArray, FieldArrayRenderProps, useField } from 'formik';
 import * as Yup from 'yup';
 import { ChangeEventHandler, KeyboardEventHandler, useState } from 'react';
-import { warningToast } from '../../toast';
 import AppFormikTagInputComp from './AppFormikTagInputComp';
 
 export interface AppFormikTagInputProps {
@@ -14,6 +13,8 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
     const [{ value: tags }] = useField<string[]>(name);
     const [inputValue, setInputValue] = useState('');
     const [inputValidationMessage, setInputValidationMessage] = useState<string | undefined>(undefined);
+    const [isInputClicked, setIsInputClicked] = useState(false);
+
 
     const tagInputValidation = Yup.string()
         .matches(/^[a-z0-9-_]*$/, 'Tags can only contain letters, numbers, dashes and underscores.')
@@ -28,8 +29,15 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
     };
 
     const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = event => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
+        switch (event.key) {
+            case 'Enter': {
+                event.preventDefault();
+                break;
+            }
+            case 'Escape': {
+                setIsInputClicked(false);
+                break;
+            }
         }
     };
 
@@ -64,6 +72,8 @@ const AppFormikTagInput: React.FC<AppFormikTagInputProps> = ({
                         onKeyUp={createHandleKeyUp(arrayHelpers)}
                         onRemoveTag={createHandleRemoveTag(arrayHelpers)}
                         inputValidationMessage={inputValidationMessage}
+                        isInputClicked={isInputClicked}
+                        onInputClick={() => setIsInputClicked(true)}
                     />
                 );
             }}

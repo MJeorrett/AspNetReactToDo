@@ -5,7 +5,7 @@ export default makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
-        marginBottom: theme.spacing(2),
+        marginBottom: theme.spacing(4),
         '& > *:first-child': {
             marginRight: theme.spacing(3),
         }

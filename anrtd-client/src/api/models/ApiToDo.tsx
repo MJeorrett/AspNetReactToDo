@@ -10,6 +10,7 @@ export interface ApiToDoSummary {
 export interface ApiUpdateToDoDto extends ApiToDoSummary {
     dueDate: string | null,
     tShirtSize: TShirtSize | null,
+    tags: string[],
 }
 
 export interface ApiToDoDetails extends ApiUpdateToDoDto {

@@ -8,14 +8,20 @@ namespace Anrtd.Infrastructure.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<ToDoEntity> builder)
         {
-            builder.Property(toDo => toDo.Status)
+            builder.Property(_ => _.Status)
                 .HasConversion<int>();
 
-            builder.HasOne(toDo => toDo.StatusEntity)
-                .WithMany(status => status.ToDos)
-                .HasForeignKey(toDo => toDo.Status);
+            builder.HasOne(_ => _.StatusEntity)
+                .WithMany(_ => _.ToDos)
+                .HasForeignKey(_ => _.Status);
 
-            builder.HasQueryFilter(toDo => !toDo.IsSoftDeleted);
+            builder.HasOne(_ => _.List)
+                .WithMany(_ => _.ToDos)
+                .HasForeignKey(_ => _.ListId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasQueryFilter(_ => !_.IsSoftDeleted);
         }
     }
 }

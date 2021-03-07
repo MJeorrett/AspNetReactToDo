@@ -8,7 +8,7 @@ namespace Anrtd.Infrastructure.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<TShirtSizeEntity> builder)
         {
-            builder.Property(x => x.Id)
+            builder.Property(_ => _.Id)
                 .HasConversion<int>();
         }
     }

@@ -8,7 +8,7 @@ namespace Anrtd.Infrastructure.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<ToDoStatusEntity> builder)
         {
-            builder.Property(status => status.Id)
+            builder.Property(_ => _.Id)
                 .HasConversion<int>();
         }
     }

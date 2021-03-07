@@ -33,6 +33,9 @@ namespace Anrtd.Domain.Entities
 
         public List<ToDoTagEntity> Tags { get; set; }
 
+        public int? ListId { get; set; }
+        public ToDoListEntity List { get; set; }
+
         public bool IsSoftDeleted { get; set; }
 
         public async Task UpdateTags(List<string> newTagList, GetTagEntities getTagEntities)

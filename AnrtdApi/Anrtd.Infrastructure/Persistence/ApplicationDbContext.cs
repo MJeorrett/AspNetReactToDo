@@ -11,6 +11,7 @@ namespace Anrtd.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
+        public DbSet<ToDoListEntity> ToDoLists { get; set; }
         public DbSet<ToDoEntity> ToDos { get; set; }
         public DbSet<ToDoStatusEntity> ToDoStatuses { get; set; }
         public DbSet<TShirtSizeEntity> TShirtSizes { get; set; }

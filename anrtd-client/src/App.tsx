@@ -20,6 +20,7 @@ const App: React.FC = () => {
                             <li><Link to={appPaths.home}>Home</Link></li>
                             <li><Link to={appPaths.createToDo}>Create ToDo</Link></li>
                             <li><Link to={appPaths.toDos}>ToDos</Link></li>
+                            <li><Link to={appPaths.toDoLists}>ToDo Lists</Link></li>
                         </ul>
                         <AppRoutes />
                     </Router>

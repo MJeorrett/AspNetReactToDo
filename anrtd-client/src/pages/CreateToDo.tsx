@@ -5,6 +5,7 @@ import { createToDo } from '../api/todos';
 import { appPaths } from '../AppRoutes';
 import ToDoForm, { ToDoFormComponent, ToDoFormValues } from '../components-todos/Form';
 import AppButton, { AppButtons } from '../components/AppButton';
+import AppForm from '../components/AppForm';
 import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';
 import AppPageHeading from '../components/AppPageHeading';
 
@@ -29,7 +30,7 @@ const CreateToDoPage: React.FC = () => {
                 onSubmit={handleSubmit}
             >
                 {formikProps => (
-                    <>
+                    <AppForm>
                         <ToDoFormComponent
                             {...formikProps}
                             createMode
@@ -39,7 +40,7 @@ const CreateToDoPage: React.FC = () => {
                             <AppButton linkPath={appPaths.toDos}>Cancel</AppButton>
                             <AppFormikSubmitButton>Save</AppFormikSubmitButton>
                         </AppButtons>
-                    </>
+                    </AppForm>
                 )}
             </ToDoForm>
         </>

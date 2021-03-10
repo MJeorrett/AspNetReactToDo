@@ -4,8 +4,8 @@ import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButto
 import AppButton, { AppButtons } from '../../components/AppButton';
 import TShirtIcon from '../../components/TShirtIcon';
 import { ToDoDetails } from '../../models/ToDo';
+import AppForm from '../../components/AppForm';
 import useStyles from './EditToDoStyles';
-import AppForm from '../../components/AppForm/AppForm';
 
 export interface EditToDoPageCompProps {
     toDo: ToDoDetails,

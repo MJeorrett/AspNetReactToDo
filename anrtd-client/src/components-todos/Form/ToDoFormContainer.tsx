@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Formik, FormikProps } from 'formik';
-import * as Yup from 'yup';
 
-import ToDoForm, { ToDoFormValues } from './ToDoForm';
-import { ToDoStatus } from '../../config/ToDoStatus';
-import { getNumericEnumValues } from '../../enumUtils';
-import { TShirtSize } from '../../config/TShirtSize';
+import { defaultToDoFormValues, ToDoFormValues, toDoFormValidationSchema } from './ToDoFormValues';
+import ToDoForm from './ToDoForm';
 
 export interface ToDoFormContainerProps {
     onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
@@ -14,26 +11,6 @@ export interface ToDoFormContainerProps {
     autoFocus?: boolean,
     children?: (formikProps: FormikProps<ToDoFormValues>) => React.ReactNode,
 }
-
-const defaultInitialValues: ToDoFormValues = {
-    title: '',
-    status: ToDoStatus.New,
-    dueDate: null,
-    tShirtSize: -1,
-    tags: [],
-};
-
-const validationSchema: Yup.SchemaOf<ToDoFormValues> = Yup.object().shape({
-    title: Yup.string().required('Please provide a title.'),
-    status: Yup.number()
-        .oneOf(getNumericEnumValues(ToDoStatus))
-        .required(),
-    tShirtSize: Yup.number()
-        .oneOf([...getNumericEnumValues(TShirtSize), -1])
-        .required(),
-    dueDate: Yup.date().typeError('Must be a valid date.').nullable().default(null),
-    tags: Yup.array().of(Yup.string().required()).required(),
-});
 
 const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
     onSubmit,
@@ -51,8 +28,8 @@ const ToDoFormContainer: React.FC<ToDoFormContainerProps> = ({
 
     return (
         <Formik
-            initialValues={initialValues || defaultInitialValues}
-            validationSchema={validationSchema}
+            initialValues={initialValues || defaultToDoFormValues}
+            validationSchema={toDoFormValidationSchema}
             validateOnBlur={submissionAttempted}
             onSubmit={handleSubmit}
         >

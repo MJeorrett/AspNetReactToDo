@@ -7,14 +7,7 @@ import AppFormikTagInput from '../../components/AppFormikTagInput';
 import { ToDoStatus } from '../../config/ToDoStatus';
 import { TShirtSize } from '../../config/TShirtSize';
 import { mapEnumToOptions } from '../../enumUtils';
-
-export type ToDoFormValues = {
-    title: string,
-    status: ToDoStatus,
-    tShirtSize: TShirtSize | -1,
-    dueDate: Date | null,
-    tags: string[],
-}
+import { ToDoFormValues } from './ToDoFormValues';
 
 export type ToDoFormOtherProps = {
     createMode?: boolean,

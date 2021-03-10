@@ -1,8 +1,8 @@
-import { Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import ApiResponseWrapper from '../../components/ApiResponseWrapper';
 import AppTable from '../../components/AppTable';
 import { actions, selectors, useDispatchEffect } from '../../store';
+import NoToDosMessage from './NoToDosMessage';
 import ToDosTableRow from './ToDosTableRow';
 
 const ToDosTable: React.FC = () => {
@@ -16,7 +16,6 @@ const ToDosTable: React.FC = () => {
 
     const toDos = useSelector(selectors.toDos.all);
     const pagination = useSelector(selectors.toDos.pagination);
-    const selectedStatuses = useSelector(selectors.toDos.selectedStatuses);
 
     const handleChangePageNumber = (pageNumber: number) => {
         dispatch(actions.toDos.setPageNumber(pageNumber));
@@ -26,17 +25,14 @@ const ToDosTable: React.FC = () => {
         dispatch(actions.toDos.setPageSize(pageSize));
     };
 
-    const noToDosMessage = selectedStatuses.length > 0 ?
-        'There are no toDos matching your selected filters.' :
-        'You do not have any toDos yet.';
-
     return (
         <>
             <ApiResponseWrapper
                 isFetching={isFetching}
                 isError={isError}
             >
-                {toDos.length === 0 ? <Typography>{noToDosMessage}</Typography> :
+                {toDos.length === 0 ?
+                    <NoToDosMessage />:
                     <AppTable
                         headers={['ID', 'Title', '', '', '']}
                         entities={toDos}

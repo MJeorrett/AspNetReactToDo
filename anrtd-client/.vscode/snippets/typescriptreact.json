@@ -1,0 +1,33 @@
+{
+	"Anrtd Propless Component": {
+		"prefix": "anrtd-pc",
+		"body": [
+			"const ${1}: React.FC = () => {",
+			"    return (",
+			"        ${0}",		
+			"    );",
+			"}",
+			"", 
+			"export default ${1};"
+		],
+		"description": "Standard component without props"
+	},
+    "Anrtd Page": {
+		"prefix": "anrtd-page",
+		"body": [
+			"import AppPageHeading from '../components/AppPageHeading';",
+			"",
+			"const ${1}Page: React.FC = () => {",
+			"    return (",
+			"        <>",
+			"            <AppPageHeading>${2}</AppPageHeading>",
+			"            ${0}",		
+			"        </>",
+			"    );",
+			"};",
+			"", 
+			"export default ${1}Page;"
+		],
+		"description": "Scaffold a page component."
+	}
+}

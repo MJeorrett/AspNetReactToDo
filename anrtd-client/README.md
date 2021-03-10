@@ -14,6 +14,9 @@ It demonstrates the typical set up I use for react projects including:
 - Pagination
   - Note that page number is 1-indexed (instead of 0) as this is default for MUI Table Pagination.
 
+### Snippets
+Included in [.vscode/snippets](./.vscode/snippets) are some snippets for scaffolding various components.  To use them you will need the [Project Snippets](https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets) extension which loads these for you.
+
 ### Component layers
 The components in the app, i.e. the files containing code that actually renders something, are divided into three layers:
 - Core - any of the components in [./src/components](./src/components)

@@ -1,4 +1,4 @@
-import ToDoForm, { ToDoFormComponent, ToDoFormValues } from '../../components-todos/Form';
+import ToDoForm, { ToDoFormComp, ToDoFormValues } from '../../components-todos/Form';
 import AppPageHeading from '../../components/AppPageHeading';
 import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButton';
 import AppButton, { AppButtons } from '../../components/AppButton';
@@ -35,7 +35,7 @@ const EditToDoPageComp: React.FC<EditToDoPageCompProps> = ({
                             <AppPageHeading gutterBottom={false}>Edit ToDo #{toDo.id}</AppPageHeading>
                         </div>
                         <AppForm>
-                            <ToDoFormComponent
+                            <ToDoFormComp
                                 {...formikProps}
                             />
                             <AppButtons>

@@ -1,54 +1,52 @@
-import { FormikProps } from 'formik';
+import React, { useState } from 'react';
+import { Form, Formik, FormikProps } from 'formik';
 
-import AppFormikDatePicker from '../../components/AppForm/AppFormikDatePicker';
-import AppFormikSelect from '../../components/AppForm/AppFormikSelect';
-import AppFormikTextField from '../../components/AppForm/AppFormikTextField';
-import AppFormikTagInput from '../../components/AppFormikTagInput';
-import { ToDoStatus } from '../../config/ToDoStatus';
-import { TShirtSize } from '../../config/TShirtSize';
-import { mapEnumToOptions } from '../../enumUtils';
-import { ToDoFormValues } from './ToDoFormValues';
+import { defaultToDoFormValues, ToDoFormValues, toDoFormValidationSchema } from './ToDoFormValues';
+import ToDoForm from './ToDoFormComp';
 
-export type ToDoFormOtherProps = {
+export interface ToDoFormProps {
+    onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
+    initialValues?: ToDoFormValues,
     createMode?: boolean,
     autoFocus?: boolean,
+    children?: (formikProps: FormikProps<ToDoFormValues>) => React.ReactNode,
 }
 
-const ToDoForm: React.FC<ToDoFormOtherProps & FormikProps<ToDoFormValues>> = ({
+const ToDoFormContainer: React.FC<ToDoFormProps> = ({
+    onSubmit,
+    initialValues,
     createMode,
     autoFocus,
-    values: {
-        tShirtSize,
-    }
+    children,
 }) => {
-    const toDoStatusOptions = mapEnumToOptions(ToDoStatus);
-    const tShirtSizeOptions = mapEnumToOptions(TShirtSize);
+    const [submissionAttempted, setSubmissionAttempted] = useState(false);
+
+    const handleSubmit = async (values: ToDoFormValues) => {
+        setSubmissionAttempted(true);
+        onSubmit && await onSubmit(values);
+    };
 
     return (
-        <>
-            <AppFormikTextField name="title" label="Title" autoFocus={autoFocus} />
-            {!createMode && (
-                <>
-                    <AppFormikTagInput name="tags" />
-                    <AppFormikSelect
-                        name="status"
-                        label="Status"
-                        options={toDoStatusOptions}
-                    />
-                    <AppFormikSelect
-                        name="tShirtSize"
-                        label="T-shirt size"
-                        options={tShirtSizeOptions}
-                        showPleaseSelect
-                        pleaseSelectText={tShirtSize > -1 ? 'None' : undefined}
-                    />
-                    <AppFormikDatePicker name="dueDate" label="Due Date" />
-                    <AppFormikDatePicker name="createdDate" label="Created Date" readonly />
-                    <AppFormikDatePicker name="lastModifiedDate" label="Last Modified Date" readonly />
-                </>
+        <Formik
+            initialValues={initialValues || defaultToDoFormValues}
+            validationSchema={toDoFormValidationSchema}
+            validateOnBlur={submissionAttempted}
+            onSubmit={handleSubmit}
+        >
+            {formikProps => (
+                <Form>
+                    {children ?
+                        children(formikProps) :
+                        <ToDoForm
+                            {...formikProps}
+                            createMode={!!createMode}
+                            autoFocus={!!autoFocus}
+                        />
+                    }
+                </Form>
             )}
-        </>
+        </Formik>
     );
 };
 
-export default ToDoForm;
+export default ToDoFormContainer;

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { createToDo } from '../api/todos';
 import { appPaths } from '../AppRoutes';
-import ToDoForm, { ToDoFormComponent, ToDoFormValues } from '../components-todos/Form';
+import ToDoForm, { ToDoFormComp, ToDoFormValues } from '../components-todos/Form';
 import AppButton, { AppButtons } from '../components/AppButton';
 import AppForm from '../components/AppForm';
 import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';
@@ -31,7 +31,7 @@ const CreateToDoPage: React.FC = () => {
             >
                 {formikProps => (
                     <AppForm>
-                        <ToDoFormComponent
+                        <ToDoFormComp
                             {...formikProps}
                             createMode
                             autoFocus

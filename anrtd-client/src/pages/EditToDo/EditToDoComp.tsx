@@ -1,11 +1,10 @@
 import ToDoForm, { ToDoFormComp, ToDoFormValues } from '../../components-todos/Form';
-import AppPageHeading from '../../components/AppPageHeading';
 import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButton';
 import AppButton, { AppButtons } from '../../components/AppButton';
-import TShirtIcon from '../../components/TShirtIcon';
 import { ToDoDetails } from '../../models/ToDo';
 import AppForm from '../../components/AppForm';
-import useStyles from './EditToDoStyles';
+import React from 'react';
+import EditToDoPageTitle from './Title';
 
 export interface EditToDoPageCompProps {
     toDo: ToDoDetails,
@@ -18,35 +17,29 @@ const EditToDoPageComp: React.FC<EditToDoPageCompProps> = ({
     handleUpdateToDo,
     backLinkPath,
 }) => {
-    const classes = useStyles();
-
     return (
-        <>
-            <ToDoForm
-                onSubmit={handleUpdateToDo}
-                initialValues={toDo}
-            >
-                {formikProps => (
-                    <>
-                        <div className={classes.heading}>
-                            {(formikProps.values.tShirtSize > -1) && (
-                                <TShirtIcon size={formikProps.values.tShirtSize} />
-                            )}
-                            <AppPageHeading gutterBottom={false}>Edit ToDo #{toDo.id}</AppPageHeading>
-                        </div>
-                        <AppForm>
-                            <ToDoFormComp
-                                {...formikProps}
-                            />
-                            <AppButtons>
-                                <AppButton linkPath={backLinkPath}>Back</AppButton>
-                                <AppFormikSubmitButton>Save</AppFormikSubmitButton>
-                            </AppButtons>
-                        </AppForm>
-                    </>
-                )}
-            </ToDoForm>
-        </>
+        <ToDoForm
+            onSubmit={handleUpdateToDo}
+            initialValues={toDo}
+        >
+            {formikProps => (
+                <>
+                    <EditToDoPageTitle
+                        toDoId={toDo.id}
+                        tShirtSize={formikProps.values.tShirtSize}
+                    />
+                    <AppForm>
+                        <ToDoFormComp
+                            {...formikProps}
+                        />
+                        <AppButtons>
+                            <AppButton linkPath={backLinkPath}>Back</AppButton>
+                            <AppFormikSubmitButton>Save</AppFormikSubmitButton>
+                        </AppButtons>
+                    </AppForm>
+                </>
+            )}
+        </ToDoForm>
     );
 };
 

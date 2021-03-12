@@ -1,4 +1,23 @@
 {
+	"Anrtd Component": {
+		"prefix": "anrtd-c",
+		"body": [
+			"export interface ${1}Props {",
+			"    ${2}",
+			"}",
+			"",
+			"const ${1}: React.FC<${1}Props> = ({",
+			"",	
+			"}) => {",
+			"    return (",
+			"        ${0}",
+			"    );",
+			"};",
+			"",
+			"export default ${1};"
+		],
+		"description": "Standard component without props"
+	},
 	"Anrtd Propless Component": {
 		"prefix": "anrtd-pc",
 		"body": [

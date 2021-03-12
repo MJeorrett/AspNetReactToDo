@@ -1,4 +1,3 @@
-import React from 'react';
 import AppPageHeading from '../../components/AppPageHeading';
 import TShirtIcon from '../../components/TShirtIcon';
 import { TShirtSize } from '../../config/TShirtSize';

@@ -1,5 +1,5 @@
 import { Menu, MenuItem } from '@material-ui/core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AppButton from '../../components/AppButton';
 import { ToDoStatus } from '../../config/ToDoStatus';
 import ToDoStatusChip from '../ToDoStatusChip';

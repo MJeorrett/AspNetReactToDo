@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteToDo } from '../../api/todos';
 import { appPaths } from '../../AppRoutes';

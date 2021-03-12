@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@material-ui/core';
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { Pagination } from '../models/Pagination';
 
 export interface AppTableProps<TRow> {

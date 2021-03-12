@@ -3,7 +3,6 @@ import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButto
 import AppButton, { AppButtons } from '../../components/AppButton';
 import { ToDoDetails } from '../../models/ToDo';
 import AppForm from '../../components/AppForm';
-import React from 'react';
 import EditToDoPageTitle from './Title';
 
 export interface EditToDoPageCompProps {

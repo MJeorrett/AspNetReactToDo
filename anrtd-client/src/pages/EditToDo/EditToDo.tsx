@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import * as api from '../../api';
 import { appPaths, useToDoId } from '../../AppRoutes';
 import { ToDoFormValues } from '../../todos/Form';

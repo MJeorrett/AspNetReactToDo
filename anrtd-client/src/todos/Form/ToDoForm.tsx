@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Formik, FormikProps } from 'formik';
 
 import { defaultToDoFormValues, ToDoFormValues, toDoFormValidationSchema } from './ToDoFormValues';

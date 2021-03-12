@@ -1,5 +1,5 @@
 import { ApiToDoSummary, ApiToDoDetails, ApiUpdateToDoDto } from '../api/models';
-import { ToDoFormValues } from '../components-todos/Form';
+import { ToDoFormValues } from '../todos/Form';
 import { ToDoSummary, ToDoDetails } from '../models/ToDo';
 import { parseApiDate, parseNullableApiDate } from './common/parseApiDate';
 

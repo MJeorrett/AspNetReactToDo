@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import * as api from '../../api';
 import { appPaths, useToDoId } from '../../AppRoutes';
-import { ToDoFormValues } from '../../components-todos/Form';
+import { ToDoFormValues } from '../../todos/Form';
 import ApiResponseWrapper from '../../components/ApiResponseWrapper';
 import { mapToApiUpdateToDo } from '../../modelMappings/ToDo';
 import EditToDoPageComp from './EditToDoComp';

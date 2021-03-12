@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { createToDo } from '../api/todos';
 import { appPaths } from '../AppRoutes';
-import ToDoForm, { ToDoFormComp, ToDoFormValues } from '../components-todos/Form';
+import ToDoForm, { ToDoFormComp, ToDoFormValues } from '../todos/Form';
 import AppButton, { AppButtons } from '../components/AppButton';
 import AppForm from '../components/AppForm';
 import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';

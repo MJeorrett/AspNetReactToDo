@@ -1,7 +1,7 @@
 import { useTheme } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import ToDoStatusFilter from '../components-todos/StatusFilter';
-import ToDosTable from '../components-todos/ToDosTable';
+import ToDoStatusFilter from '../todos/StatusFilter';
+import ToDosTable from '../todos/ToDosTable';
 import AppPageHeading from '../components/AppPageHeading';
 import { selectors } from '../store';
 

@@ -1,4 +1,4 @@
-import ToDoForm, { ToDoFormComp, ToDoFormValues } from '../../components-todos/Form';
+import ToDoForm, { ToDoFormComp, ToDoFormValues } from '../../todos/Form';
 import AppFormikSubmitButton from '../../components/AppForm/AppFormikSubmitButton';
 import AppButton, { AppButtons } from '../../components/AppButton';
 import { ToDoDetails } from '../../models/ToDo';

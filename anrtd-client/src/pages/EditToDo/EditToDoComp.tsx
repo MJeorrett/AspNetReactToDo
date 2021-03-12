@@ -28,9 +28,7 @@ const EditToDoPageComp: React.FC<EditToDoPageCompProps> = ({
                         tShirtSize={formikProps.values.tShirtSize}
                     />
                     <AppForm>
-                        <ToDoFormComp
-                            {...formikProps}
-                        />
+                        <ToDoFormComp />
                         <AppButtons>
                             <AppButton linkPath={backLinkPath}>Back</AppButton>
                             <AppFormikSubmitButton>Save</AppFormikSubmitButton>

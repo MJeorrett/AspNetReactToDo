@@ -38,7 +38,6 @@ const ToDoFormContainer: React.FC<ToDoFormProps> = ({
                     {children ?
                         children(formikProps) :
                         <ToDoForm
-                            {...formikProps}
                             createMode={!!createMode}
                             autoFocus={!!autoFocus}
                         />

@@ -1,4 +1,4 @@
-import { FormikProps } from 'formik';
+import { useField } from 'formik';
 
 import AppFormikDatePicker from '../../components/AppForm/AppFormikDatePicker';
 import AppFormikSelect from '../../components/AppForm/AppFormikSelect';
@@ -7,22 +7,19 @@ import AppFormikTagInput from '../../components/AppFormikTagInput';
 import { ToDoStatus } from '../../config/ToDoStatus';
 import { TShirtSize } from '../../config/TShirtSize';
 import { mapEnumToOptions } from '../../enumUtils';
-import { ToDoFormValues } from './ToDoFormValues';
 
 export type ToDoFormCompOtherProps = {
     createMode?: boolean,
     autoFocus?: boolean,
 }
 
-const ToDoForm: React.FC<ToDoFormCompOtherProps & FormikProps<ToDoFormValues>> = ({
+const ToDoForm: React.FC<ToDoFormCompOtherProps> = ({
     createMode,
     autoFocus,
-    values: {
-        tShirtSize,
-    }
 }) => {
     const toDoStatusOptions = mapEnumToOptions(ToDoStatus);
     const tShirtSizeOptions = mapEnumToOptions(TShirtSize);
+    const [{value: tShirtSize}] = useField<TShirtSize>('tShirtSize');
 
     return (
         <>

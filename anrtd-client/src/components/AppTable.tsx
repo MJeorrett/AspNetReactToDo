@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from '@material-ui/core';
 import { ChangeEvent } from 'react';
 import { Pagination } from '../models/Pagination';
 
@@ -10,6 +10,7 @@ export interface AppTableProps<TRow> {
     pageSizeOptions?: number[],
     onChangePageNumber?: (pageNumber: number) => void,
     onChangePageSize?: (pageSize: number) => void,
+    noEntitiesMessage: string,
 }
 
 const AppTable = <TRow,>({
@@ -20,6 +21,7 @@ const AppTable = <TRow,>({
     pageSizeOptions = [10, 25, 100],
     onChangePageNumber,
     onChangePageSize,
+    noEntitiesMessage,
 }: AppTableProps<TRow>): JSX.Element => {
     if (pagination) {
         if (!onChangePageNumber || !onChangePageSize) {
@@ -35,6 +37,13 @@ const AppTable = <TRow,>({
         const pageSize = parseInt(event.target.value);
         onChangePageSize && onChangePageSize(pageSize);
     };
+
+    if (entities.length === 0) {
+        return (
+            <Typography>{noEntitiesMessage}</Typography>
+        );
+    }
+
     return (
         <>
             <TableContainer>

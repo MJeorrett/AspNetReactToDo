@@ -1,19 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import * as toDosSlice from './toDos';
+import * as toDos from './toDos';
+import * as toDoLists from './toDoLists';
 
 const store = configureStore({
     reducer: {
-        [toDosSlice.name]: toDosSlice.reducer,
+        [toDos.name]: toDos.reducer,
+        [toDoLists.name]: toDoLists.reducer,
     }
 });
 
 export const actions = {
-    [toDosSlice.name]: toDosSlice.actions,
+    [toDos.name]: toDos.actions,
+    [toDoLists.name]: toDoLists.actions,
 };
 
 export const selectors = {
-    [toDosSlice.name]: toDosSlice.selectors,
+    [toDos.name]: toDos.selectors,
+    [toDoLists.name]: toDoLists.selectors,
 };
 
 export default store;

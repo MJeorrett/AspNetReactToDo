@@ -5,7 +5,7 @@ import { defaultToDoFormValues, ToDoFormValues, toDoFormValidationSchema } from 
 import ToDoForm from './ToDoFormComp';
 
 export interface ToDoFormProps {
-    onSubmit?: (toDo: ToDoFormValues) => Promise<unknown>,
+    onSubmit: (toDo: ToDoFormValues) => Promise<unknown>,
     initialValues?: ToDoFormValues,
     createMode?: boolean,
     autoFocus?: boolean,
@@ -23,7 +23,7 @@ const ToDoFormContainer: React.FC<ToDoFormProps> = ({
 
     const handleSubmit = async (values: ToDoFormValues) => {
         setSubmissionAttempted(true);
-        onSubmit && await onSubmit(values);
+        await onSubmit(values);
     };
 
     return (

@@ -1,22 +1,16 @@
 import { useState } from 'react';
-import { Form, Formik, FormikProps } from 'formik';
+import { Form, Formik } from 'formik';
 
 import { defaultToDoFormValues, ToDoFormValues, toDoFormValidationSchema } from './ToDoFormValues';
-import ToDoForm from './ToDoFormComp';
 
 export interface ToDoFormProps {
     onSubmit: (toDo: ToDoFormValues) => Promise<unknown>,
     initialValues?: ToDoFormValues,
-    createMode?: boolean,
-    autoFocus?: boolean,
-    children?: (formikProps: FormikProps<ToDoFormValues>) => React.ReactNode,
 }
 
-const ToDoFormContainer: React.FC<ToDoFormProps> = ({
+const ToDoForm: React.FC<ToDoFormProps> = ({
     onSubmit,
     initialValues,
-    createMode,
-    autoFocus,
     children,
 }) => {
     const [submissionAttempted, setSubmissionAttempted] = useState(false);
@@ -33,19 +27,11 @@ const ToDoFormContainer: React.FC<ToDoFormProps> = ({
             validateOnBlur={submissionAttempted}
             onSubmit={handleSubmit}
         >
-            {formikProps => (
-                <Form>
-                    {children ?
-                        children(formikProps) :
-                        <ToDoForm
-                            createMode={!!createMode}
-                            autoFocus={!!autoFocus}
-                        />
-                    }
-                </Form>
-            )}
+            <Form>
+                {children}
+            </Form>
         </Formik>
     );
 };
 
-export default ToDoFormContainer;
+export default ToDoForm;

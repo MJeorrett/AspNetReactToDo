@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom';
 
 import { createToDo } from '../api/todos';
 import { appPaths } from '../AppRoutes';
-import ToDoForm, { ToDoFormComp, ToDoFormValues } from '../todos/Form';
+import ToDoForm, { ToDoFields, ToDoFormValues } from '../todos/Form';
 import AppButton, { AppButtons } from '../components/AppButton';
 import AppForm from '../components/AppForm';
 import AppFormikSubmitButton from '../components/AppForm/AppFormikSubmitButton';
@@ -28,19 +28,13 @@ const CreateToDoPage: React.FC = () => {
             <ToDoForm
                 onSubmit={handleSubmit}
             >
-                {formikProps => (
-                    <AppForm>
-                        <ToDoFormComp
-                            {...formikProps}
-                            createMode
-                            autoFocus
-                        />
-                        <AppButtons>
-                            <AppButton linkPath={appPaths.toDos}>Cancel</AppButton>
-                            <AppFormikSubmitButton>Save</AppFormikSubmitButton>
-                        </AppButtons>
-                    </AppForm>
-                )}
+                <AppForm>
+                    <ToDoFields.Title autoFocus />
+                    <AppButtons>
+                        <AppButton linkPath={appPaths.toDos}>Cancel</AppButton>
+                        <AppFormikSubmitButton>Save</AppFormikSubmitButton>
+                    </AppButtons>
+                </AppForm>
             </ToDoForm>
         </>
     );

@@ -4,6 +4,7 @@ import { appPaths, useToDoId } from '../../AppRoutes';
 import { ToDoFormValues } from '../../todos/Form';
 import ApiResponseWrapper from '../../components/ApiResponseWrapper';
 import { mapToApiUpdateToDo } from '../../modelMappings/ToDo';
+import ToDoForm from '../../todos/Form';
 import EditToDoPageComp from './EditToDoComp';
 
 const EditToDoPage: React.FC = () => {
@@ -31,11 +32,15 @@ const EditToDoPage: React.FC = () => {
                 isError={isError}
             >
                 {toDo && (
-                    <EditToDoPageComp
-                        toDo={toDo}
-                        handleUpdateToDo={handleUpdateToDo}
-                        backLinkPath={appPaths.toDos}
-                    />
+                    <ToDoForm
+                        onSubmit={handleUpdateToDo}
+                        initialValues={toDo}
+                    >
+                        <EditToDoPageComp
+                            toDo={toDo}
+                            backLinkPath={appPaths.toDos}
+                        />
+                    </ToDoForm>
                 )}
             </ApiResponseWrapper>
         </>

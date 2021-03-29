@@ -10,7 +10,7 @@ namespace Anrtd.Application.ToDos.Commands.Create
 {
     public record CreateToDoCommand : IAppRequest<int>, IMapTo<ToDoEntity>
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
 
         public void Mapping(Profile profile)
         {

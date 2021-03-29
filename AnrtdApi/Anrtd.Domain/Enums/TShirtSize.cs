@@ -17,13 +17,8 @@ namespace Anrtd.Domain.Enums
         [Column("TShirtSizeId")]
         public TShirtSize Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
-        public List<ToDoEntity> ToDos { get; set; }
-
-        public TShirtSizeEntity()
-        {
-            ToDos = new List<ToDoEntity>();
-        }
+        public List<ToDoEntity> ToDos { get; set; } = new List<ToDoEntity>();
     }
 }

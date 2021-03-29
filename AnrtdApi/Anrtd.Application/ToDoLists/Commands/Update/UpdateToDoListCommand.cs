@@ -2,7 +2,6 @@ using Anrtd.Application.Common.Interfaces;
 using Anrtd.Application.Common.Mapping;
 using Anrtd.Application.Common.Requests;
 using Anrtd.Domain.Entities;
-using Anrtd.Domain.Enums;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
@@ -14,8 +13,7 @@ namespace Anrtd.Application.ToDoLists.Commands.Update
     {
         public int Id { get; init; }
 
-        public string Title { get; set; }
-
+        public string Title { get; set; } = "";
         public void Mapping(Profile profile)
         {
             profile.CreateMap<UpdateToDoListCommand, ToDoListEntity>()

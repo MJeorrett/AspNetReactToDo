@@ -30,7 +30,7 @@ namespace Anrtd.Domain.UnitTests.Moqs
         private static Task<List<ToDoTagEntity>> GetTagEntities(List<string> tagIds)
         {
             return Task.FromResult(tagIds
-                .Select(tagId => new ToDoTagEntity() { Id = tagId })
+                .Select(tagId => new ToDoTagEntity(tagId))
                 .ToList());
         }
     }

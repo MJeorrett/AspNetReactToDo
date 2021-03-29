@@ -10,7 +10,7 @@ namespace Anrtd.Application.ToDoLists.Commands.Create
 {
     public record CreateToDoListCommand : IAppRequest<int>, IMapTo<ToDoListEntity>
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
 
         public void Mapping(Profile profile)
         {

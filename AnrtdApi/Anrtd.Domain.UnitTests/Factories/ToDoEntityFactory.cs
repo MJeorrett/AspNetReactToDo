@@ -11,7 +11,7 @@ namespace Anrtd.Domain.UnitTests.Factories
             return new ToDoEntity()
             {
                 Tags = tags
-                    .Select(tag => new ToDoTagEntity() { Id = tag })
+                    .Select(tag => new ToDoTagEntity(tag))
                     .ToList()
             };
         }

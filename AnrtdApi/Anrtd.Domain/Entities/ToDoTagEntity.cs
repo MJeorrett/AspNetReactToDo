@@ -9,7 +9,12 @@ namespace Anrtd.Domain.Entities
         [Column("ToDoTagId")]
         public string Id { get; set; }
 
-        public List<ToDoEntity> ToDos { get; set; }
+        public List<ToDoEntity> ToDos { get; set; } = new List<ToDoEntity>();
+
+        public ToDoTagEntity(string id)
+        {
+            Id = id;
+        }
 
         public override string ToString()
         {

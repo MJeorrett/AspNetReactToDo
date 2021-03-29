@@ -16,16 +16,11 @@ namespace Anrtd.Application.ToDos.Commands.Edit
     public record UpdateToDoCommand : IAppRequest, IMapTo<ToDoEntity>
     {
         public int Id { get; init; }
-        public string Title { get; init; }
+        public string Title { get; init; } = "";
         public ToDoStatus Status { get; init; }
         public TShirtSize? TShirtSize { get; init; }
         public DateTime? DueDate { get; init; }
-        public List<string> Tags { get; init; }
-
-        public UpdateToDoCommand()
-        {
-            Tags = new List<string>();
-        }
+        public List<string> Tags { get; init; } = new List<string>;
 
         public void Mapping(Profile profile)
         {
@@ -73,7 +68,7 @@ namespace Anrtd.Application.ToDos.Commands.Edit
             {
                 var existingTag = allTags.SingleOrDefault(t => t.Id == tagId);
                 var tagToReturn = existingTag == default ?
-                    new ToDoTagEntity() { Id = tagId } :
+                    new ToDoTagEntity(tagId):
                     existingTag;
 
                 result.Add(tagToReturn);

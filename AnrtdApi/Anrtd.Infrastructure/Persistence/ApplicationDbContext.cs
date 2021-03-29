@@ -11,11 +11,11 @@ namespace Anrtd.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public DbSet<ToDoListEntity> ToDoLists { get; set; }
-        public DbSet<ToDoEntity> ToDos { get; set; }
-        public DbSet<ToDoStatusEntity> ToDoStatuses { get; set; }
-        public DbSet<TShirtSizeEntity> TShirtSizes { get; set; }
-        public DbSet<ToDoTagEntity> ToDoTags { get; set; }
+        public DbSet<ToDoListEntity> ToDoLists { get; set; } = null!;
+        public DbSet<ToDoEntity> ToDos { get; set; } = null!;
+        public DbSet<ToDoStatusEntity> ToDoStatuses { get; set; } = null!;
+        public DbSet<TShirtSizeEntity> TShirtSizes { get; set; } = null!;
+        public DbSet<ToDoTagEntity> ToDoTags { get; set; } = null!;
 
         private readonly IDateTime _dateTime;
 

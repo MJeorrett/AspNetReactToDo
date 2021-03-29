@@ -55,7 +55,7 @@ namespace Anrtd.Application.Common.Behaviours
         {
             var responseType = typeof(TResponse);
 
-            return Activator.CreateInstance(responseType, failures) as TResponse;
+            return (Activator.CreateInstance(responseType, failures) as TResponse)!;
         }
     }
 }

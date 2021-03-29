@@ -16,25 +16,25 @@ namespace Anrtd.Domain.Entities
 
         [Column("ToDoId")]
         public int Id { get; set; }
-        
-        [Required]
-        public string Title { get; set; }
 
         [Required]
-        public ToDoStatus Status { get; set; }
+        public string Title { get; set; } = "";
 
-        public ToDoStatusEntity StatusEntity { get; set; }
+        [Required]
+        public ToDoStatus Status { get; set; } = ToDoStatus.New;
+
+        public ToDoStatusEntity StatusEntity { get; set; } = null!;
 
         public TShirtSize? TShirtSize { get; set; }
 
-        public TShirtSizeEntity TShirtSizeEntity { get; set; }
+        public TShirtSizeEntity? TShirtSizeEntity { get; set; }
 
         public DateTime? DueDate { get; set; }
 
-        public List<ToDoTagEntity> Tags { get; set; }
+        public List<ToDoTagEntity> Tags { get; set; } = new List<ToDoTagEntity>();
 
         public int? ListId { get; set; }
-        public ToDoListEntity List { get; set; }
+        public ToDoListEntity? List { get; set; }
 
         public bool IsSoftDeleted { get; set; }
 

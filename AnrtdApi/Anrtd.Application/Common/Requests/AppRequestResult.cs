@@ -4,7 +4,7 @@ namespace Anrtd.Application.Common.Requests
 {
     public record AppRequestResult<T>
     {
-        public T Content { get; init; }
+        public T? Content { get; init; }
         public bool IsBadRequest { get; init; }
         public bool IsNotFound { get; init; }
         public Dictionary<string, string[]> ValidationFailures { get; init; }

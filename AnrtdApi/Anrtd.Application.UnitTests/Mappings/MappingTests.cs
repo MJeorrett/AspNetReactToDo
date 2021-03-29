@@ -44,7 +44,7 @@ namespace Anrtd.Application.UnitTests.Mappings
             _mapper.Map(instance, source, destination);
         }
 
-        private object GetInstanceOf(Type type)
+        private object? GetInstanceOf(Type type)
         {
             if (type.GetConstructor(Type.EmptyTypes) != null)
                 return Activator.CreateInstance(type);
